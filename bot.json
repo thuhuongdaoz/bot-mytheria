@@ -1,0 +1,2016 @@
+{
+  "card": [
+    {
+      "id": 1,
+      "hero_id": 347,
+      "frame": 1
+    },
+    {
+      "id": 2,
+      "hero_id": 347,
+      "frame": 1
+    },
+    {
+      "id": 3,
+      "hero_id": 347,
+      "frame": 1
+    },
+    {
+      "id": 4,
+      "hero_id": 23,
+      "frame": 1
+    },
+    {
+      "id": 5,
+      "hero_id": 23,
+      "frame": 1
+    },
+    {
+      "id": 6,
+      "hero_id": 23,
+      "frame": 1
+    },
+    {
+      "id": 7,
+      "hero_id": 24,
+      "frame": 1
+    },
+    {
+      "id": 8,
+      "hero_id": 24,
+      "frame": 1
+    },
+    {
+      "id": 9,
+      "hero_id": 98,
+      "frame": 1
+    },
+    {
+      "id": 10,
+      "hero_id": 98,
+      "frame": 1
+    },
+    {
+      "id": 11,
+      "hero_id": 191,
+      "frame": 1
+    },
+    {
+      "id": 12,
+      "hero_id": 96,
+      "frame": 1
+    },
+    {
+      "id": 13,
+      "hero_id": 96,
+      "frame": 1
+    },
+    {
+      "id": 14,
+      "hero_id": 106,
+      "frame": 1
+    },
+    {
+      "id": 15,
+      "hero_id": 106,
+      "frame": 1
+    },
+    {
+      "id": 16,
+      "hero_id": 94,
+      "frame": 1
+    },
+    {
+      "id": 17,
+      "hero_id": 94,
+      "frame": 1
+    },
+    {
+      "id": 18,
+      "hero_id": 32,
+      "frame": 1
+    },
+    {
+      "id": 19,
+      "hero_id": 32,
+      "frame": 1
+    },
+    {
+      "id": 20,
+      "hero_id": 46,
+      "frame": 1
+    },
+    {
+      "id": 21,
+      "hero_id": 46,
+      "frame": 1
+    },
+    {
+      "id": 22,
+      "hero_id": 107,
+      "frame": 1
+    },
+    {
+      "id": 23,
+      "hero_id": 107,
+      "frame": 1
+    },
+    {
+      "id": 24,
+      "hero_id": 5,
+      "frame": 1
+    },
+    {
+      "id": 25,
+      "hero_id": 5,
+      "frame": 1
+    },
+    {
+      "id": 26,
+      "hero_id": 12,
+      "frame": 1
+    },
+    {
+      "id": 27,
+      "hero_id": 108,
+      "frame": 1
+    },
+    {
+      "id": 28,
+      "hero_id": 108,
+      "frame": 1
+    },
+    {
+      "id": 29,
+      "hero_id": 111,
+      "frame": 1
+    },
+    {
+      "id": 30,
+      "hero_id": 111,
+      "frame": 1
+    },
+    {
+      "id": 31,
+      "hero_id": 113,
+      "frame": 1
+    },
+    {
+      "id": 32,
+      "hero_id": 9,
+      "frame": 1
+    },
+    {
+      "id": 33,
+      "hero_id": 9,
+      "frame": 1
+    },
+    {
+      "id": 34,
+      "hero_id": 146,
+      "frame": 1
+    },
+    {
+      "id": 35,
+      "hero_id": 110,
+      "frame": 1
+    },
+    {
+      "id": 36,
+      "hero_id": 110,
+      "frame": 1
+    },
+    {
+      "id": 37,
+      "hero_id": 104,
+      "frame": 1
+    },
+    {
+      "id": 38,
+      "hero_id": 104,
+      "frame": 1
+    },
+    {
+      "id": 39,
+      "hero_id": 105,
+      "frame": 1
+    },
+    {
+      "id": 40,
+      "hero_id": 105,
+      "frame": 1
+    },
+    {
+      "id": 41,
+      "hero_id": 132,
+      "frame": 1
+    },
+    {
+      "id": 42,
+      "hero_id": 132,
+      "frame": 1
+    },
+    {
+      "id": 43,
+      "hero_id": 40,
+      "frame": 1
+    },
+    {
+      "id": 44,
+      "hero_id": 40,
+      "frame": 1
+    },
+    {
+      "id": 45,
+      "hero_id": 349,
+      "frame": 1
+    },
+    {
+      "id": 46,
+      "hero_id": 349,
+      "frame": 1
+    },
+    {
+      "id": 47,
+      "hero_id": 349,
+      "frame": 1
+    },
+    {
+      "id": 48,
+      "hero_id": 2,
+      "frame": 1
+    },
+    {
+      "id": 49,
+      "hero_id": 2,
+      "frame": 1
+    },
+    {
+      "id": 50,
+      "hero_id": 2,
+      "frame": 1
+    },
+    {
+      "id": 51,
+      "hero_id": 3,
+      "frame": 1
+    },
+    {
+      "id": 52,
+      "hero_id": 3,
+      "frame": 1
+    },
+    {
+      "id": 53,
+      "hero_id": 4,
+      "frame": 1
+    },
+    {
+      "id": 54,
+      "hero_id": 4,
+      "frame": 1
+    },
+    {
+      "id": 55,
+      "hero_id": 14,
+      "frame": 1
+    },
+    {
+      "id": 56,
+      "hero_id": 14,
+      "frame": 1
+    },
+    {
+      "id": 57,
+      "hero_id": 100,
+      "frame": 1
+    },
+    {
+      "id": 58,
+      "hero_id": 20,
+      "frame": 1
+    },
+    {
+      "id": 59,
+      "hero_id": 129,
+      "frame": 1
+    },
+    {
+      "id": 60,
+      "hero_id": 129,
+      "frame": 1
+    },
+    {
+      "id": 61,
+      "hero_id": 131,
+      "frame": 1
+    },
+    {
+      "id": 62,
+      "hero_id": 350,
+      "frame": 1
+    },
+    {
+      "id": 63,
+      "hero_id": 350,
+      "frame": 1
+    },
+    {
+      "id": 64,
+      "hero_id": 350,
+      "frame": 1
+    },
+    {
+      "id": 65,
+      "hero_id": 70,
+      "frame": 1
+    },
+    {
+      "id": 66,
+      "hero_id": 70,
+      "frame": 1
+    },
+    {
+      "id": 67,
+      "hero_id": 70,
+      "frame": 1
+    },
+    {
+      "id": 68,
+      "hero_id": 88,
+      "frame": 1
+    },
+    {
+      "id": 69,
+      "hero_id": 88,
+      "frame": 1
+    },
+    {
+      "id": 70,
+      "hero_id": 121,
+      "frame": 1
+    },
+    {
+      "id": 71,
+      "hero_id": 121,
+      "frame": 1
+    },
+    {
+      "id": 72,
+      "hero_id": 79,
+      "frame": 1
+    },
+    {
+      "id": 73,
+      "hero_id": 79,
+      "frame": 1
+    },
+    {
+      "id": 74,
+      "hero_id": 119,
+      "frame": 1
+    },
+    {
+      "id": 75,
+      "hero_id": 119,
+      "frame": 1
+    },
+    {
+      "id": 76,
+      "hero_id": 193,
+      "frame": 1
+    },
+    {
+      "id": 77,
+      "hero_id": 193,
+      "frame": 1
+    },
+    {
+      "id": 78,
+      "hero_id": 138,
+      "frame": 1
+    },
+    {
+      "id": 79,
+      "hero_id": 138,
+      "frame": 1
+    },
+    {
+      "id": 80,
+      "hero_id": 166,
+      "frame": 1
+    },
+    {
+      "id": 81,
+      "hero_id": 166,
+      "frame": 1
+    },
+    {
+      "id": 82,
+      "hero_id": 351,
+      "frame": 1
+    },
+    {
+      "id": 83,
+      "hero_id": 351,
+      "frame": 1
+    },
+    {
+      "id": 84,
+      "hero_id": 351,
+      "frame": 1
+    },
+    {
+      "id": 85,
+      "hero_id": 50,
+      "frame": 1
+    },
+    {
+      "id": 86,
+      "hero_id": 50,
+      "frame": 1
+    },
+    {
+      "id": 87,
+      "hero_id": 50,
+      "frame": 1
+    },
+    {
+      "id": 88,
+      "hero_id": 56,
+      "frame": 1
+    },
+    {
+      "id": 89,
+      "hero_id": 56,
+      "frame": 1
+    },
+    {
+      "id": 90,
+      "hero_id": 52,
+      "frame": 1
+    },
+    {
+      "id": 91,
+      "hero_id": 52,
+      "frame": 1
+    },
+    {
+      "id": 92,
+      "hero_id": 147,
+      "frame": 1
+    },
+    {
+      "id": 93,
+      "hero_id": 147,
+      "frame": 1
+    },
+    {
+      "id": 94,
+      "hero_id": 54,
+      "frame": 1
+    },
+    {
+      "id": 95,
+      "hero_id": 54,
+      "frame": 1
+    },
+    {
+      "id": 96,
+      "hero_id": 63,
+      "frame": 1
+    },
+    {
+      "id": 97,
+      "hero_id": 63,
+      "frame": 1
+    },
+    {
+      "id": 98,
+      "hero_id": 65,
+      "frame": 1
+    },
+    {
+      "id": 99,
+      "hero_id": 65,
+      "frame": 1
+    },
+    {
+      "id": 100,
+      "hero_id": 59,
+      "frame": 1
+    },
+    {
+      "id": 101,
+      "hero_id": 59,
+      "frame": 1
+    },
+    {
+      "id": 102,
+      "hero_id": 213,
+      "frame": 1
+    },
+    {
+      "id": 103,
+      "hero_id": 213,
+      "frame": 1
+    },
+    {
+      "id": 104,
+      "hero_id": 213,
+      "frame": 1
+    },
+    {
+      "id": 105,
+      "hero_id": 340,
+      "frame": 1
+    },
+    {
+      "id": 106,
+      "hero_id": 340,
+      "frame": 1
+    },
+    {
+      "id": 107,
+      "hero_id": 340,
+      "frame": 1
+    }
+  ],
+  "deck": [
+    {
+      "defaul": 1,
+      "name": "Red",
+      "id": 1,
+      "detail": {
+        "cardDeck": [
+          -1,
+          7,
+          -1,
+          8,
+          -1,
+          9,
+          -1,
+          10,
+          -1,
+          11,
+          -1,
+          12,
+          -1,
+          13,
+          -1,
+          14,
+          -1,
+          15,
+          -1,
+          16,
+          -1,
+          17,
+          -1,
+          18,
+          -1,
+          19,
+          -1,
+          20,
+          -1,
+          22,
+          -1,
+          23,
+          -1,
+          24,
+          -1,
+          26,
+          -1,
+          27,
+          -1,
+          28,
+          -1,
+          29,
+          -1,
+          30,
+          -1,
+          31,
+          -1,
+          32,
+          -1,
+          33,
+          -1,
+          34,
+          -1,
+          35,
+          -1,
+          37,
+          -1,
+          38,
+          -1,
+          39,
+          -1,
+          40,
+          -1,
+          41,
+          -1,
+          43,
+          -1,
+          44
+        ],
+        "godDeck": [
+          -1,
+          1,
+          1,
+          -1,
+          2,
+          0,
+          -1,
+          3,
+          0,
+          -1,
+          4,
+          1,
+          -1,
+          5,
+          0,
+          -1,
+          6,
+          0
+        ]
+      }
+    },
+    {
+      "defaul": 1,
+      "name": "Green",
+      "id": 2,
+      "detail": {
+        "cardDeck": [
+          -1,
+          51,
+          -1,
+          52,
+          -1,
+          53,
+          -1,
+          54,
+          -1,
+          55,
+          -1,
+          56,
+          -1,
+          57,
+          -1,
+          14,
+          -1,
+          15,
+          -1,
+          16,
+          -1,
+          17,
+          -1,
+          18,
+          -1,
+          19,
+          -1,
+          22,
+          -1,
+          23,
+          -1,
+          20,
+          -1,
+          24,
+          -1,
+          26,
+          -1,
+          27,
+          -1,
+          28,
+          -1,
+          29,
+          -1,
+          30,
+          -1,
+          31,
+          -1,
+          34,
+          -1,
+          35,
+          -1,
+          37,
+          -1,
+          38,
+          -1,
+          32,
+          -1,
+          33,
+          -1,
+          39,
+          -1,
+          40,
+          -1,
+          58,
+          -1,
+          59,
+          -1,
+          61
+        ],
+        "godDeck": [
+          -1,
+          45,
+          1,
+          -1,
+          46,
+          0,
+          -1,
+          47,
+          0,
+          -1,
+          48,
+          1,
+          -1,
+          49,
+          0,
+          -1,
+          50,
+          0
+        ]
+      }
+    },
+    {
+      "defaul": 1,
+      "name": "Yellow",
+      "id": 3,
+      "detail": {
+        "cardDeck": [
+          -1,
+          68,
+          -1,
+          69,
+          -1,
+          70,
+          -1,
+          71,
+          -1,
+          72,
+          -1,
+          74,
+          -1,
+          76,
+          -1,
+          34,
+          -1,
+          16,
+          -1,
+          17,
+          -1,
+          18,
+          -1,
+          19,
+          -1,
+          22,
+          -1,
+          23,
+          -1,
+          20,
+          -1,
+          24,
+          -1,
+          26,
+          -1,
+          27,
+          -1,
+          28,
+          -1,
+          29,
+          -1,
+          30,
+          -1,
+          31,
+          -1,
+          32,
+          -1,
+          33,
+          -1,
+          14,
+          -1,
+          15,
+          -1,
+          35,
+          -1,
+          37,
+          -1,
+          38,
+          -1,
+          39,
+          -1,
+          40,
+          -1,
+          78,
+          -1,
+          79,
+          -1,
+          80
+        ],
+        "godDeck": [
+          -1,
+          62,
+          1,
+          -1,
+          63,
+          0,
+          -1,
+          64,
+          0,
+          -1,
+          65,
+          1,
+          -1,
+          66,
+          0,
+          -1,
+          67,
+          0
+        ]
+      }
+    },
+    {
+      "defaul": 1,
+      "name": "Purple",
+      "id": 4,
+      "detail": {
+        "cardDeck": [
+          -1,
+          88,
+          -1,
+          90,
+          -1,
+          92,
+          -1,
+          93,
+          -1,
+          94,
+          -1,
+          14,
+          -1,
+          15,
+          -1,
+          16,
+          -1,
+          17,
+          -1,
+          18,
+          -1,
+          19,
+          -1,
+          20,
+          -1,
+          22,
+          -1,
+          23,
+          -1,
+          24,
+          -1,
+          26,
+          -1,
+          27,
+          -1,
+          28,
+          -1,
+          29,
+          -1,
+          30,
+          -1,
+          31,
+          -1,
+          32,
+          -1,
+          33,
+          -1,
+          34,
+          -1,
+          35,
+          -1,
+          37,
+          -1,
+          38,
+          -1,
+          39,
+          -1,
+          40,
+          -1,
+          96,
+          -1,
+          97,
+          -1,
+          98,
+          -1,
+          99,
+          -1,
+          100
+        ],
+        "godDeck": [
+          -1,
+          82,
+          1,
+          -1,
+          83,
+          0,
+          -1,
+          84,
+          0,
+          -1,
+          85,
+          1,
+          -1,
+          86,
+          0,
+          -1,
+          87,
+          0
+        ]
+      }
+    },
+    {
+      "defaul": 0,
+      "name": "Easy5",
+      "id": 5,
+      "detail": {
+        "cardDeck": [
+          -1,
+          7,
+          -1,
+          8,
+          -1,
+          41,
+          -1,
+          42,
+          -1,
+          16,
+          -1,
+          17,
+          -1,
+          24,
+          -1,
+          25,
+          -1,
+          18,
+          -1,
+          19,
+          -1,
+          20,
+          -1,
+          21,
+          -1,
+          22,
+          -1,
+          23,
+          -1,
+          14,
+          -1,
+          15,
+          -1,
+          35,
+          -1,
+          36,
+          -1,
+          68,
+          -1,
+          69,
+          -1,
+          70,
+          -1,
+          71,
+          -1,
+          72,
+          -1,
+          73,
+          -1,
+          74,
+          -1,
+          75,
+          -1,
+          76,
+          -1,
+          77,
+          -1,
+          78,
+          -1,
+          79,
+          -1,
+          80,
+          -1,
+          81,
+          -1,
+          59,
+          -1,
+          60
+        ],
+        "godDeck": [
+          -1,
+          102,
+          1,
+          -1,
+          103,
+          0,
+          -1,
+          104,
+          0,
+          -1,
+          4,
+          1,
+          -1,
+          5,
+          0,
+          -1,
+          6,
+          0
+        ]
+      }
+    },
+    {
+      "defaul": 0,
+      "name": "Easy6",
+      "id": 6,
+      "detail": {
+        "cardDeck": [
+          -1,
+          7,
+          -1,
+          8,
+          -1,
+          41,
+          -1,
+          42,
+          -1,
+          16,
+          -1,
+          17,
+          -1,
+          24,
+          -1,
+          25,
+          -1,
+          18,
+          -1,
+          19,
+          -1,
+          20,
+          -1,
+          21,
+          -1,
+          22,
+          -1,
+          23,
+          -1,
+          14,
+          -1,
+          15,
+          -1,
+          35,
+          -1,
+          36,
+          -1,
+          68,
+          -1,
+          69,
+          -1,
+          70,
+          -1,
+          71,
+          -1,
+          72,
+          -1,
+          73,
+          -1,
+          74,
+          -1,
+          75,
+          -1,
+          76,
+          -1,
+          77,
+          -1,
+          78,
+          -1,
+          79,
+          -1,
+          80,
+          -1,
+          81,
+          -1,
+          59,
+          -1,
+          60
+        ],
+        "godDeck": [
+          -1,
+          105,
+          1,
+          -1,
+          106,
+          0,
+          -1,
+          107,
+          0,
+          -1,
+          4,
+          1,
+          -1,
+          5,
+          0,
+          -1,
+          6,
+          0
+        ]
+      }
+    },
+    {
+      "defaul": 0,
+      "name": "Easy7",
+      "id": 7,
+      "detail": {
+        "cardDeck": [
+          -1,
+          16,
+          -1,
+          17,
+          -1,
+          24,
+          -1,
+          25,
+          -1,
+          98,
+          -1,
+          99,
+          -1,
+          14,
+          -1,
+          15,
+          -1,
+          68,
+          -1,
+          69,
+          -1,
+          72,
+          -1,
+          73,
+          -1,
+          74,
+          -1,
+          75,
+          -1,
+          76,
+          -1,
+          77,
+          -1,
+          78,
+          -1,
+          79,
+          -1,
+          80,
+          -1,
+          81,
+          -1,
+          88,
+          -1,
+          89,
+          -1,
+          90,
+          -1,
+          91,
+          -1,
+          92,
+          -1,
+          93,
+          -1,
+          94,
+          -1,
+          95,
+          -1,
+          96,
+          -1,
+          97,
+          -1,
+          98,
+          -1,
+          99,
+          -1,
+          100,
+          -1,
+          101
+        ],
+        "godDeck": [
+          -1,
+          62,
+          1,
+          -1,
+          63,
+          0,
+          -1,
+          64,
+          0,
+          -1,
+          65,
+          1,
+          -1,
+          66,
+          0,
+          -1,
+          67,
+          0
+        ]
+      }
+    },
+    {
+      "defaul": 0,
+      "name": "Easy8",
+      "id": 8,
+      "detail": {
+        "cardDeck": [
+          -1,
+          16,
+          -1,
+          17,
+          -1,
+          24,
+          -1,
+          25,
+          -1,
+          20,
+          -1,
+          21,
+          -1,
+          14,
+          -1,
+          15,
+          -1,
+          90,
+          -1,
+          91,
+          -1,
+          88,
+          -1,
+          89,
+          -1,
+          98,
+          -1,
+          99,
+          -1,
+          68,
+          -1,
+          69,
+          -1,
+          70,
+          -1,
+          71,
+          -1,
+          72,
+          -1,
+          73,
+          -1,
+          74,
+          -1,
+          75,
+          -1,
+          76,
+          -1,
+          77,
+          -1,
+          78,
+          -1,
+          79,
+          -1,
+          80,
+          -1,
+          81,
+          -1,
+          22,
+          -1,
+          23,
+          -1,
+          53,
+          -1,
+          54,
+          -1,
+          51,
+          -1,
+          52
+        ],
+        "godDeck": [
+          -1,
+          82,
+          1,
+          -1,
+          83,
+          0,
+          -1,
+          84,
+          0,
+          -1,
+          85,
+          1,
+          -1,
+          86,
+          0,
+          -1,
+          87,
+          0
+        ]
+      }
+    },
+    {
+      "defaul": 0,
+      "name": "Easy9",
+      "id": 9,
+      "detail": {
+        "cardDeck": [
+          -1,
+          16,
+          -1,
+          17,
+          -1,
+          24,
+          -1,
+          25,
+          -1,
+          20,
+          -1,
+          21,
+          -1,
+          14,
+          -1,
+          15,
+          -1,
+          53,
+          -1,
+          54,
+          -1,
+          51,
+          -1,
+          52,
+          -1,
+          68,
+          -1,
+          69,
+          -1,
+          70,
+          -1,
+          71,
+          -1,
+          72,
+          -1,
+          73,
+          -1,
+          74,
+          -1,
+          75,
+          -1,
+          76,
+          -1,
+          77,
+          -1,
+          78,
+          -1,
+          79,
+          -1,
+          80,
+          -1,
+          81,
+          -1,
+          100,
+          -1,
+          101,
+          -1,
+          18,
+          -1,
+          19,
+          -1,
+          96,
+          -1,
+          97,
+          -1,
+          72,
+          -1,
+          73
+        ],
+        "godDeck": [
+          -1,
+          45,
+          1,
+          -1,
+          46,
+          0,
+          -1,
+          47,
+          0,
+          -1,
+          48,
+          1,
+          -1,
+          49,
+          0,
+          -1,
+          50,
+          0
+        ]
+      }
+    }
+  ],
+  "bot": [
+    {
+      "id": 10000001,
+      "username": "botmytheria1",
+      "screenname": "CosmicCrasher88",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000002,
+      "username": "botmytheria2",
+      "screenname": "火箭飞行员",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000003,
+      "username": "botmytheria3",
+      "screenname": "DragondeLuz",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000004,
+      "username": "botmytheria4",
+      "screenname": "dreamersieudinh",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000005,
+      "username": "botmytheria5",
+      "screenname": "천상의별",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000006,
+      "username": "botmytheria6",
+      "screenname": "桜色の恋人",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000007,
+      "username": "botmytheria7",
+      "screenname": "СеверныйОхотник",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000008,
+      "username": "botmytheria8",
+      "screenname": "LaReineDeFeu",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000009,
+      "username": "botmytheria9",
+      "screenname": "hoangtronghieu",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000010,
+      "username": "botmytheria10",
+      "screenname": "火炎モンスター",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000011,
+      "username": "botmytheria11",
+      "screenname": "불꽃날개",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000012,
+      "username": "botmytheria12",
+      "screenname": "月夜の誘惑",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000013,
+      "username": "botmytheria13",
+      "screenname": "ИзгойСудьбы",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000014,
+      "username": "botmytheria14",
+      "screenname": "lassassinfurtif",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000015,
+      "username": "botmytheria15",
+      "screenname": "toilaflorentino",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000016,
+      "username": "botmytheria16",
+      "screenname": "極寒の戦士",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000017,
+      "username": "botmytheria17",
+      "screenname": "雪花飘舞",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000018,
+      "username": "botmytheria18",
+      "screenname": "바다의전설",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000019,
+      "username": "botmytheria19",
+      "screenname": "蒼穹の魔術師",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000020,
+      "username": "botmytheria20",
+      "screenname": "燃える瞳",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000021,
+      "username": "botmytheria21",
+      "screenname": "海盜王者",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000022,
+      "username": "botmytheria22",
+      "screenname": "숲속의요정",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000023,
+      "username": "botmytheria23",
+      "screenname": "龙之子",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000024,
+      "username": "botmytheria24",
+      "screenname": "忍者刺客",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000025,
+      "username": "botmytheria25",
+      "screenname": "火鳥の舞",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000026,
+      "username": "botmytheria26",
+      "screenname": "ВерныйДруг",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000027,
+      "username": "botmytheria27",
+      "screenname": "chasseurMysterieux",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000028,
+      "username": "botmytheria28",
+      "screenname": "ningiadaichien",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000029,
+      "username": "botmytheria29",
+      "screenname": "炫酷機器人",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000030,
+      "username": "botmytheria30",
+      "screenname": "星空の旅人",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000031,
+      "username": "botmytheria31",
+      "screenname": "赤い翼の勇者",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000032,
+      "username": "botmytheria32",
+      "screenname": "불멸의영웅",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000033,
+      "username": "botmytheria33",
+      "screenname": "氷晶の女王",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000034,
+      "username": "botmytheria34",
+      "screenname": "长夜孤独",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000035,
+      "username": "botmytheria35",
+      "screenname": "ВоительСвободы",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000036,
+      "username": "botmytheria36",
+      "screenname": "LeMageDeLumiere",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000037,
+      "username": "botmytheria37",
+      "screenname": "ngươingoaihanhtinh",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000038,
+      "username": "botmytheria38",
+      "screenname": "星海の航海士",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000039,
+      "username": "botmytheria39",
+      "screenname": "화려한천사",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000040,
+      "username": "botmytheria40",
+      "screenname": "嵐の戦士",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000041,
+      "username": "botmytheria41",
+      "screenname": "蒼穹の神秘",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000042,
+      "username": "botmytheria42",
+      "screenname": "하늘나라의기사",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000043,
+      "username": "botmytheria43",
+      "screenname": "火焰之心",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000044,
+      "username": "botmytheria44",
+      "screenname": "電撃戰士",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000045,
+      "username": "botmytheria45",
+      "screenname": "秘密の花園",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000046,
+      "username": "botmytheria46",
+      "screenname": "黑暗之王",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000047,
+      "username": "botmytheria47",
+      "screenname": "Звезда-Путешественник",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000048,
+      "username": "botmytheria48",
+      "screenname": "Langenoir",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000049,
+      "username": "botmytheria49",
+      "screenname": "NguyenQuyet19",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000050,
+      "username": "botmytheria50",
+      "screenname": "天空の剣士",
+      "mode": "unrank"
+    },
+    {
+      "id": 10000051,
+      "username": "botmytheria51",
+      "screenname": "心に刻まれた物語",
+      "mode": "rank"
+    },
+    {
+      "id": 10000052,
+      "username": "botmytheria52",
+      "screenname": "炎の騎士",
+      "mode": "rank"
+    },
+    {
+      "id": 10000053,
+      "username": "botmytheria53",
+      "screenname": "눈부신별",
+      "mode": "rank"
+    },
+    {
+      "id": 10000054,
+      "username": "botmytheria54",
+      "screenname": "飛天遊俠",
+      "mode": "rank"
+    },
+    {
+      "id": 10000055,
+      "username": "botmytheria55",
+      "screenname": "Vutru",
+      "mode": "rank"
+    },
+    {
+      "id": 10000056,
+      "username": "botmytheria56",
+      "screenname": "桜花の恋人",
+      "mode": "rank"
+    },
+    {
+      "id": 10000057,
+      "username": "botmytheria57",
+      "screenname": "暴風の航海者",
+      "mode": "rank"
+    },
+    {
+      "id": 10000058,
+      "username": "botmytheria58",
+      "screenname": "夢のような世界",
+      "mode": "rank"
+    },
+    {
+      "id": 10000059,
+      "username": "botmytheria59",
+      "screenname": "絶望の亡者",
+      "mode": "rank"
+    },
+    {
+      "id": 10000060,
+      "username": "botmytheria60",
+      "screenname": "ГлавныйГерой",
+      "mode": "rank"
+    },
+    {
+      "id": 10000061,
+      "username": "botmytheria61",
+      "screenname": "reineDesTenebres7",
+      "mode": "rank"
+    },
+    {
+      "id": 10000062,
+      "username": "botmytheria62",
+      "screenname": "Huyenthoailua01",
+      "mode": "rank"
+    },
+    {
+      "id": 10000063,
+      "username": "botmytheria63",
+      "screenname": "魔法使いの冒険",
+      "mode": "rank"
+    },
+    {
+      "id": 10000064,
+      "username": "botmytheria64",
+      "screenname": "새벽빛의기사",
+      "mode": "rank"
+    },
+    {
+      "id": 10000065,
+      "username": "botmytheria65",
+      "screenname": "空想家の冒険",
+      "mode": "rank"
+    },
+    {
+      "id": 10000066,
+      "username": "botmytheria66",
+      "screenname": "野生の獣人",
+      "mode": "rank"
+    },
+    {
+      "id": 10000067,
+      "username": "botmytheria67",
+      "screenname": "불타는정령",
+      "mode": "rank"
+    },
+    {
+      "id": 10000068,
+      "username": "botmytheria68",
+      "screenname": "NightShade68",
+      "mode": "rank"
+    },
+    {
+      "id": 10000069,
+      "username": "botmytheria69",
+      "screenname": "火焰巨人",
+      "mode": "rank"
+    },
+    {
+      "id": 10000070,
+      "username": "botmytheria70",
+      "screenname": "ElCaballeroLoco8",
+      "mode": "rank"
+    },
+    {
+      "id": 10000071,
+      "username": "botmytheria71",
+      "screenname": "banggia1111",
+      "mode": "rank"
+    },
+    {
+      "id": 10000072,
+      "username": "botmytheria72",
+      "screenname": "달콤한고양이",
+      "mode": "rank"
+    },
+    {
+      "id": 10000073,
+      "username": "botmytheria73",
+      "screenname": "飛雲",
+      "mode": "rank"
+    },
+    {
+      "id": 10000074,
+      "username": "botmytheria74",
+      "screenname": "РевностьТигр",
+      "mode": "rank"
+    },
+    {
+      "id": 10000075,
+      "username": "botmytheria75",
+      "screenname": "Guerriermasque",
+      "mode": "rank"
+    },
+    {
+      "id": 10000076,
+      "username": "botmytheria76",
+      "screenname": "snowypeak",
+      "mode": "rank"
+    },
+    {
+      "id": 10000077,
+      "username": "botmytheria77",
+      "screenname": "女神之泪",
+      "mode": "rank"
+    },
+    {
+      "id": 10000078,
+      "username": "botmytheria78",
+      "screenname": "태양의칼날",
+      "mode": "rank"
+    },
+    {
+      "id": 10000079,
+      "username": "botmytheria79",
+      "screenname": "炎の剣",
+      "mode": "rank"
+    },
+    {
+      "id": 10000080,
+      "username": "botmytheria80",
+      "screenname": "ВолкПоколения",
+      "mode": "rank"
+    },
+    {
+      "id": 10000081,
+      "username": "botmytheria81",
+      "screenname": "Phongvi",
+      "mode": "rank"
+    },
+    {
+      "id": 10000082,
+      "username": "botmytheria82",
+      "screenname": "ダークサムライ",
+      "mode": "rank"
+    },
+    {
+      "id": 10000083,
+      "username": "botmytheria83",
+      "screenname": "FleurdeLys",
+      "mode": "rank"
+    },
+    {
+      "id": 10000084,
+      "username": "botmytheria84",
+      "screenname": "紫霞仙子",
+      "mode": "rank"
+    },
+    {
+      "id": 10000085,
+      "username": "botmytheria85",
+      "screenname": "강철의방패",
+      "mode": "rank"
+    },
+    {
+      "id": 10000086,
+      "username": "botmytheria86",
+      "screenname": "水晶琥珀",
+      "mode": "rank"
+    },
+    {
+      "id": 10000087,
+      "username": "botmytheria87",
+      "screenname": "МагияТеней",
+      "mode": "rank"
+    },
+    {
+      "id": 10000088,
+      "username": "botmytheria88",
+      "screenname": "LaLunaOscura",
+      "mode": "rank"
+    },
+    {
+      "id": 10000089,
+      "username": "botmytheria89",
+      "screenname": "Vukhihell",
+      "mode": "rank"
+    },
+    {
+      "id": 10000090,
+      "username": "botmytheria90",
+      "screenname": "空蝉",
+      "mode": "rank"
+    },
+    {
+      "id": 10000091,
+      "username": "botmytheria91",
+      "screenname": "차가운눈",
+      "mode": "rank"
+    },
+    {
+      "id": 10000092,
+      "username": "botmytheria92",
+      "screenname": "幻想の騎士",
+      "mode": "rank"
+    },
+    {
+      "id": 10000093,
+      "username": "botmytheria93",
+      "screenname": "LeChasseurNoir",
+      "mode": "rank"
+    },
+    {
+      "id": 10000094,
+      "username": "botmytheria94",
+      "screenname": "FrostyFangs",
+      "mode": "rank"
+    },
+    {
+      "id": 10000095,
+      "username": "botmytheria95",
+      "screenname": "青龍",
+      "mode": "rank"
+    },
+    {
+      "id": 10000096,
+      "username": "botmytheria96",
+      "screenname": "Huyetchien",
+      "mode": "rank"
+    },
+    {
+      "id": 10000097,
+      "username": "botmytheria97",
+      "screenname": "ミステリオ",
+      "mode": "rank"
+    },
+    {
+      "id": 10000098,
+      "username": "botmytheria98",
+      "screenname": "灰狼",
+      "mode": "rank"
+    },
+    {
+      "id": 10000099,
+      "username": "botmytheria99",
+      "screenname": "달의빛",
+      "mode": "rank"
+    },
+    {
+      "id": 10000100,
+      "username": "botmytheria100",
+      "screenname": "СоколСтремительный",
+      "mode": "rank"
+    }
+  ]
+}
