@@ -9,6 +9,7 @@ public class DBHero
     public static long TYPE_TROOPER_NORMAL = 1;
     public static long TYPE_TROOPER_MAGIC = 2;
 
+    public static long TYPE_BUFF_GOD = 4;
     public static long COLOR_WHITE = 0;
     public static long COLOR_GREEN = 1;
     public static long COLOR_RED = 2;
@@ -55,6 +56,8 @@ public class DBHero
     /// <summary>Số TÍCH của Thần cùng loại để có thể ra trận; chỉ áp dụng với lính thường và lính phép</summary>
     public long shardRequired;
     /// <summary>Số máu trụ bị mất khi hero bị đối phương tiêu diệt</summary>
+
+    public long owner_god_id; //này là id của hero sở hữu nếu đó là bài buff thần
     public long deathCost, collectible, cleave, breaker, overrun, combo, pierce, disable, virtualHero,godSlayer;
     public long speciesId, atk, hp;
     public String name, speciesName, skills;

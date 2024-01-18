@@ -1872,8 +1872,6 @@ public class Mytheria extends BaseGambScreen {
         }
         // wait delay
         onProcessData = false;
-
-
         //BOT
         bot();
 
@@ -1882,62 +1880,21 @@ public class Mytheria extends BaseGambScreen {
 
     public void bot() {
         try {
-
             if (IsYourTurn) {
-                Thread.sleep(5000);
-                int count = 0;
-                for (int i = 0; i < playerSlotContainer.size(); i++) {
-                    CardSlot slot = playerSlotContainer.get(i);
-                    if (slot.state == SlotState.Full) {
-                        Card card = slot.currentCard;
-                        if (card.heroInfo.type == DBHero.TYPE_GOD) {
-                            count++;
-                            break;
+                //trên sân có vị trí để summon không
+                int rowEmty = -1;
+                int colEmty = -1;
+                List<Integer> lstXIndex = new ArrayList<>();
+                List<Integer> lstYIndex = new ArrayList<>();
+                for (CardSlot slot : playerSlotContainer) {
+                    if (slot.state == SlotState.Empty) {
+                        if (slot.yPos != 3) { //có cần thêm đk là x =0,1 không?
+                            lstXIndex.add(slot.xPos);
+                            lstYIndex.add(slot.yPos);
                         }
                     }
                 }
-                if (count == 0) {
-                    if (playerGodDeck.size() == 0) {
-                        instance.session2.GameConfirmStartBattle();
-                        return;
-                    }
-                    long maxMana = 0;
-                    int index = -1;
-                    for (int i = 0; i < playerGodDeck.size(); i++) {
-                        DBHero god = playerGodDeck.get(i).hero;
-                        if (god.mana <= currentMana && god.mana > maxMana) {
-                            maxMana = god.mana;
-                            index = i;
-                        }
-                    }
-                    long row = -1, col = -1;
-                    GodCardUI godCardSelected = playerGodDeck.get(index);
-
-                    if (godCardSelected.hero.id == 347 || godCardSelected.hero.id == 349 || godCardSelected.hero.id == 350 || godCardSelected.hero.id == 351)
-                        row = 0;
-                    else row = 1;
-                    List<Integer> lstIndex = new ArrayList<>();
-                    for (CardSlot slot : playerSlotContainer) {
-                        if (slot.xPos == row && slot.state == SlotState.Empty) {
-                            if (slot.yPos != 3) lstIndex.add(slot.yPos);
-                        }
-                    }
-                    if (lstIndex.size() == 0) {
-                        row = 1 - row;
-                        for (CardSlot slot : playerSlotContainer) {
-                            if (slot.xPos == row && slot.state == SlotState.Empty) {
-                                if (slot.yPos != 3) lstIndex.add(slot.yPos);
-                            }
-                        }
-                    }
-                    if (lstIndex.size() == 0){
-                        instance.session2.GameConfirmStartBattle();
-                        return;
-                    }
-                    col = lstIndex.get(random.nextInt(lstIndex.size()));
-                    SummonGodInBattlePhase(godCardSelected, row, col);
-                    Thread.sleep(2000);
-                }
+                //này là gì? lấy god card hiện tại à?
                 BoardCard godCard = null;
                 for (int i = 0; i < playerSlotContainer.size(); i++) {
                     CardSlot slot = playerSlotContainer.get(i);
@@ -1949,716 +1906,33 @@ public class Mytheria extends BaseGambScreen {
                         }
                     }
                 }
-                long maxShardNeed = godCard.heroInfo.maxShardUnlockSkill;
-                for (HandCard handCard : Decks[0].GetListCard()) {
-                    maxShardNeed = Math.max(maxShardNeed, handCard.heroInfo.shardRequired);
-                }
-
-                while (currentShard > 0 && godCard.countShardAddded < maxShardNeed) {
-                    AddShard(godCard);
-                    Thread.sleep(2000);
-                }
-
-                if (godCard.countShardAddded < maxShardNeed) {
-                    GetShard();
-                    Thread.sleep(2000);
-                    AddShard(godCard);
-                    Thread.sleep(2000);
-
-                }
-
-                if (currentMana <= 0) {
-                    instance.session2.GameConfirmStartBattle();
-                    return;
-                }
-                boolean isFull = true;
-                for (int i = 0; i < playerSlotContainer.size(); i++) {
-                    CardSlot slot = playerSlotContainer.get(i);
-                    if (slot.state == SlotState.Empty) {
-                        isFull = false;
-                        break;
+                //chạy luồng ko có chỗ trống
+                if(lstXIndex.size() == 0){
+                    if(godCard != null){
+                        //trên tay có buf của thần và có đủ mana chơi hay ko?=========
+                        for (HandCard handCard : Decks[0].GetListCard()) {
+                            if(handCard.heroInfo.type == DBHero.TYPE_BUFF_GOD
+                                    && handCard.heroInfo.owner_god_id == godCard.heroID
+                                    && handCard.tmpMana <= currentMana){
+                                currentMana -= handCard.tmpMana;
+                                SummonBuffGodInBattlePhase(godCard.battleID, handCard.heroID, godCard. ); //để xem có phải gửi vị trí lên ko
+                            }
+                        }
                     }
-                }
-                success = false;
-                if (isFull) {
-                    int[] weight = {5, 50, 30, 15};
-                    int n = weight.length;
-                    int[] sum = new int[n];
-                    sum[0] = weight[0];
-                    for (int i = 1; i < n; i++)
-                        sum[i] = sum[i - 1] + weight[i];
-                    int rmd = random.nextInt(sum[n - 1]);
-                    int indexAction = 0;
-                    for (int i = 0; i < n; i++)
-                        if (sum[i] > rmd) {
-                            indexAction = i;
-                            break;
+                    //luồng chơi phép riêng
+                    List<HandCard> handCards = new ArrayList<>();
+                    for (HandCard handCard : Decks[0].GetListCard()) {
+                        if (handCard.heroInfo.type == DBHero.TYPE_TROOPER_MAGIC && CanSummon(handCard)) {
+                            handCards.add(handCard);
                         }
-                    switch (indexAction) {
-                        case 0:
-                        case 2: {
-                            break;
-                        }
-                        case 1: {
-                            List<HandCard> handCards = new ArrayList<>();
-                            for (HandCard handCard : Decks[0].GetListCard()) {
-                                if (handCard.heroInfo.type == DBHero.TYPE_TROOPER_MAGIC && CanSummon(handCard)) {
-                                    handCards.add(handCard);
-                                }
-                            }
-                            if (handCards.size() == 0) {
-                                break;
-                            }
-                            outer:
-                            for (int i = 0; i < prioritySpellArr.size(); i++) {
-                                JSONArray arr = (JSONArray) prioritySpellArr.get(i);
-                                for (HandCard card : handCards) {
-                                    long heroId = card.heroID;
-                                    if (arr.contains(heroId)) {
-                                        if (SummonSpellInBattlePhase(card)) {
-                                            Thread.sleep(2000);
-                                            if (success) break outer;
-                                        }
-                                    }
-                                }
-
-                            }
-
-                            break;
-                        }
-                        default: {
-                            boolean haveActiveSkill = false;
-                            for (DBHeroSkill skill : godCard.lstSkill) {
-                                if (skill.skill_type == 1 && !skill.isUltiType) {
-                                    godCard.OnActiveSkill(skill);
-                                    haveActiveSkill = true;
-                                    break;
-                                }
-                            }
-                            if (haveActiveSkill) {
-                                boolean ok = DoActiveSkill(godCard);
-                                if (ok) {
-                                    Thread.sleep(2000);
-                                }
-                            }
-                            break;
-                        }
-
                     }
-                    instance.session2.GameConfirmStartBattle();
-                } else {
-                    int[] weight = {50, 30, 15, 5};
-                    int n = weight.length;
-                    int[] sum = new int[n];
-                    int indexAction = 0;
-                    while (!success) {
-                        sum[0] = weight[0];
-                        for (int i = 1; i < n; i++)
-                            sum[i] = sum[i - 1] + weight[i];
-                        if (sum[n - 1] <= 0) {
-                            instance.session2.GameConfirmStartBattle();
-                            return;
-                        }
-                        int rmd = random.nextInt(sum[n - 1]);
-                        for (int i = 0; i < n; i++)
-                            if (sum[i] > rmd) {
-                                indexAction = i;
-                                break;
-                            }
-                        switch (indexAction) {
-                            case 0: {
-                                List<HandCard> canCummonCards = new ArrayList<>();
-                                for (HandCard card : Decks[0].GetListCard()) {
-                                    if (card.heroInfo.type == DBHero.TYPE_TROOPER_NORMAL && CanSummon(card))
-                                        canCummonCards.add(card);
-                                }
-                                if (canCummonCards.size() == 0) {
-                                    weight[0] = 0;
-                                    break;
-                                }
-
-                                CardSlot enemySlotMatrix[][] = new CardSlot[2][4];
-                                CardSlot playerSlotMatrix[][] = new CardSlot[2][4];
-                                for (CardSlot slot : enemySlotContainer) {
-                                    enemySlotMatrix[slot.xPos][slot.yPos] = slot;
-                                }
-                                for (CardSlot slot : playerSlotContainer) {
-                                    playerSlotMatrix[slot.xPos][slot.yPos] = slot;
-                                }
-                                List<Integer> lstValidEmptyCol = new ArrayList<>();
-                                for (int j = 0; j < MAX_COLUMN; j++) {
-                                    int enemyCardCount = 0;
-                                    int playerCardCount = 0;
-                                    for (int i = 0; i < MAX_ROW; i++) {
-                                        if (enemySlotMatrix[i][j].state != SlotState.Empty) enemyCardCount++;
-                                    }
-                                    for (int i = 0; i < MAX_ROW; i++) {
-                                        if (playerSlotMatrix[i][j].state != SlotState.Empty) playerCardCount++;
-                                    }
-                                    if (j < MAX_COLUMN - 1 && enemyCardCount == 0 && playerCardCount < MAX_ROW) {
-                                        lstValidEmptyCol.add(j);
-
-                                    }
-                                }
-                                if (lstValidEmptyCol.size() > 0) {
-                                    int col = lstValidEmptyCol.get(random.nextInt(lstValidEmptyCol.size()));
-                                    int row;
-                                    if (playerSlotMatrix[0][col].state == SlotState.Empty) {
-                                        if (playerSlotMatrix[1][col].state == SlotState.Empty) {
-                                            int k = random.nextInt(100);
-                                            if (k < 80) row = 0;
-                                            else row = 1;
-                                        } else {
-                                            row = 0;
-                                        }
-                                    } else {
-                                        row = 1;
-                                    }
-
-                                    if (summonCardInGroup(1, row, col)) {
-                                        Thread.sleep(2000);
-                                        instance.session2.GameConfirmStartBattle();
-                                        return;
-                                    }
-                                    // chưa có
-                                    if (summonCardInGroup(2, row, col)) {
-                                        Thread.sleep(2000);
-                                        instance.session2.GameConfirmStartBattle();
-                                        return;
-                                    }
-
-                                }
-                                List<Integer> lstValidEnemyGodCol = new ArrayList<>();
-                                for (int j = 0; j < MAX_COLUMN - 1; j++) {
-                                    boolean full = playerSlotMatrix[0][j].state != SlotState.Empty && playerSlotMatrix[1][j].state != SlotState.Empty;
-                                    if (!full) {
-                                        if ((enemySlotMatrix[0][j].state == SlotState.Full && enemySlotMatrix[0][j].currentCard.heroInfo.type == DBHero.TYPE_GOD)
-                                                || (enemySlotMatrix[1][j].state == SlotState.Full && enemySlotMatrix[1][j].currentCard.heroInfo.type == DBHero.TYPE_GOD && enemySlotMatrix[0][j].state == SlotState.Empty)) {
-                                            lstValidEnemyGodCol.add(j);
-                                        }
-
-                                    }
-                                }
-                                if (lstValidEnemyGodCol.size() > 0) {
-                                    int col = lstValidEnemyGodCol.get(random.nextInt(lstValidEnemyGodCol.size()));
-                                    int row;
-                                    if (playerSlotMatrix[0][col].state == SlotState.Empty) {
-                                        if (playerSlotMatrix[1][col].state == SlotState.Empty) {
-                                            int k = random.nextInt(100);
-                                            if (k < 80) row = 0;
-                                            else row = 1;
-                                        } else {
-                                            row = 0;
-                                        }
-                                    } else {
-                                        row = 1;
-                                    }
-                                    if (summonCardInGroup(10, row, col)) {
-                                        Thread.sleep(2000);
-                                        instance.session2.GameConfirmStartBattle();
-                                        return;
-                                    }
-                                    if (summonCardInGroup(5, row, col)) {
-                                        Thread.sleep(2000);
-                                        instance.session2.GameConfirmStartBattle();
-                                        return;
-                                    }
-                                    //chưa có
-                                    if (summonCardInGroup(2, row, col)) {
-                                        Thread.sleep(2000);
-                                        instance.session2.GameConfirmStartBattle();
-                                        return;
-                                    }
-                                    // chưa có
-                                    if (summonCardInGroup(6, row, col)) {
-                                        Thread.sleep(2000);
-                                        instance.session2.GameConfirmStartBattle();
-                                        return;
-                                    }
-                                    long maxAtk = -1;
-                                    HandCard selectCard = null;
-                                    for (HandCard card : Decks[0].GetListCard()) {
-                                        if (card.heroInfo.type == DBHero.TYPE_TROOPER_NORMAL && CanSummon(card)) {
-                                            if (card.heroInfo.atk > maxAtk) {
-                                                maxAtk = card.heroInfo.atk;
-                                                selectCard = card;
-                                            }
-                                        }
-                                    }
-                                    SummonNormalInBattlePhase(selectCard, row, col);
-                                    Thread.sleep(2000);
-                                    instance.session2.GameConfirmStartBattle();
-                                    return;
-                                }
-//                                else {
-                                List<Integer> lstValidEnemyHpCol = new ArrayList<>();
-                                for (int j = 0; j < MAX_COLUMN - 1; j++) {
-                                    boolean full = playerSlotMatrix[0][j].state != SlotState.Empty && playerSlotMatrix[1][j].state != SlotState.Empty;
-                                    if (!full) {
-                                        if (enemySlotMatrix[0][j].state == SlotState.Full && enemySlotMatrix[0][j].currentCard.heroInfo.type == DBHero.TYPE_TROOPER_NORMAL && ((BoardCard) enemySlotMatrix[0][j].currentCard).hpValue < 3
-                                        ) {
-                                            lstValidEnemyHpCol.add(j);
-                                        }
-
-                                    }
-                                }
-                                if (lstValidEnemyHpCol.size() > 0) {
-                                    int col = lstValidEnemyHpCol.get(random.nextInt(lstValidEnemyHpCol.size()));
-                                    int row;
-                                    if (canSummonCardInGroup(13) || canSummonCardInGroup(5) || canSummonCardInGroup(6)) {
-                                        if (playerSlotMatrix[0][col].state == SlotState.Empty) {
-                                            row = 0;
-                                        } else {
-                                            CommonVector cv = CommonVector.newBuilder()
-                                                    .addALong(0)
-                                                    .addALong(col)
-                                                    .addALong(1).addALong(col).build();
-                                            instance.session2.GameMoveCardInbattle(cv);
-                                            Thread.sleep(2000);
-                                            row = 1;
-                                        }
-                                        if (summonCardInGroup(13, row, col)) {
-                                            Thread.sleep(2000);
-                                            instance.session2.GameConfirmStartBattle();
-                                            return;
-                                        }
-                                        if (summonCardInGroup(5, row, col)) {
-                                            Thread.sleep(2000);
-                                            instance.session2.GameConfirmStartBattle();
-                                            return;
-                                        }
-                                        //chưa có
-                                        summonCardInGroup(6, row, col);
-                                        Thread.sleep(2000);
-                                        instance.session2.GameConfirmStartBattle();
-                                        return;
-                                    }
-                                }
-                                // chưa có
-                                if (canSummonCardInGroup(15)) {
-                                    // todo : nếu bộ bài khác có group lính 15
-                                }
-                                // chưa có
-                                if (canSummonCardInGroup(8)) {
-                                    // todo : nếu bộ bài khác có group lính 8
-                                }
-
-                                // chưa có
-                                if (canSummonCardInGroup(6)) {
-                                    // todo : nếu bộ bài khác có group lính 6
-                                }
-
-
-                                List<HandCard> cards = normalGroup(3);
-                                HandCard selectCard = null;
-                                long maxMana = -1;
-                                for (HandCard card : cards) {
-                                    if (card.heroInfo.type == DBHero.TYPE_TROOPER_NORMAL && CanSummon(card)) {
-                                        if (card.tmpMana > maxMana) {
-                                            maxMana = card.tmpMana;
-                                            selectCard = card;
-                                        }
-                                    }
-                                }
-                                if (selectCard != null) {
-                                    int lane = -1;
-                                    outer:
-                                    for (int i = 0; i < MAX_ROW; i++)
-                                        for (int j = 0; j < MAX_COLUMN; j++) {
-                                            CardSlot slot = playerSlotMatrix[i][j];
-                                            if (slot.state == SlotState.Full && slot.currentCard.heroInfo.type == DBHero.TYPE_GOD) {
-                                                if (j == 0 || j == 1) lane = 0;
-                                                else lane = 2;
-                                                break outer;
-                                            }
-
-                                        }
-                                    int min = 0, max = 3;
-                                    if (lane == 0) {
-                                        min = 0;
-                                        max = 1;
-
-                                    } else {
-                                        min = 2;
-                                        max = 2;
-                                    }
-
-                                    int row = -1, col = -1;
-                                    outer:
-                                    for (int i = 0; i < MAX_ROW; i++)
-                                        for (int j = min; j <= max; j++) {
-                                            CardSlot slot = playerSlotMatrix[i][j];
-                                            if (slot.state == SlotState.Empty) {
-                                                row = i;
-                                                col = j;
-                                                break outer;
-                                            }
-                                        }
-                                    if (row == -1 || col == -1) {
-                                        min = 2 - min;
-                                        max = 3 - max;
-                                        outer:
-                                        for (int i = 0; i < MAX_ROW; i++)
-                                            for (int j = min; j <= max; j++) {
-                                                CardSlot slot = playerSlotMatrix[i][j];
-                                                if (slot.state == SlotState.Empty) {
-                                                    row = i;
-                                                    col = j;
-                                                    break outer;
-                                                }
-                                            }
-                                    }
-                                    if (row != -1 && col != -1){
-                                        SummonNormalInBattlePhase(selectCard, row, col);
-                                        Thread.sleep(2000);
-                                        instance.session2.GameConfirmStartBattle();
-                                        return;
-                                    }
-                                }
-                                int[] cardInLane = new int[3];
-                                int validBlankInLane2 = 0;
-                                cardInLane[0] = 0;
-                                for (int i = 0; i < MAX_ROW; i++)
-                                    for (int j = 0; j <= 1; j++) {
-                                        CardSlot slot = playerSlotMatrix[i][j];
-                                        if (slot.state == SlotState.Full) cardInLane[0]++;
-
-                                    }
-                                cardInLane[2] = 0;
-                                for (int i = 0; i < MAX_ROW; i++)
-                                    for (int j = 2; j <= 3; j++) {
-                                        CardSlot slot = playerSlotMatrix[i][j];
-                                        if (slot.state == SlotState.Full) cardInLane[2]++;
-                                        else if (j == 2) validBlankInLane2 ++;
-                                    }
-                                cards = normalGroup(4);
-                                selectCard = null;
-                                maxMana = -1;
-                                for (HandCard card : cards) {
-                                    if (card.heroInfo.type == DBHero.TYPE_TROOPER_NORMAL && CanSummon(card)) {
-                                        if (card.tmpMana > maxMana) {
-                                            maxMana = card.tmpMana;
-                                            selectCard = card;
-                                        }
-                                    }
-                                }
-                                if (selectCard != null) {
-                                    int min, max;
-                                    int row = -1, col = -1;
-
-                                    if (cardInLane[0] == 3) {
-                                            if (cardInLane[2] == 3 && validBlankInLane2 > 0) {
-                                                TowerController tower0 = getAllyTowerByLane(0);
-                                                TowerController tower2 = getAllyTowerByLane(2);
-                                                if (tower0.towerHealth >= tower2.towerHealth) {
-                                                    min = 0;
-                                                    max = 1;
-                                                } else {
-                                                    min = 2;
-                                                    max = 2;
-                                                }
-
-                                                outer:
-                                                for (int i = 0; i < MAX_ROW; i++)
-                                                    for (int j = min; j <= max; j++)
-                                                        if (playerSlotMatrix[i][j].state == SlotState.Empty) {
-                                                            row = i;
-                                                            col = j;
-                                                            break outer;
-                                                        }
-                                                SummonNormalInBattlePhase(selectCard, row, col);
-                                            } else {
-                                                min = 0;
-                                                max = 1;
-                                                outer:
-                                                for (int i = 0; i < MAX_ROW; i++)
-                                                    for (int j = min; j <= max; j++)
-                                                        if (playerSlotMatrix[i][j].state == SlotState.Empty) {
-                                                            row = i;
-                                                            col = j;
-                                                            break outer;
-                                                        }
-                                                SummonNormalInBattlePhase(selectCard, row, col);
-                                            }
-                                    } else {
-                                        if (cardInLane[2] == 3 && validBlankInLane2 > 0) {
-                                            min = 2;
-                                            max = 2;
-                                            outer:
-                                            for (int i = 0; i < MAX_ROW; i++)
-                                                for (int j = min; j <= max; j++)
-                                                    if (playerSlotMatrix[i][j].state == SlotState.Empty) {
-                                                        row = i;
-                                                        col = j;
-                                                        break outer;
-                                                    }
-                                            SummonNormalInBattlePhase(selectCard, row, col);
-                                        } else {
-                                            if (cardInLane[0] == 4) {
-                                                min = 2;
-                                                max = 3;
-                                            } else if (cardInLane[2] == 4) {
-                                                min = 0;
-                                                max = 1;
-                                            } else {
-                                                if (0 <= godCard.slot.yPos && godCard.slot.yPos <= 1) {
-                                                    min = 0;
-                                                    max = 1;
-                                                } else {
-                                                    min = 2;
-                                                    max = 3;
-                                                }
-                                            }
-                                            row = 0;
-                                            for (int j = min; j <= max; j++)
-                                                if (playerSlotMatrix[0][j].state == SlotState.Empty) {
-                                                    col = j;
-                                                    break;
-                                                }
-                                            if (col == -1) {
-                                                col = random.nextInt(2);
-                                                CommonVector cv = CommonVector.newBuilder()
-                                                        .addALong(0)
-                                                        .addALong(col)
-                                                        .addALong(1).addALong(col).build();
-                                                instance.session2.GameMoveCardInbattle(cv);
-                                                Thread.sleep(2000);
-                                            }
-                                            SummonNormalInBattlePhase(selectCard, row, col);
-                                        }
-                                    }
-                                    Thread.sleep(2000);
-                                    instance.session2.GameConfirmStartBattle();
-                                    return;
-                                }
-                                //todo: bộ basic k có nhóm 2
-                                cards = normalGroup(16);
-                                selectCard = null;
-                                maxMana = -1;
-                                for (HandCard card : cards) {
-                                    if (card.heroInfo.type == DBHero.TYPE_TROOPER_NORMAL && CanSummon(card)) {
-                                        if (card.tmpMana > maxMana) {
-                                            maxMana = card.tmpMana;
-                                            selectCard = card;
-                                        }
-                                    }
-                                }
-                                if (selectCard != null) {
-                                    int lane = -1;
-                                    if (cardInLane[0] < 3) {
-                                        if (cardInLane[2] < 3) {
-                                            if (0 <= godCard.slot.yPos && godCard.slot.yPos <= 1) {
-                                                lane = 2;
-                                            } else lane = 0;
-
-                                        } else {
-                                            lane = 0;
-                                        }
-                                    } else {
-                                        if (cardInLane[2] < 3) {
-                                            lane = 2;
-                                        }
-                                    }
-                                    if (lane != -1) {
-                                        int min, max;
-                                        if (lane == 0) {
-                                            min = 0;
-                                            max = 1;
-                                        } else {
-                                            min = 2;
-                                            max = 3;
-                                        }
-                                        for (int j = min; j <= max; j++) {
-                                            if (playerSlotMatrix[0][j].state == SlotState.Full) {
-                                                for (int k = min; k <= max; k++) {
-                                                    if (playerSlotMatrix[1][k].state == SlotState.Empty) {
-                                                        CommonVector cv = CommonVector.newBuilder()
-                                                                .addALong(0)
-                                                                .addALong(j)
-                                                                .addALong(1)
-                                                                .addALong(k).build();
-                                                        instance.session2.GameMoveCardInbattle(cv);
-                                                        Thread.sleep(2000);
-                                                        break;
-                                                    }
-                                                }
-
-                                            }
-                                        }
-                                        SummonNormalInBattlePhase(selectCard, 0, min);
-                                        Thread.sleep(2000);
-                                        instance.session2.GameConfirmStartBattle();
-                                        return;
-
-                                    }
-                                }
-                                //todo: basic k có nhóm 7 => k check nhom 9
-                                cards = normalGroup(18);
-                                selectCard = null;
-                                maxMana = -1;
-                                for (HandCard card : cards) {
-                                    if (card.heroInfo.type == DBHero.TYPE_TROOPER_NORMAL && CanSummon(card)) {
-                                        if (card.tmpMana > maxMana) {
-                                            maxMana = card.tmpMana;
-                                            selectCard = card;
-                                        }
-                                    }
-                                }
-                                int godLane;
-
-                                if (0 <= godCard.slot.yPos && godCard.slot.yPos <= 1) {
-                                    godLane = 0;
-                                } else {
-                                    godLane = 2;
-                                }
-                                if (selectCard != null) {
-                                    if (cardInLane[godLane] <= 3) {
-                                        if (godCard.slot.xPos == 0) {
-                                            CommonVector cv = CommonVector.newBuilder()
-                                                    .addALong(0)
-                                                    .addALong(godCard.slot.yPos)
-                                                    .addALong(1)
-                                                    .addALong(godCard.slot.yPos).build();
-                                            instance.session2.GameMoveCardInbattle(cv);
-                                            Thread.sleep(2000);
-                                        }
-                                        if (playerSlotMatrix[0][godCard.slot.yPos].state == SlotState.Full) {
-                                            int nearByCol = godLane + (1 - godCard.slot.yPos);
-                                            int row = -1;
-                                            for (int i = 0; i < MAX_ROW; i++)
-                                                if (playerSlotMatrix[0][nearByCol].state == SlotState.Empty) {
-                                                    row = i;
-                                                    break;
-                                                }
-                                            CommonVector cv = CommonVector.newBuilder()
-                                                    .addALong(0)
-                                                    .addALong(godCard.slot.yPos)
-                                                    .addALong(row)
-                                                    .addALong(nearByCol).build();
-                                            instance.session2.GameMoveCardInbattle(cv);
-                                            Thread.sleep(2000);
-                                        }
-                                        SummonNormalInBattlePhase(selectCard, 0, godCard.slot.yPos);
-
-
-                                    } else {
-                                        int min, max;
-                                        if (godLane == 0) {
-                                            min = 2;
-                                            max = 3;
-                                        } else {
-                                            min = 0;
-                                            max = 1;
-                                        }
-                                        int row = -1, col = -1;
-                                        for (int i = 0; i < MAX_ROW; i++)
-                                            for (int j = min; j <= max; j++)
-                                                if (playerSlotMatrix[i][j].state == SlotState.Empty) {
-                                                    row = i;
-                                                    col = j;
-                                                    break;
-                                                }
-                                        SummonNormalInBattlePhase(selectCard, 0, godCard.slot.yPos);
-
-
-                                    }
-                                    Thread.sleep(2000);
-                                    instance.session2.GameConfirmStartBattle();
-                                    return;
-                                }
-                                selectCard = null;
-                                maxMana = -1;
-                                for (HandCard card : Decks[0].GetListCard()) {
-                                    if (card.heroInfo.type == DBHero.TYPE_TROOPER_NORMAL && CanSummon(card)) {
-                                        if (card.tmpMana > maxMana) {
-                                            maxMana = card.tmpMana;
-                                            selectCard = card;
-                                        }
-                                    }
-                                }
-                                if (selectCard != null) {
-                                    int min, max;
-                                    if (cardInLane[godLane] <= 3) {
-                                        min = godLane;
-                                        max = godLane + 1;
-                                    } else {
-                                        min = 2 - godLane;
-                                        max = 2 - godLane + 1;
-                                    }
-                                    List<Integer> lstRow = new ArrayList<>();
-                                    List<Integer> lstCol = new ArrayList<>();
-                                    for (int i = 0; i < MAX_ROW; i++)
-                                        for (int j = min; j <= max; j++)
-                                            if (playerSlotMatrix[i][j].state == SlotState.Empty) {
-                                                lstRow.add(i);
-                                                lstCol.add(j);
-                                                break;
-                                            }
-                                    int row = lstRow.get(random.nextInt(lstRow.size()));
-                                    int col = lstCol.get(random.nextInt(lstCol.size()));
-                                    SummonNormalInBattlePhase(selectCard, row, col);
-                                    Thread.sleep(2000);
-                                    instance.session2.GameConfirmStartBattle();
-                                    return;
-                                }
-                                weight[0] = 0;
-                                break;
-
-
-//                                }
-
-
-                            }
-                            case 1: {
-                                List<HandCard> handCards = new ArrayList<>();
-                                for (HandCard handCard : Decks[0].GetListCard()) {
-                                    if (handCard.heroInfo.type == DBHero.TYPE_TROOPER_MAGIC && CanSummon(handCard)) {
-                                        handCards.add(handCard);
-                                    }
-                                }
-                                if (handCards.size() == 0) {
-                                    weight[1] = 0;
-                                    break;
-                                }
-                                outer:
-                                for (int i = 0; i < prioritySpellArr.size(); i++) {
-                                    JSONArray arr = (JSONArray) prioritySpellArr.get(i);
-                                    for (HandCard card : handCards) {
-                                        long heroId = card.heroID;
-                                        if (arr.contains(heroId)) {
-                                            if (SummonSpellInBattlePhase(card)) {
-                                                Thread.sleep(2000);
-                                                if (success) {
-                                                    instance.session2.GameConfirmStartBattle();
-                                                    return;
-                                                }
-                                            }
-                                        }
-                                    }
-
-                                }
-
-
-                                weight[1] = 0;
-                                break;
-                            }
-                            case 2: {
-                                weight[2] = 0;
-                                break;
-                            }
-                            default: {
-                                boolean haveActiveSkill = false;
-                                for (DBHeroSkill skill : godCard.lstSkill) {
-                                    if (skill.skill_type == 1 && !skill.isUltiType) {
-
-                                        godCard.OnActiveSkill(skill);
-                                        haveActiveSkill = true;
-                                        break;
-                                    }
-                                }
-                                if (haveActiveSkill) {
-                                    boolean ok = DoActiveSkill(godCard);
-                                    if (ok) {
+                    if (handCards.size() != 0) {
+                        for (int i = 0; i < prioritySpellArr.size(); i++) {
+                            JSONArray arr = (JSONArray) prioritySpellArr.get(i);
+                            for (HandCard card : handCards) {
+                                long heroId = card.heroID;
+                                if (arr.contains(heroId)) {
+                                    if (SummonSpellInBattlePhase(card)) {
                                         Thread.sleep(2000);
                                         if (success) {
                                             instance.session2.GameConfirmStartBattle();
@@ -2666,17 +1940,1798 @@ public class Mytheria extends BaseGambScreen {
                                         }
                                     }
                                 }
-                                weight[n - 1] = 0;
-                                break;
                             }
 
                         }
-
                     }
+                    //enturn thôi
                     instance.session2.GameConfirmStartBattle();
+                    return;
+
                 }
 
+                //trường hợp có chỗ trống
 
+                if(godCard != null) {
+                    if (playerGodDeck.size() != 0) {
+                        long maxMana = 0;
+                        int index = -1;
+                        //này là lấy index và maxmana của tướng có nhiều mana nhất trong bộ
+                        for (int i = 0; i < playerGodDeck.size(); i++) {
+                            DBHero god = playerGodDeck.get(i).hero;
+                            if (god.mana <= currentMana && god.mana > maxMana) {
+                                maxMana = god.mana;
+                                index = i;
+                            }
+                        }
+                        long row = -1, col = -1;
+                        //lấy ra tướng được chọn
+                        GodCardUI godCardSelected = playerGodDeck.get(index);
+
+                        //đây là gì nhỉ? chọn mấy con hero chỉ hợp hàng sau
+                        if (godCardSelected.hero.id == 347 || godCardSelected.hero.id == 349 || godCardSelected.hero.id == 350 || godCardSelected.hero.id == 351)
+                            row = 0;
+                        else row = 1;
+                        List<Integer> lstIndex = new ArrayList<>();
+
+                        //lấy ra danh sách các slot trống ư? với đk là slot đó ở row tương ứng vs vị trí của thần và tình trạng là empty, sau đó lưu y vào
+                        for (CardSlot slot : playerSlotContainer) {
+                            if (slot.xPos == row && slot.state == SlotState.Empty) {
+                                if (slot.yPos != 3) lstIndex.add(slot.yPos);
+                            }
+                        }
+                        //nếu ko có vị trí trống, thì chuyển sang row còn lại và duyệt chăng?
+                        if (lstIndex.size() == 0) {
+                            row = 1 - row;
+                            for (CardSlot slot : playerSlotContainer) {
+                                if (slot.xPos == row && slot.state == SlotState.Empty) {
+                                    if (slot.yPos != 3) lstIndex.add(slot.yPos);
+                                }
+                            }
+                        }
+                        //vẫn ko có thì thôi, chơi game
+                        if (lstIndex.size() == 0) {
+                            instance.session2.GameConfirmStartBattle();
+                            return;
+                        }
+
+                        //lấy bừa 1 vị trí trong số các vị trí trống
+                        col = lstIndex.get(random.nextInt(lstIndex.size()));
+
+                        //triệu hồi vô đó
+                        SummonGodInBattlePhase(godCardSelected, row, col);
+                        lstXIndex.remove(row);
+                        lstYIndex.remove(col);
+                        godCard = null;
+                        Thread.sleep(2000);
+                    }
+                }
+                if (godCard != null){
+                    //trên tay có buf của thần và có đủ mana chơi hay ko?=========
+                    //này là gì? lấy god card hiện tại à?
+                    for (int i = 0; i < playerSlotContainer.size(); i++) {
+                        CardSlot slot = playerSlotContainer.get(i);
+                        if (slot.state == SlotState.Full) {
+                            Card card = slot.currentCard;
+                            if (card.heroInfo.type == DBHero.TYPE_GOD) {
+                                godCard = (BoardCard) card;
+                                break;
+                            }
+                        }
+                    }
+                    for (HandCard handCard : Decks[0].GetListCard()) {
+                        if(handCard.heroInfo.type == DBHero.TYPE_BUFF_GOD
+                                && handCard.heroInfo.owner_god_id == godCard.heroID
+                                && handCard.tmpMana <= currentMana){
+                            currentMana -= handCard.tmpMana;
+                            SummonBuffGodInBattlePhase(godCard.battleID, handCard.heroID, godCard. ); //để xem có phải gửi vị trí lên ko
+                        }
+                    }
+                }
+                Thread.sleep(5000);
+
+                //luồng chơi lính hoặc phép
+                List<HandCard> canSummonCardsNormal = new ArrayList<>(); //=================sửa Cummon thành Summon=========================================================
+                List<HandCard> canSummonCardsMagic = new ArrayList<>();
+                //duyệt xem trên tay có thẻ nào
+                for (HandCard card : Decks[0].GetListCard()) {
+                    if (card.heroInfo.type == DBHero.TYPE_TROOPER_NORMAL && CanSummon(card))
+                        canSummonCardsNormal.add(card);
+                    if (card.heroInfo.type == DBHero.TYPE_TROOPER_MAGIC && CanSummon(card))
+                        canSummonCardsMagic.add(card);
+                }
+                int indexAction = -1;
+                if (canSummonCardsNormal.size() != 0 && canSummonCardsMagic.size() != 0){
+                    indexAction = random.nextInt(2);
+                } else if (canSummonCardsNormal.size() != 0){
+                    indexAction = 0;
+                } else if (canSummonCardsMagic.size() != 0) {
+                    indexAction = 1;
+                } else {
+                    //đếch có con nào thì sử lý sao???
+                }
+
+                switch (indexAction){
+                    //summon lính
+                    case 0: {
+                        //lấy mảng vị trí kẻ thù
+                        CardSlot enemySlotMatrix[][] = new CardSlot[2][4];
+                        //ấy mảng gì đó cũng ko biết nữa cơ
+                        CardSlot playerSlotMatrix[][] = new CardSlot[2][4];
+                        //này là gì, lấy vị trí kẻ thù à?
+                        for (CardSlot slot : enemySlotContainer) {
+                            enemySlotMatrix[slot.xPos][slot.yPos] = slot;
+                        }
+                        //còn này là lấy mảng tướng của mình hiện tại à?
+                        for (CardSlot slot : playerSlotContainer) {
+                            playerSlotMatrix[slot.xPos][slot.yPos] = slot;
+                        }
+                        //này chắc hẳn là lấy số lượng thẻ địch và mình trên sân?
+                        List<Integer> lstValidEmptyCol = new ArrayList<>();
+                        for (int j = 0; j < MAX_COLUMN; j++) {
+                            int enemyCardCount = 0;
+                            int playerCardCount = 0;
+                            for (int i = 0; i < MAX_ROW; i++) {
+                                if (enemySlotMatrix[i][j].state != SlotState.Empty) enemyCardCount++;
+                            }
+                            for (int i = 0; i < MAX_ROW; i++) {
+                                if (playerSlotMatrix[i][j].state != SlotState.Empty) playerCardCount++;
+                            }
+                            //nếu không phải ở cột cuối cùng và không có kẻ địch nào trên sân và số thẻ đồng minh trong cột j chưa full thì thêm vào lstValidEmptyCol
+                            if (j < MAX_COLUMN - 1 && enemyCardCount == 0 && playerCardCount < MAX_ROW) {
+                                lstValidEmptyCol.add(j);
+                            }
+                        }
+                        //nếu có 1 cột nào đó chưa có kẻ địch và có thể triệu gồi vô đó
+                        if (lstValidEmptyCol.size() > 0) {
+                            //lấy ngẫu nhiên 1 cột trong các cột trống
+                            int col = lstValidEmptyCol.get(random.nextInt(lstValidEmptyCol.size()));
+                            //này là ưu tiên nếu có 2 vt rí trống thì 80% hàng trước, 20% hàng sau,
+                            int row;
+                            if (playerSlotMatrix[0][col].state == SlotState.Empty) {
+                                if (playerSlotMatrix[1][col].state == SlotState.Empty) {
+                                    int k = random.nextInt(100);
+                                    if (k < 80) row = 0;
+                                    else row = 1;
+                                } else {
+                                    row = 0;
+                                }
+                            } else {
+                                row = 1;
+                            }
+                            //hàm if này là nếu có tướng thuộc nhóm và có thể triệu hồi thì triệu hồi luôn, còn không thì trả về false
+                            if (summonCardInGroup(1, row, col)) {
+                                Thread.sleep(2000);
+                                instance.session2.GameConfirmStartBattle();
+                                return;
+                            }
+                            // chưa có
+                            if (summonCardInGroup(2, row, col)) {
+                                Thread.sleep(2000);
+                                instance.session2.GameConfirmStartBattle();
+                                return;
+                            }
+                        }
+                        //chuyển tới luồng thần đối phương có ở hàng trước không
+                        List<Integer> lstValidEnemyGodCol = new ArrayList<>();
+                        for (int j = 0; j < MAX_COLUMN - 1; j++) {
+                            //full = true là hàng sau cột j trống và hàng trước cột j trống
+                            boolean full = playerSlotMatrix[0][j].state != SlotState.Empty && playerSlotMatrix[1][j].state != SlotState.Empty;
+                            if (!full) {
+                                if ((enemySlotMatrix[0][j].state == SlotState.Full && enemySlotMatrix[0][j].currentCard.heroInfo.type == DBHero.TYPE_GOD)
+                                        || (enemySlotMatrix[1][j].state == SlotState.Full && enemySlotMatrix[1][j].currentCard.heroInfo.type == DBHero.TYPE_GOD && enemySlotMatrix[0][j].state == SlotState.Empty)) {
+                                    lstValidEnemyGodCol.add(j);
+                                }
+                            }
+                        }
+                        //nếu có
+                        if (lstValidEnemyGodCol.size() > 0) {
+                            int col = lstValidEnemyGodCol.get(random.nextInt(lstValidEnemyGodCol.size()));
+                            int row;
+                            if (playerSlotMatrix[0][col].state == SlotState.Empty) {
+                                if (playerSlotMatrix[1][col].state == SlotState.Empty) {
+                                    int k = random.nextInt(100);
+                                    if (k < 80) row = 0;
+                                    else row = 1;
+                                } else {
+                                    row = 0;
+                                }
+                            } else {
+                                row = 1;
+                            }
+                            if (summonCardInGroup(10, row, col)) {
+                                Thread.sleep(2000);
+                                instance.session2.GameConfirmStartBattle();
+                                return;
+                            }
+                            if (summonCardInGroup(5, row, col)) {
+                                Thread.sleep(2000);
+                                instance.session2.GameConfirmStartBattle();
+                                return;
+                            }
+                            //chưa có
+                            if (summonCardInGroup(2, row, col)) {
+                                Thread.sleep(2000);
+                                instance.session2.GameConfirmStartBattle();
+                                return;
+                            }
+                            // chưa có
+                            if (summonCardInGroup(6, row, col)) {
+                                Thread.sleep(2000);
+                                instance.session2.GameConfirmStartBattle();
+                                return;
+                            }
+                            long maxAtk = -1;
+                            HandCard selectCard = null;
+                            for (HandCard card : Decks[0].GetListCard()) {
+                                if (card.heroInfo.type == DBHero.TYPE_TROOPER_NORMAL && CanSummon(card)) {
+                                    if (card.heroInfo.atk > maxAtk) {
+                                        maxAtk = card.heroInfo.atk;
+                                        selectCard = card;
+                                    }
+                                }
+                            }
+                            SummonNormalInBattlePhase(selectCard, row, col);
+                            Thread.sleep(2000);
+                            instance.session2.GameConfirmStartBattle();
+                            return;
+                        }
+                        // luồng có địch <3 máu ở hàng trước
+                        List<Integer> lstValidEnemyHpCol = new ArrayList<>();
+                        for (int j = 0; j < MAX_COLUMN - 1; j++) {
+                            boolean full = playerSlotMatrix[0][j].state != SlotState.Empty && playerSlotMatrix[1][j].state != SlotState.Empty;
+                            if (!full) {
+                                if (enemySlotMatrix[0][j].state == SlotState.Full && enemySlotMatrix[0][j].currentCard.heroInfo.type == DBHero.TYPE_TROOPER_NORMAL && ((BoardCard) enemySlotMatrix[0][j].currentCard).hpValue < 3
+                                ) {
+                                    lstValidEnemyHpCol.add(j);
+                                }
+
+                            }
+                        }
+                        //nếu có
+                        if (lstValidEnemyHpCol.size() > 0) {
+                            int col = lstValidEnemyHpCol.get(random.nextInt(lstValidEnemyHpCol.size()));
+                            int row;
+                            if (canSummonCardInGroup(13) || canSummonCardInGroup(5) || canSummonCardInGroup(6)) {
+                                if (playerSlotMatrix[0][col].state == SlotState.Empty) {
+                                    row = 0;
+                                } else {
+                                    CommonVector cv = CommonVector.newBuilder()
+                                            .addALong(0)
+                                            .addALong(col)
+                                            .addALong(1).addALong(col).build();
+                                    instance.session2.GameMoveCardInbattle(cv);
+                                    Thread.sleep(2000);
+                                    row = 1;
+                                }
+                                if (summonCardInGroup(13, row, col)) {
+                                    Thread.sleep(2000);
+                                    instance.session2.GameConfirmStartBattle();
+                                    return;
+                                }
+                                if (summonCardInGroup(5, row, col)) {
+                                    Thread.sleep(2000);
+                                    instance.session2.GameConfirmStartBattle();
+                                    return;
+                                }
+                                //chưa có
+                                summonCardInGroup(6, row, col);
+                                Thread.sleep(2000);
+                                instance.session2.GameConfirmStartBattle();
+                                return;
+                            }
+                        }
+                        // chưa có, lane đồng minh có thần ko, lane là 2 đường 1 á
+                        if (canSummonCardInGroup(15)) {
+                            // todo : nếu bộ bài khác có group lính 15
+                            //duyệt qua từng đường, xem thần ở vị trí nào
+                            boolean lane1Full = true;
+                            boolean lane0Full = true;
+                            List<Integer> lstValidPlayerGodCol = new ArrayList<>();
+                            for(int j=0;j<MAX_COLUMN-1;j++){
+                                if( j == 0 || j == 1){
+                                    boolean full = playerSlotMatrix[0][0].state != SlotState.Empty
+                                            && playerSlotMatrix[1][0].state != SlotState.Empty
+                                            && playerSlotMatrix[0][1].state != SlotState.Empty
+                                            && playerSlotMatrix[1][1].state != SlotState.Empty;
+                                    if(!full){
+                                        lane0Full = false;
+                                        if((playerSlotMatrix[0][j].state == SlotState.Full && playerSlotMatrix[0][j].currentCard.heroInfo.type == DBHero.TYPE_GOD)
+                                                || playerSlotMatrix[1][j].state == SlotState.Full && playerSlotMatrix[1][j].currentCard.heroInfo.type == DBHero.TYPE_GOD){
+                                            lstValidPlayerGodCol.add(0);
+                                            lstValidPlayerGodCol.add(1);
+                                        }
+                                    }
+                                } else {
+                                    boolean full = playerSlotMatrix[0][j].state != SlotState.Empty && playerSlotMatrix[1][j].state != SlotState.Empty;
+                                    if(!full){
+                                        lane1Full = false;
+                                        if((playerSlotMatrix[0][j].state == SlotState.Full && playerSlotMatrix[0][j].currentCard.heroInfo.type == DBHero.TYPE_GOD)
+                                                || playerSlotMatrix[1][j].state == SlotState.Full && playerSlotMatrix[1][j].currentCard.heroInfo.type == DBHero.TYPE_GOD){
+                                            lstValidPlayerGodCol.add(j);
+                                        }
+                                    }
+                                }
+                            }
+                            //nếu có 1 đường thỏa mãn có tướng và còn trống
+                            if(lstValidPlayerGodCol.size()>0) {
+                                int col = lstValidEnemyGodCol.get(random.nextInt(lstValidEnemyGodCol.size()));
+                                int row;
+                                if (playerSlotMatrix[0][col].state == SlotState.Empty) {
+                                    if (playerSlotMatrix[1][col].state == SlotState.Empty) {
+                                        int k = random.nextInt(100);
+                                        if (k < 80) row = 0;
+                                        else row = 1;
+                                    } else {
+                                        row = 0;
+                                    }
+                                } else {
+                                    row = 1;
+                                }
+                                if (summonCardInGroup(15, row, col)) {
+                                    Thread.sleep(2000);
+                                    instance.session2.GameConfirmStartBattle();
+                                    return;
+                                }
+                            } else {
+                                //nếu không có đường thỏa mãn có tướng còn trống, hoặc không có tướng
+                                List<Integer> cols = new ArrayList<>();
+                                List<Integer> rows= new ArrayList<>();
+                                //duyệt tất cả vị trí trống cho nó nhanh
+                                for(int j =0; j< MAX_COLUMN-1;j++){
+                                    for(int i =0; i< MAX_ROW;j++){
+                                        if(playerSlotMatrix[i][j].state != SlotState.Full){
+                                            cols.add(j);
+                                            rows.add(i);
+                                        }
+                                    }
+                                }
+                                //dù là trường hợp 1 lane trống hay 2 lane trống, có tướng nhưng full hay ko có tướng đều như nhau
+                                //2 lane trống, tức là đã ko thể chạy if đầu tiên và xuống else này, tức ko có tướng, vậy random trong số chỗ trống thôi
+                                //1 lane trống, tức là trong số cols chỉ chứa cột 0 1 hoặc 2, vậy ta cũng chỉ cần random index bất kỳ rồi lấy thôi
+                                int i = random.nextInt(cols.size());
+                                if (summonCardInGroup(15, rows.get(i), cols.get(i))) {
+                                    Thread.sleep(2000);
+                                    instance.session2.GameConfirmStartBattle();
+                                    return;
+                                }
+                            }
+                        }
+
+                        // chưa có
+                        if (canSummonCardInGroup(8)) {
+                            // todo : nếu bộ bài khác có group lính 8
+                            List<Integer> cols = new ArrayList<>();
+                            List<Integer> rows= new ArrayList<>();
+                            //duyệt tất cả vị trí trống cho nó nhanh
+                            for(int j =0; j< MAX_COLUMN-1;j++){
+                                for(int i =0; i< MAX_ROW;j++){
+                                    if(playerSlotMatrix[i][j].state != SlotState.Full){
+                                        cols.add(j);
+                                        rows.add(i);
+                                    }
+                                }
+                            }
+                            int i = random.nextInt(cols.size());
+                            if (summonCardInGroup(8, rows.get(i), cols.get(i))) {
+                                Thread.sleep(2000);
+                                instance.session2.GameConfirmStartBattle();
+                                return;
+                            }
+                        }
+
+                        // chưa có
+                        if (canSummonCardInGroup(6)) {
+                            //hmmm....
+                            //có thần đối phương trên sân không
+                            boolean ValidEnemyGod =false;
+                            for(int j=0;j< MAX_COLUMN-1;j++){
+                                if ((enemySlotMatrix[0][j].state == SlotState.Full && enemySlotMatrix[0][j].currentCard.heroInfo.type == DBHero.TYPE_GOD)
+                                        || (enemySlotMatrix[1][j].state == SlotState.Full && enemySlotMatrix[1][j].currentCard.heroInfo.type == DBHero.TYPE_GOD)) {
+                                    //lstValidEnemyGod.add(j);
+                                    ValidEnemyGod = true;
+                                }
+                            }
+                            //hiện tại thì 2 đoạn sử lý triệu hồi của 2 trường hợp ValidEnemyGod khá giống nhau và khá dài, sau nêếu làm target thì sẽ thu gọn lại
+                            if(ValidEnemyGod) {
+                                int ValidAllyGod = -1;
+                                List<Integer> cols = new ArrayList<>();
+                                List<Integer> rows = new ArrayList<>();
+                                //lấy danh sách vị trí trống
+                                //duyệt tất cả vị trí trống cho nó nhanh
+                                for(int j =0; j< MAX_COLUMN-1;j++){
+                                    for(int i =0; i< MAX_ROW;j++){
+                                        if(playerSlotMatrix[i][j].state != SlotState.Full){
+                                            cols.add(j);
+                                            rows.add(i);
+                                        }
+                                    }
+                                }
+                                //nếu mảng cols chỉ có 1 ptu thì triệu hồi vô đó
+                                if(cols.size() == 1) {
+                                    summonCardInGroupWithMaxMana(6,cols.get(0), rows.get(0));
+                                } else if (cols.size() >= 1){
+                                    //kiểm tra xem có tướng đồng minh ko để ưu tiên
+                                    if (0 <= godCard.slot.yPos && godCard.slot.yPos <= 1 )
+                                        ValidAllyGod = 0;
+                                    else if (godCard.slot.yPos == 2)
+                                        ValidAllyGod = 1;
+                                    if(ValidAllyGod == -1){
+                                        int i = random.nextInt(cols.size());
+                                        summonCardInGroupWithMaxMana(6,cols.get(i), rows.get(i));
+                                    } else {
+                                        List<Integer> rowInLane = new ArrayList<>();
+                                        for(int j = 0; j< cols.size(); j++){
+                                            if (cols.get(j)==ValidAllyGod) {
+                                                rowInLane.add(rows.get(j));
+                                            }
+                                        }
+                                        if(rowInLane.size() > 0){
+                                            summonCardInGroupWithMaxMana(6, rowInLane.get(random.nextInt(rowInLane.size())), cols.get(ValidAllyGod));
+                                        }
+                                    }
+                                }
+
+                                //todo: triệu hồi với mục tiêu chỉ định
+
+                            }
+                            else {
+                                boolean normalHpAtk = false;
+                                outer:
+                                for(int j =0; j< MAX_COLUMN-1;j++){
+                                    for(int i =0; i< MAX_ROW;j++){
+                                        if(enemySlotMatrix[i][j].state == SlotState.Full
+                                                && enemySlotMatrix[i][j].currentCard.heroInfo.type == DBHero.TYPE_TROOPER_NORMAL
+                                                && enemySlotMatrix[i][j].currentCard.heroInfo.hp == 1
+                                                && enemySlotMatrix[i][j].currentCard.heroInfo.atk >= 2) {
+                                            normalHpAtk = true;
+                                            break outer;
+                                        }
+                                    }
+                                }
+                                if (normalHpAtk) {
+                                    int ValidAllyGod = -1;
+                                    List<Integer> cols = new ArrayList<>();
+                                    List<Integer> rows = new ArrayList<>();
+                                    //lấy danh sách vị trí trống
+                                    //duyệt tất cả vị trí trống cho nó nhanh
+                                    for(int j =0; j< MAX_COLUMN-1;j++){
+                                        for(int i =0; i< MAX_ROW;j++){
+                                            if(playerSlotMatrix[i][j].state != SlotState.Full){
+                                                cols.add(j);
+                                                rows.add(i);
+                                            }
+                                        }
+                                    }
+                                    //nếu mảng cols chỉ có 1 ptu thì triệu hồi vô đó
+                                    if(cols.size() == 1) {
+                                        summonCardInGroupWithMaxMana(6,cols.get(0), rows.get(0));
+                                    } else if (cols.size() >= 1){
+                                        //kiểm tra xem có tướng đồng minh ko để ưu tiên
+                                        if (0 <= godCard.slot.yPos && godCard.slot.yPos <= 1 )
+                                            ValidAllyGod = 0;
+                                        else if (godCard.slot.yPos == 2)
+                                            ValidAllyGod = 1;
+                                        if(ValidAllyGod == -1){
+                                            int i = random.nextInt(cols.size());
+                                            summonCardInGroupWithMaxMana(6,cols.get(i), rows.get(i));
+                                        } else {
+                                            List<Integer> rowInLane = new ArrayList<>();
+                                            for(int j = 0; j< cols.size(); j++){
+                                                if (cols.get(j)==ValidAllyGod) {
+                                                    rowInLane.add(rows.get(j));
+                                                }
+                                            }
+                                            if(rowInLane.size() > 0){
+                                                summonCardInGroupWithMaxMana(6, rowInLane.get(random.nextInt(rowInLane.size())), cols.get(ValidAllyGod));
+                                            }
+                                        }
+                                    }
+
+                                    //todo: triệu hồi với mục tiêu chỉ định? làm ở đâu ta?
+                                }
+                            }
+                        }
+
+                        //chị hương này viết dài vậy...dài gấp 3 của mình ròi...
+//                        if(canSummonCardInGroup(3)){
+//                            List<HandCard> cards = normalGroup(3);
+//                            HandCard selectCard = null;
+//                            long maxMana = -1;
+//                            for (HandCard card : cards) {
+//                                if (card.heroInfo.type == DBHero.TYPE_TROOPER_NORMAL && CanSummon(card)) {
+//                                    if (card.tmpMana > maxMana) {
+//                                        maxMana = card.tmpMana;
+//                                        selectCard = card;
+//                                    }
+//                                }
+//                            }
+//                            if (selectCard != null) {
+//                                int lane = -1;
+//                                outer:
+//                                for (int i = 0; i < MAX_ROW; i++)
+//                                    for (int j = 0; j < MAX_COLUMN; j++) {
+//                                        CardSlot slot = playerSlotMatrix[i][j];
+//                                        if (slot.state == SlotState.Full && slot.currentCard.heroInfo.type == DBHero.TYPE_GOD) {
+//                                            if (j == 0 || j == 1) lane = 0;
+//                                            else lane = 2;
+//                                            break outer;
+//                                        }
+//
+//                                    }
+//                                int min = 0, max = 3;
+//                                if (lane == 0) {
+//                                    min = 0;
+//                                    max = 1;
+//
+//                                } else {
+//                                    min = 2;
+//                                    max = 2;
+//                                }
+//
+//                                int row = -1, col = -1;
+//                                outer:
+//                                for (int i = 0; i < MAX_ROW; i++)
+//                                    for (int j = min; j <= max; j++) {
+//                                        CardSlot slot = playerSlotMatrix[i][j];
+//                                        if (slot.state == SlotState.Empty) {
+//                                            row = i;
+//                                            col = j;
+//                                            break outer;
+//                                        }
+//                                    }
+//                                if (row == -1 || col == -1) {
+//                                    min = 2 - min;
+//                                    max = 3 - max;
+//                                    outer:
+//                                    for (int i = 0; i < MAX_ROW; i++)
+//                                        for (int j = min; j <= max; j++) {
+//                                            CardSlot slot = playerSlotMatrix[i][j];
+//                                            if (slot.state == SlotState.Empty) {
+//                                                row = i;
+//                                                col = j;
+//                                                break outer;
+//                                            }
+//                                        }
+//                                }
+//                                if (row != -1 && col != -1){
+//                                    SummonNormalInBattlePhase(selectCard, row, col);
+//                                    Thread.sleep(2000);
+//                                    instance.session2.GameConfirmStartBattle();
+//                                    return;
+//                                }
+//                            }
+//                        }
+                        if(canSummonCardInGroup(3)){
+                            int ValidAllyGod = -1;
+                            List<Integer> cols = new ArrayList<>();
+                            List<Integer> rows = new ArrayList<>();
+                            //lấy danh sách vị trí trống
+                            //duyệt tất cả vị trí trống cho nó nhanh
+                            for(int j =0; j< MAX_COLUMN-1;j++){
+                                for(int i =0; i< MAX_ROW;j++){
+                                    if(playerSlotMatrix[i][j].state != SlotState.Full){
+                                        cols.add(j);
+                                        rows.add(i);
+                                    }
+                                }
+                            }
+                            //nếu mảng cols chỉ có 1 ptu thì triệu hồi vô đó
+                            if(cols.size() == 1) {
+                                summonCardInGroupWithMaxMana(6,cols.get(0), rows.get(0));
+                            } else if (cols.size() >= 1){
+                                //kiểm tra xem có tướng đồng minh ko để ưu tiên
+                                if (0 <= godCard.slot.yPos && godCard.slot.yPos <= 1 )
+                                    ValidAllyGod = 0;
+                                else if (godCard.slot.yPos == 2)
+                                    ValidAllyGod = 1;
+                                if(ValidAllyGod == -1){
+                                    int i = random.nextInt(cols.size());
+                                    summonCardInGroupWithMaxMana(6,cols.get(i), rows.get(i));
+                                } else {
+                                    List<Integer> rowInLane = new ArrayList<>();
+                                    for(int j = 0; j< cols.size(); j++){
+                                        if (cols.get(j)==ValidAllyGod) {
+                                            rowInLane.add(rows.get(j));
+                                        }
+                                    }
+                                    if(rowInLane.size() > 0){
+                                        summonCardInGroupWithMaxMana(6, rowInLane.get(random.nextInt(rowInLane.size())), cols.get(ValidAllyGod));
+                                    }
+                                }
+                            }
+                        }
+
+                        //này cuũng dài nữa...
+                        //kiểm tra số vị trí trống trong các lane cho các nhóm lính tiếp theo
+                        int[] cardInLane = new int[2];
+                        int validBlankInLane2 = 0;
+                        cardInLane[0] = 0;
+                        //này là kiểm tra xem lane 1 có bao nhiêu quân này
+                        for (int i = 0; i < MAX_ROW; i++)
+                            for (int j = 0; j <= 1; j++) {
+                                CardSlot slot = playerSlotMatrix[i][j];
+                                if (slot.state == SlotState.Full) cardInLane[0]++;
+
+                            }
+                        cardInLane[1] = 0;
+                        //này là lane 2 có bao nhiêu quân này, và đếm luôn cột ngoài cùng có bao nhiêu card, vậy vị trí trống của cột 3 là sao nhỉ?  cột 4 ko tính nên lane 2 chỉ tính cột 3 sao?
+                        for (int i = 0; i < MAX_ROW; i++)
+                            for (int j = 2; j <= 3; j++) {
+                                CardSlot slot = playerSlotMatrix[i][j];
+                                if (slot.state == SlotState.Full) cardInLane[1]++;
+                                else if (j == 2) validBlankInLane2 ++;
+                            }
+
+                        int min, max;
+                        int row = -1, col = -1;
+                        if(canSummonCardInGroup(4)){
+
+                            //nếu lane 1  có 3 con này
+                            if (cardInLane[0] == 3) {
+                                //nếu lane 2 cũng có 3 lane và ở vị trí cột 3 không trống
+                                if (cardInLane[1] == 3 && validBlankInLane2 > 0) {
+                                    int value = random.nextInt(2);
+                                    if (value == 0) {
+                                        min = 0;
+                                        max = 1;
+                                    } else {
+                                        min = 2;
+                                        max = 2;
+                                    }
+
+                                    outer:
+                                    for (int i = 0; i < MAX_ROW; i++)
+                                        for (int j = min; j <= max; j++)
+                                            if (playerSlotMatrix[i][j].state == SlotState.Empty) {
+                                                row = i;
+                                                col = j;
+                                                break outer;
+                                            }
+                                    summonCardInGroupWithMaxMana(4,row, col);
+                                } else {
+                                    //trường hợp chỉ có lane 1 có 3 card và dư 1 vị trí trống
+                                    min = 0;
+                                    max = 1;
+                                    outer:
+                                    for (int i = 0; i < MAX_ROW; i++)
+                                        for (int j = min; j <= max; j++)
+                                            if (playerSlotMatrix[i][j].state == SlotState.Empty) {
+                                                row = i;
+                                                col = j;
+                                                break outer;
+                                            }
+                                    summonCardInGroupWithMaxMana(4,row, col);
+                                }
+                            } else {
+                                //không trường hợp chỉ có lane 2 có chỗ trống
+                                if (cardInLane[1] == 3 && validBlankInLane2 > 0) {
+                                    min = 2;
+                                    max = 2;
+                                    outer:
+                                    for (int i = 0; i < MAX_ROW; i++)
+                                        for (int j = min; j <= max; j++)
+                                            if (playerSlotMatrix[i][j].state == SlotState.Empty) {
+                                                row = i;
+                                                col = j;
+                                                break outer;
+                                            }
+                                    summonCardInGroupWithMaxMana(4,row, col);
+                                } else {
+                                    //trường hợp này là luồng không thỏa mãn có đường có 3 quân rồi========================================================
+                                    //cả 2 lane đều ko trống thì ko làm gì cả
+                                    if( cardInLane[0] != 4 && cardInLane[1] != 4) {
+                                        if (cardInLane[0] == 4) {
+                                            //nếu lane 1 full
+                                            min = 2;
+                                            max = 3;
+                                        } else if (cardInLane[1] == 4) {
+                                            //nếu lane 2 full
+                                            min = 0;
+                                            max = 1;
+                                        } else {
+                                            //nếu 2 lane chưa full
+                                            //này là xem god ở vị trí nào để ưu tiên nếu 2 lane có số quân bằng nhau
+                                            if (0 <= godCard.slot.yPos && godCard.slot.yPos <= 1) {
+                                                min = 0;
+                                                max = 1;
+                                            } else {
+                                                min = 2;
+                                                max = 3;
+                                            }
+                                        }
+                                        row = 0;
+                                        for (int j = min; j <= max; j++)
+                                            if (playerSlotMatrix[0][j].state == SlotState.Empty) {
+                                                col = j;
+                                                break;
+                                            }
+                                        //nếu cột có thần ko có chỗ trống ở hàng trước, thì gửi di chuyển hàng sau tới client
+                                        if (col == -1) {
+                                            col = random.nextInt(2);
+                                            CommonVector cv = CommonVector.newBuilder()
+                                                    .addALong(0)
+                                                    .addALong(col)
+                                                    .addALong(1).addALong(col).build();
+                                            instance.session2.GameMoveCardInbattle(cv);
+                                            Thread.sleep(2000);
+                                        }
+                                        summonCardInGroupWithMaxMana(4,row, col);
+                                    }
+                                }
+                            }
+                        }
+
+                        //todo: bộ basic k có nhóm 2
+                        if(canSummonCardInGroup(2))
+
+                        //này dễ lỗi ở chỗ nếu 2 lane cùng full hoặc ko có godcard trên sân nè!
+                        if(canSummonCardInGroup(16)){
+                            int lane = -1;
+                            //nếu lane 1 nhỏ hơn 3
+                            if (cardInLane[0] < 3) {
+                                //lane 2 cũng <3
+                                if (cardInLane[1] < 3) {
+                                    //xác định vị trí god ở lane nào
+                                    if (0 <= godCard.slot.yPos && godCard.slot.yPos <= 1 ) {
+                                        lane = 1;
+                                    } else lane = 0;
+
+                                } else {
+                                    lane = 0;
+                                }
+                            } else {
+                                if (cardInLane[2] < 3) {
+                                    lane = 2;
+                                }
+                            }
+                            //nếu có lane nào <3 card
+                            if (lane != -1) {
+                                if (lane == 0) {
+                                    min = 0;
+                                    max = 1;
+                                } else {
+                                    min = 2;
+                                    max = 3;
+                                }
+                                for (int j = min; j <= max; j++) {
+                                    if (playerSlotMatrix[0][j].state == SlotState.Full) {
+                                        for (int k = min; k <= max; k++) {
+                                            if (playerSlotMatrix[1][k].state == SlotState.Empty) {
+                                                CommonVector cv = CommonVector.newBuilder()
+                                                        .addALong(0)
+                                                        .addALong(j)
+                                                        .addALong(1)
+                                                        .addALong(k).build();
+                                                instance.session2.GameMoveCardInbattle(cv);
+                                                Thread.sleep(2000);
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+                                summonCardInGroupWithMaxMana(16,0,min);
+                                Thread.sleep(2000);
+                                instance.session2.GameConfirmStartBattle();
+                                return;
+
+                            }
+                        }
+
+                        //gì đó, cuối cùng khi ko có các nhóm tướng cần có nữa
+
+                        HandCard selectCard = null;
+                        long maxMana = -1;
+                        for (HandCard handCard : Decks[0].GetListCard()) {
+                            if (handCard.heroInfo.type == DBHero.TYPE_TROOPER_NORMAL && CanSummon(handCard)) {
+                                if (handCard.tmpMana > maxMana) {
+                                    maxMana = handCard.tmpMana;
+                                    selectCard = handCard;
+                                }
+                            }
+                        }
+                        if (selectCard != null) {
+                            int ValidAllyGod = -1;
+                            List<Integer> cols = new ArrayList<>();
+                            List<Integer> rows = new ArrayList<>();
+                            //lấy danh sách vị trí trống
+                            //duyệt tất cả vị trí trống cho nó nhanh
+                            for(int j =0; j< MAX_COLUMN-1;j++){
+                                for(int i =0; i< MAX_ROW;j++){
+                                    if(playerSlotMatrix[i][j].state != SlotState.Full){
+                                        cols.add(j);
+                                        rows.add(i);
+                                    }
+                                }
+                            }
+                            //nếu mảng cols chỉ có 1 ptu thì triệu hồi vô đó
+                            if(cols.size() == 1) {
+                                summonCardInGroupWithMaxMana(6,cols.get(0), rows.get(0));
+                            } else if (cols.size() >= 1){
+                                //kiểm tra xem có tướng đồng minh ko để ưu tiên
+                                if (0 <= godCard.slot.yPos && godCard.slot.yPos <= 1 )
+                                    ValidAllyGod = 0;
+                                else if (godCard.slot.yPos == 2)
+                                    ValidAllyGod = 1;
+                                //nếu ko có thần đồng minh random đê
+                                if(ValidAllyGod == -1){
+                                    int i = random.nextInt(rows.size());
+                                    SummonNormalInBattlePhase(selectCard, rows.get(i), cols.get(i) );
+                                } else {
+                                    List<Integer> rowInLane = new ArrayList<>();
+                                    for(int j = 0; j< cols.size(); j++){
+                                        if (cols.get(j)==ValidAllyGod) {
+                                            rowInLane.add(rows.get(j));
+                                        }
+                                    }
+                                    if(rowInLane.size() > 0){
+                                        SummonNormalInBattlePhase(selectCard, rowInLane.get(random.nextInt(rowInLane.size())), cols.get(ValidAllyGod));
+                                    }
+
+                                }
+                            }
+                        }
+
+                        //todo: basic k có nhóm 7 => k check nhom 9
+
+//                        if(!canSummonCardInGroup(18)){
+//                            List<HandCard> cards = normalGroup(18);
+//                            HandCard selectCard = null;
+//                            long maxMana = -1;
+//                            int[] cardInLane = new int[3];
+//                            for (HandCard card : cards) {
+//                                if (card.heroInfo.type == DBHero.TYPE_TROOPER_NORMAL && CanSummon(card)) {
+//                                    if (card.tmpMana > maxMana) {
+//                                        maxMana = card.tmpMana;
+//                                        selectCard = card;
+//                                    }
+//                                }
+//                            }
+//                            int godLane;
+//
+//                            if (0 <= godCard.slot.yPos && godCard.slot.yPos <= 1) {
+//                                godLane = 0;
+//                            } else {
+//                                godLane = 2;
+//                            }
+//                            if (selectCard != null) {
+//                                if (cardInLane[godLane] <= 3) {
+//                                    if (godCard.slot.xPos == 0) {
+//                                        CommonVector cv = CommonVector.newBuilder()
+//                                                .addALong(0)
+//                                                .addALong(godCard.slot.yPos)
+//                                                .addALong(1)
+//                                                .addALong(godCard.slot.yPos).build();
+//                                        instance.session2.GameMoveCardInbattle(cv);
+//                                        Thread.sleep(2000);
+//                                    }
+//                                    if (playerSlotMatrix[0][godCard.slot.yPos].state == SlotState.Full) {
+//                                        int nearByCol = godLane + (1 - godCard.slot.yPos);
+//                                        int row = -1;
+//                                        for (int i = 0; i < MAX_ROW; i++)
+//                                            if (playerSlotMatrix[0][nearByCol].state == SlotState.Empty) {
+//                                                row = i;
+//                                                break;
+//                                            }
+//                                        CommonVector cv = CommonVector.newBuilder()
+//                                                .addALong(0)
+//                                                .addALong(godCard.slot.yPos)
+//                                                .addALong(row)
+//                                                .addALong(nearByCol).build();
+//                                        instance.session2.GameMoveCardInbattle(cv);
+//                                        Thread.sleep(2000);
+//                                    }
+//                                    SummonNormalInBattlePhase(selectCard, 0, godCard.slot.yPos);
+//
+//
+//                                } else {
+//                                    int min, max;
+//                                    if (godLane == 0) {
+//                                        min = 2;
+//                                        max = 3;
+//                                    } else {
+//                                        min = 0;
+//                                        max = 1;
+//                                    }
+//                                    int row = -1, col = -1;
+//                                    for (int i = 0; i < MAX_ROW; i++)
+//                                        for (int j = min; j <= max; j++)
+//                                            if (playerSlotMatrix[i][j].state == SlotState.Empty) {
+//                                                row = i;
+//                                                col = j;
+//                                                break;
+//                                            }
+//                                    SummonNormalInBattlePhase(selectCard, 0, godCard.slot.yPos);
+//
+//
+//                                }
+//                                Thread.sleep(2000);
+//                                instance.session2.GameConfirmStartBattle();
+//                                return;
+//                            }
+//                            selectCard = null;
+//                            maxMana = -1;
+//                            for (HandCard card : Decks[0].GetListCard()) {
+//                                if (card.heroInfo.type == DBHero.TYPE_TROOPER_NORMAL && CanSummon(card)) {
+//                                    if (card.tmpMana > maxMana) {
+//                                        maxMana = card.tmpMana;
+//                                        selectCard = card;
+//                                    }
+//                                }
+//                            }
+//                            if (selectCard != null) {
+//                                int min, max;
+//                                if (cardInLane[godLane] <= 3) {
+//                                    min = godLane;
+//                                    max = godLane + 1;
+//                                } else {
+//                                    min = 2 - godLane;
+//                                    max = 2 - godLane + 1;
+//                                }
+//                                List<Integer> lstRow = new ArrayList<>();
+//                                List<Integer> lstCol = new ArrayList<>();
+//                                for (int i = 0; i < MAX_ROW; i++)
+//                                    for (int j = min; j <= max; j++)
+//                                        if (playerSlotMatrix[i][j].state == SlotState.Empty) {
+//                                            lstRow.add(i);
+//                                            lstCol.add(j);
+//                                            break;
+//                                        }
+//                                int row = lstRow.get(random.nextInt(lstRow.size()));
+//                                int col = lstCol.get(random.nextInt(lstCol.size()));
+//                                SummonNormalInBattlePhase(selectCard, row, col);
+//                                Thread.sleep(2000);
+//                                instance.session2.GameConfirmStartBattle();
+//                                return;
+//                            }
+//                        }
+//
+                        break;
+
+                    }
+                    // đánh phép xuống
+                    case 1: {
+                        List<HandCard> handCards = new ArrayList<>();
+                        for (HandCard handCard : Decks[0].GetListCard()) {
+                            if (handCard.heroInfo.type == DBHero.TYPE_TROOPER_MAGIC && CanSummon(handCard)) {
+                                handCards.add(handCard);
+                            }
+                        }
+                        if (handCards.size() == 0) {
+                            break;
+                        }
+                        outer:
+                        for (int i = 0; i < prioritySpellArr.size(); i++) {
+                            JSONArray arr = (JSONArray) prioritySpellArr.get(i);
+                            for (HandCard card : handCards) {
+                                long heroId = card.heroID;
+                                if (arr.contains(heroId)) {
+                                    if (SummonSpellInBattlePhase(card)) {
+                                        Thread.sleep(2000);
+                                        if (success) {
+                                            instance.session2.GameConfirmStartBattle();
+                                            return;
+                                        }
+                                    }
+                                }
+                            }
+
+                        }
+                        break;
+                    }
+                    //dùng skill thần
+                }
+
+//                //nếu ko có chỗ trống trên sân
+//                if (count == 0) {
+//                    if (playerGodDeck.size() == 0) {
+//                        instance.session2.GameConfirmStartBattle();
+//                        return;
+//                    }
+//                    long maxMana = 0;
+//                    int index = -1;
+//                    //này là lấy index và maxmana của tướng có nhiều mana nhất trong bộ
+//                    for (int i = 0; i < playerGodDeck.size(); i++) {
+//                        DBHero god = playerGodDeck.get(i).hero;
+//                        if (god.mana <= currentMana && god.mana > maxMana) {
+//                            maxMana = god.mana;
+//                            index = i;
+//                        }
+//                    }
+//                    long row = -1, col = -1;
+//                    //lấy ra tướng được chọn
+//                    GodCardUI godCardSelected = playerGodDeck.get(index);
+//
+//                    //đây là gì nhỉ? chọn mấy con hero chỉ hợp hàng sau
+//                    if (godCardSelected.hero.id == 347 || godCardSelected.hero.id == 349 || godCardSelected.hero.id == 350 || godCardSelected.hero.id == 351)
+//                        row = 0;
+//                    else row = 1;
+//                    List<Integer> lstIndex = new ArrayList<>();
+//
+//                    //lấy ra danh sách các slot trống ư? với đk là slot đó ở row tương ứng vs vị trí của thần và tình trạng là empty, sau đó lưu y vào
+//                    for (CardSlot slot : playerSlotContainer) {
+//                        if (slot.xPos == row && slot.state == SlotState.Empty) {
+//                            if (slot.yPos != 3) lstIndex.add(slot.yPos);
+//                        }
+//                    }
+//                    //nếu ko có vị trí trống, thì chuyển sang row còn lại và duyệt chăng?
+//                    if (lstIndex.size() == 0) {
+//                        row = 1 - row;
+//                        for (CardSlot slot : playerSlotContainer) {
+//                            if (slot.xPos == row && slot.state == SlotState.Empty) {
+//                                if (slot.yPos != 3) lstIndex.add(slot.yPos);
+//                            }
+//                        }
+//                    }
+//                    //vẫn ko có thì thôi, chơi game
+//                    if (lstIndex.size() == 0){
+//                        instance.session2.GameConfirmStartBattle();
+//                        return;
+//                    }
+//
+//                    //lấy bừa 1 vị trí trong số các vị trí trống
+//                    col = lstIndex.get(random.nextInt(lstIndex.size()));
+//
+//                    //triệu hồi vô đó
+//                    SummonGodInBattlePhase(godCardSelected, row, col);
+//                    Thread.sleep(2000);
+//                }
+//
+//                //này là gì? lấy god card hiện tại à?
+//                BoardCard godCard = null;
+//                for (int i = 0; i < playerSlotContainer.size(); i++) {
+//                    CardSlot slot = playerSlotContainer.get(i);
+//                    if (slot.state == SlotState.Full) {
+//                        Card card = slot.currentCard;
+//                        if (card.heroInfo.type == DBHero.TYPE_GOD) {
+//                            godCard = (BoardCard) card;
+//                            break;
+//                        }
+//                    }
+//                }
+//                //này cần sửa thành max mana để unlock skill, chắc cần sửa ở đoạn này
+//                long maxShardNeed = godCard.heroInfo.maxShardUnlockSkill;
+//                for (HandCard handCard : Decks[0].GetListCard()) {
+//                    maxShardNeed = Math.max(maxShardNeed, handCard.heroInfo.shardRequired);
+//                }
+//
+//                //nay là nếu đủ đk để gọi shard, thì thêm vào, sửa thành mana ko biết sẽ ntn, chắc sẽ giống kỹ năng bt
+//                while (currentShard > 0 && godCard.countShardAddded < maxShardNeed) {
+//                    AddShard(godCard);
+//                    Thread.sleep(2000);
+//                }
+//
+//                // này là do currentShard =0 rồi nhưng vế còn lại vẫn thỏa mãn nên sửa sao? dùng mana nên chắc sẽ khác
+//                if (godCard.countShardAddded < maxShardNeed) {
+//                    GetShard();
+//                    Thread.sleep(2000);
+//                    AddShard(godCard);
+//                    Thread.sleep(2000);
+//                }
+//                // nếu chẳng còn mana nào thì bắt đầu game thôi
+//                if (currentMana <= 0) {
+//                    instance.session2.GameConfirmStartBattle();
+//                    return;
+//                }
+//                //này là lại kiểm tra xem còn chỗ trống ko này
+//                boolean isFull = true;
+//                for (int i = 0; i < playerSlotContainer.size(); i++) {
+//                    CardSlot slot = playerSlotContainer.get(i);
+//                    if (slot.state == SlotState.Empty) {
+//                        isFull = false;
+//                        break;
+//                    }
+//                }
+//                //success là biến thành công summon lên sân?
+//                success = false;
+//                //nếu hết chõ trống
+//                if (isFull) {
+//                    int[] weight = {5, 50, 30, 15}; //???
+//                    int n = weight.length;
+//                    int[] sum = new int[n];
+//                    sum[0] = weight[0];
+//                    for (int i = 1; i < n; i++)
+//                        sum[i] = sum[i - 1] + weight[i]; //5, 55, 85, 100??? làm gì ta?
+//                    int rmd = random.nextInt(sum[n - 1]); //random trong 0-100? làm gì?
+//                    //đánh dấu hành động là 0?
+//                    int indexAction = 0;
+//                    //này là gì đây? chạy từ 0 đến 4 để làm gì? tìm ra hành động có indexAction =i?
+//                    for (int i = 0; i < n; i++)
+//                        if (sum[i] > rmd) {
+//                            indexAction = i;
+//                            break;
+//                        }
+//                    //này là sao? sao chỉ chạy với indexAction = 1?
+//                    switch (indexAction) {
+//                            //0 và 2 là summon lính và đánh phép xuống, loại bỏ do hết chỗ ròi
+//                        case 0:
+//                        case 2: {
+//                            break;
+//                        }
+//                        //1 là dùng skill thần
+//                        case 1: {
+//                            //này là lấy các thể trên tay, nếu nó là luồng chơi phép riêng?
+//                            List<HandCard> handCards = new ArrayList<>();
+//                            for (HandCard handCard : Decks[0].GetListCard()) {
+//                                if (handCard.heroInfo.type == DBHero.TYPE_TROOPER_MAGIC && CanSummon(handCard)) {
+//                                    handCards.add(handCard);
+//                                }
+//                            }
+//                            if (handCards.size() == 0) {
+//                                break;
+//                            }
+//                            outer: //thoát khỏi nhiều vòng lặp trồng lên nhau
+//                            //lặp qua những bài phép chăng? này chắc chắn là bài phép ưu tiên, chấc luồng chơi phép riêng, mà sao đây lại lỗi nhỉ?
+//                            for (int i = 0; i < prioritySpellArr.size(); i++) {
+//                                JSONArray arr = (JSONArray) prioritySpellArr.get(i);
+//                                for (HandCard card : handCards) {
+//                                    long heroId = card.heroID;
+//                                    if (arr.contains(heroId)) {
+//                                        if (SummonSpellInBattlePhase(card)) {
+//                                            Thread.sleep(2000);
+//                                            if (success) break outer;
+//                                        }
+//                                    }
+//                                }
+//
+//                            }
+//
+//                            break;
+//                        }
+//                        //dùng ulti thần
+//                        default: {
+//                            //này là gì? mặc định sẽ là chơi buff cho tương đó ấy à? nhìn có vẻ giống, hay là ulti thần ha?
+//                            boolean haveActiveSkill = false;
+//                            for (DBHeroSkill skill : godCard.lstSkill) {
+//                                if (skill.skill_type == 1 && !skill.isUltiType) {
+//                                    godCard.OnActiveSkill(skill);
+//                                    haveActiveSkill = true;
+//                                    break;
+//                                }
+//                            }
+//                            if (haveActiveSkill) {
+//                                boolean ok = DoActiveSkill(godCard);
+//                                if (ok) {
+//                                    Thread.sleep(2000);
+//                                }
+//                            }
+//                            break;
+//                        }
+//
+//                    }
+//                    instance.session2.GameConfirmStartBattle();
+//                } else {
+//                    //nếu có chỗ trống??? lại bộ khỉ ho cò gái gì đây?
+//                    int[] weight = {50, 30, 15, 5};
+//                    int n = weight.length;
+//                    int[] sum = new int[n];
+//                    int indexAction = 0;
+//                    while (!success) {
+//                        sum[0] = weight[0];
+//                        for (int i = 1; i < n; i++)
+//                            sum[i] = sum[i - 1] + weight[i];
+//                        if (sum[n - 1] <= 0) {
+//                            instance.session2.GameConfirmStartBattle();
+//                            return;
+//                        }
+//                        int rmd = random.nextInt(sum[n - 1]);
+//                        for (int i = 0; i < n; i++)
+//                            if (sum[i] > rmd) {
+//                                indexAction = i;
+//                                break;
+//                            }
+//                        switch (indexAction) {
+//                                //summon lính
+//                            case 0: {
+//                                List<HandCard> canCummonCards = new ArrayList<>();
+//                                for (HandCard card : Decks[0].GetListCard()) {
+//                                    if (card.heroInfo.type == DBHero.TYPE_TROOPER_NORMAL && CanSummon(card))
+//                                        canCummonCards.add(card);
+//                                }
+//                                if (canCummonCards.size() == 0) {
+//                                    weight[0] = 0;
+//                                    break;
+//                                }
+//
+//                                CardSlot enemySlotMatrix[][] = new CardSlot[2][4];
+//                                CardSlot playerSlotMatrix[][] = new CardSlot[2][4];
+//                                for (CardSlot slot : enemySlotContainer) {
+//                                    enemySlotMatrix[slot.xPos][slot.yPos] = slot;
+//                                }
+//                                for (CardSlot slot : playerSlotContainer) {
+//                                    playerSlotMatrix[slot.xPos][slot.yPos] = slot;
+//                                }
+//                                List<Integer> lstValidEmptyCol = new ArrayList<>();
+//                                for (int j = 0; j < MAX_COLUMN; j++) {
+//                                    int enemyCardCount = 0;
+//                                    int playerCardCount = 0;
+//                                    for (int i = 0; i < MAX_ROW; i++) {
+//                                        if (enemySlotMatrix[i][j].state != SlotState.Empty) enemyCardCount++;
+//                                    }
+//                                    for (int i = 0; i < MAX_ROW; i++) {
+//                                        if (playerSlotMatrix[i][j].state != SlotState.Empty) playerCardCount++;
+//                                    }
+//                                    if (j < MAX_COLUMN - 1 && enemyCardCount == 0 && playerCardCount < MAX_ROW) {
+//                                        lstValidEmptyCol.add(j);
+//
+//                                    }
+//                                }
+//                                if (lstValidEmptyCol.size() > 0) {
+//                                    int col = lstValidEmptyCol.get(random.nextInt(lstValidEmptyCol.size()));
+//                                    int row;
+//                                    if (playerSlotMatrix[0][col].state == SlotState.Empty) {
+//                                        if (playerSlotMatrix[1][col].state == SlotState.Empty) {
+//                                            int k = random.nextInt(100);
+//                                            if (k < 80) row = 0;
+//                                            else row = 1;
+//                                        } else {
+//                                            row = 0;
+//                                        }
+//                                    } else {
+//                                        row = 1;
+//                                    }
+//
+//                                    if (summonCardInGroup(1, row, col)) {
+//                                        Thread.sleep(2000);
+//                                        instance.session2.GameConfirmStartBattle();
+//                                        return;
+//                                    }
+//                                    // chưa có
+//                                    if (summonCardInGroup(2, row, col)) {
+//                                        Thread.sleep(2000);
+//                                        instance.session2.GameConfirmStartBattle();
+//                                        return;
+//                                    }
+//
+//                                }
+//                                List<Integer> lstValidEnemyGodCol = new ArrayList<>();
+//                                for (int j = 0; j < MAX_COLUMN - 1; j++) {
+//                                    boolean full = playerSlotMatrix[0][j].state != SlotState.Empty && playerSlotMatrix[1][j].state != SlotState.Empty;
+//                                    if (!full) {
+//                                        if ((enemySlotMatrix[0][j].state == SlotState.Full && enemySlotMatrix[0][j].currentCard.heroInfo.type == DBHero.TYPE_GOD)
+//                                                || (enemySlotMatrix[1][j].state == SlotState.Full && enemySlotMatrix[1][j].currentCard.heroInfo.type == DBHero.TYPE_GOD && enemySlotMatrix[0][j].state == SlotState.Empty)) {
+//                                            lstValidEnemyGodCol.add(j);
+//                                        }
+//
+//                                    }
+//                                }
+//                                if (lstValidEnemyGodCol.size() > 0) {
+//                                    int col = lstValidEnemyGodCol.get(random.nextInt(lstValidEnemyGodCol.size()));
+//                                    int row;
+//                                    if (playerSlotMatrix[0][col].state == SlotState.Empty) {
+//                                        if (playerSlotMatrix[1][col].state == SlotState.Empty) {
+//                                            int k = random.nextInt(100);
+//                                            if (k < 80) row = 0;
+//                                            else row = 1;
+//                                        } else {
+//                                            row = 0;
+//                                        }
+//                                    } else {
+//                                        row = 1;
+//                                    }
+//                                    if (summonCardInGroup(10, row, col)) {
+//                                        Thread.sleep(2000);
+//                                        instance.session2.GameConfirmStartBattle();
+//                                        return;
+//                                    }
+//                                    if (summonCardInGroup(5, row, col)) {
+//                                        Thread.sleep(2000);
+//                                        instance.session2.GameConfirmStartBattle();
+//                                        return;
+//                                    }
+//                                    //chưa có
+//                                    if (summonCardInGroup(2, row, col)) {
+//                                        Thread.sleep(2000);
+//                                        instance.session2.GameConfirmStartBattle();
+//                                        return;
+//                                    }
+//                                    // chưa có
+//                                    if (summonCardInGroup(6, row, col)) {
+//                                        Thread.sleep(2000);
+//                                        instance.session2.GameConfirmStartBattle();
+//                                        return;
+//                                    }
+//                                    long maxAtk = -1;
+//                                    HandCard selectCard = null;
+//                                    for (HandCard card : Decks[0].GetListCard()) {
+//                                        if (card.heroInfo.type == DBHero.TYPE_TROOPER_NORMAL && CanSummon(card)) {
+//                                            if (card.heroInfo.atk > maxAtk) {
+//                                                maxAtk = card.heroInfo.atk;
+//                                                selectCard = card;
+//                                            }
+//                                        }
+//                                    }
+//                                    SummonNormalInBattlePhase(selectCard, row, col);
+//                                    Thread.sleep(2000);
+//                                    instance.session2.GameConfirmStartBattle();
+//                                    return;
+//                                }
+////                                else {
+//                                List<Integer> lstValidEnemyHpCol = new ArrayList<>();
+//                                for (int j = 0; j < MAX_COLUMN - 1; j++) {
+//                                    boolean full = playerSlotMatrix[0][j].state != SlotState.Empty && playerSlotMatrix[1][j].state != SlotState.Empty;
+//                                    if (!full) {
+//                                        if (enemySlotMatrix[0][j].state == SlotState.Full && enemySlotMatrix[0][j].currentCard.heroInfo.type == DBHero.TYPE_TROOPER_NORMAL && ((BoardCard) enemySlotMatrix[0][j].currentCard).hpValue < 3
+//                                        ) {
+//                                            lstValidEnemyHpCol.add(j);
+//                                        }
+//
+//                                    }
+//                                }
+//                                if (lstValidEnemyHpCol.size() > 0) {
+//                                    int col = lstValidEnemyHpCol.get(random.nextInt(lstValidEnemyHpCol.size()));
+//                                    int row;
+//                                    if (canSummonCardInGroup(13) || canSummonCardInGroup(5) || canSummonCardInGroup(6)) {
+//                                        if (playerSlotMatrix[0][col].state == SlotState.Empty) {
+//                                            row = 0;
+//                                        } else {
+//                                            CommonVector cv = CommonVector.newBuilder()
+//                                                    .addALong(0)
+//                                                    .addALong(col)
+//                                                    .addALong(1).addALong(col).build();
+//                                            instance.session2.GameMoveCardInbattle(cv);
+//                                            Thread.sleep(2000);
+//                                            row = 1;
+//                                        }
+//                                        if (summonCardInGroup(13, row, col)) {
+//                                            Thread.sleep(2000);
+//                                            instance.session2.GameConfirmStartBattle();
+//                                            return;
+//                                        }
+//                                        if (summonCardInGroup(5, row, col)) {
+//                                            Thread.sleep(2000);
+//                                            instance.session2.GameConfirmStartBattle();
+//                                            return;
+//                                        }
+//                                        //chưa có
+//                                        summonCardInGroup(6, row, col);
+//                                        Thread.sleep(2000);
+//                                        instance.session2.GameConfirmStartBattle();
+//                                        return;
+//                                    }
+//                                }
+//                                // chưa có
+//                                if (canSummonCardInGroup(15)) {
+//                                    // todo : nếu bộ bài khác có group lính 15
+//                                }
+//                                // chưa có
+//                                if (canSummonCardInGroup(8)) {
+//                                    // todo : nếu bộ bài khác có group lính 8
+//                                }
+//
+//                                // chưa có
+//                                if (canSummonCardInGroup(6)) {
+//                                    // todo : nếu bộ bài khác có group lính 6
+//                                }
+//
+//
+//                                List<HandCard> cards = normalGroup(3);
+//                                HandCard selectCard = null;
+//                                long maxMana = -1;
+//                                for (HandCard card : cards) {
+//                                    if (card.heroInfo.type == DBHero.TYPE_TROOPER_NORMAL && CanSummon(card)) {
+//                                        if (card.tmpMana > maxMana) {
+//                                            maxMana = card.tmpMana;
+//                                            selectCard = card;
+//                                        }
+//                                    }
+//                                }
+//                                if (selectCard != null) {
+//                                    int lane = -1;
+//                                    outer:
+//                                    for (int i = 0; i < MAX_ROW; i++)
+//                                        for (int j = 0; j < MAX_COLUMN; j++) {
+//                                            CardSlot slot = playerSlotMatrix[i][j];
+//                                            if (slot.state == SlotState.Full && slot.currentCard.heroInfo.type == DBHero.TYPE_GOD) {
+//                                                if (j == 0 || j == 1) lane = 0;
+//                                                else lane = 2;
+//                                                break outer;
+//                                            }
+//
+//                                        }
+//                                    int min = 0, max = 3;
+//                                    if (lane == 0) {
+//                                        min = 0;
+//                                        max = 1;
+//
+//                                    } else {
+//                                        min = 2;
+//                                        max = 2;
+//                                    }
+//
+//                                    int row = -1, col = -1;
+//                                    outer:
+//                                    for (int i = 0; i < MAX_ROW; i++)
+//                                        for (int j = min; j <= max; j++) {
+//                                            CardSlot slot = playerSlotMatrix[i][j];
+//                                            if (slot.state == SlotState.Empty) {
+//                                                row = i;
+//                                                col = j;
+//                                                break outer;
+//                                            }
+//                                        }
+//                                    if (row == -1 || col == -1) {
+//                                        min = 2 - min;
+//                                        max = 3 - max;
+//                                        outer:
+//                                        for (int i = 0; i < MAX_ROW; i++)
+//                                            for (int j = min; j <= max; j++) {
+//                                                CardSlot slot = playerSlotMatrix[i][j];
+//                                                if (slot.state == SlotState.Empty) {
+//                                                    row = i;
+//                                                    col = j;
+//                                                    break outer;
+//                                                }
+//                                            }
+//                                    }
+//                                    if (row != -1 && col != -1){
+//                                        SummonNormalInBattlePhase(selectCard, row, col);
+//                                        Thread.sleep(2000);
+//                                        instance.session2.GameConfirmStartBattle();
+//                                        return;
+//                                    }
+//                                }
+//                                int[] cardInLane = new int[3];
+//                                int validBlankInLane2 = 0;
+//                                cardInLane[0] = 0;
+//                                for (int i = 0; i < MAX_ROW; i++)
+//                                    for (int j = 0; j <= 1; j++) {
+//                                        CardSlot slot = playerSlotMatrix[i][j];
+//                                        if (slot.state == SlotState.Full) cardInLane[0]++;
+//
+//                                    }
+//                                cardInLane[2] = 0;
+//                                for (int i = 0; i < MAX_ROW; i++)
+//                                    for (int j = 2; j <= 3; j++) {
+//                                        CardSlot slot = playerSlotMatrix[i][j];
+//                                        if (slot.state == SlotState.Full) cardInLane[2]++;
+//                                        else if (j == 2) validBlankInLane2 ++;
+//                                    }
+//                                cards = normalGroup(4);
+//                                selectCard = null;
+//                                maxMana = -1;
+//                                for (HandCard card : cards) {
+//                                    if (card.heroInfo.type == DBHero.TYPE_TROOPER_NORMAL && CanSummon(card)) {
+//                                        if (card.tmpMana > maxMana) {
+//                                            maxMana = card.tmpMana;
+//                                            selectCard = card;
+//                                        }
+//                                    }
+//                                }
+//                                if (selectCard != null) {
+//                                    int min, max;
+//                                    int row = -1, col = -1;
+//
+//                                    if (cardInLane[0] == 3) {
+//                                            if (cardInLane[2] == 3 && validBlankInLane2 > 0) {
+//                                                TowerController tower0 = getAllyTowerByLane(0);
+//                                                TowerController tower2 = getAllyTowerByLane(2);
+//                                                if (tower0.towerHealth >= tower2.towerHealth) {
+//                                                    min = 0;
+//                                                    max = 1;
+//                                                } else {
+//                                                    min = 2;
+//                                                    max = 2;
+//                                                }
+//
+//                                                outer:
+//                                                for (int i = 0; i < MAX_ROW; i++)
+//                                                    for (int j = min; j <= max; j++)
+//                                                        if (playerSlotMatrix[i][j].state == SlotState.Empty) {
+//                                                            row = i;
+//                                                            col = j;
+//                                                            break outer;
+//                                                        }
+//                                                SummonNormalInBattlePhase(selectCard, row, col);
+//                                            } else {
+//                                                min = 0;
+//                                                max = 1;
+//                                                outer:
+//                                                for (int i = 0; i < MAX_ROW; i++)
+//                                                    for (int j = min; j <= max; j++)
+//                                                        if (playerSlotMatrix[i][j].state == SlotState.Empty) {
+//                                                            row = i;
+//                                                            col = j;
+//                                                            break outer;
+//                                                        }
+//                                                SummonNormalInBattlePhase(selectCard, row, col);
+//                                            }
+//                                    } else {
+//                                        if (cardInLane[2] == 3 && validBlankInLane2 > 0) {
+//                                            min = 2;
+//                                            max = 2;
+//                                            outer:
+//                                            for (int i = 0; i < MAX_ROW; i++)
+//                                                for (int j = min; j <= max; j++)
+//                                                    if (playerSlotMatrix[i][j].state == SlotState.Empty) {
+//                                                        row = i;
+//                                                        col = j;
+//                                                        break outer;
+//                                                    }
+//                                            SummonNormalInBattlePhase(selectCard, row, col);
+//                                        } else {
+//                                            if (cardInLane[0] == 4) {
+//                                                min = 2;
+//                                                max = 3;
+//                                            } else if (cardInLane[2] == 4) {
+//                                                min = 0;
+//                                                max = 1;
+//                                            } else {
+//                                                if (0 <= godCard.slot.yPos && godCard.slot.yPos <= 1) {
+//                                                    min = 0;
+//                                                    max = 1;
+//                                                } else {
+//                                                    min = 2;
+//                                                    max = 3;
+//                                                }
+//                                            }
+//                                            row = 0;
+//                                            for (int j = min; j <= max; j++)
+//                                                if (playerSlotMatrix[0][j].state == SlotState.Empty) {
+//                                                    col = j;
+//                                                    break;
+//                                                }
+//                                            if (col == -1) {
+//                                                col = random.nextInt(2);
+//                                                CommonVector cv = CommonVector.newBuilder()
+//                                                        .addALong(0)
+//                                                        .addALong(col)
+//                                                        .addALong(1).addALong(col).build();
+//                                                instance.session2.GameMoveCardInbattle(cv);
+//                                                Thread.sleep(2000);
+//                                            }
+//                                            SummonNormalInBattlePhase(selectCard, row, col);
+//                                        }
+//                                    }
+//                                    Thread.sleep(2000);
+//                                    instance.session2.GameConfirmStartBattle();
+//                                    return;
+//                                }
+//                                //todo: bộ basic k có nhóm 2
+//                                cards = normalGroup(16);
+//                                selectCard = null;
+//                                maxMana = -1;
+//                                for (HandCard card : cards) {
+//                                    if (card.heroInfo.type == DBHero.TYPE_TROOPER_NORMAL && CanSummon(card)) {
+//                                        if (card.tmpMana > maxMana) {
+//                                            maxMana = card.tmpMana;
+//                                            selectCard = card;
+//                                        }
+//                                    }
+//                                }
+//                                if (selectCard != null) {
+//                                    int lane = -1;
+//                                    if (cardInLane[0] < 3) {
+//                                        if (cardInLane[2] < 3) {
+//                                            if (0 <= godCard.slot.yPos && godCard.slot.yPos <= 1) {
+//                                                lane = 2;
+//                                            } else lane = 0;
+//
+//                                        } else {
+//                                            lane = 0;
+//                                        }
+//                                    } else {
+//                                        if (cardInLane[2] < 3) {
+//                                            lane = 2;
+//                                        }
+//                                    }
+//                                    if (lane != -1) {
+//                                        int min, max;
+//                                        if (lane == 0) {
+//                                            min = 0;
+//                                            max = 1;
+//                                        } else {
+//                                            min = 2;
+//                                            max = 3;
+//                                        }
+//                                        for (int j = min; j <= max; j++) {
+//                                            if (playerSlotMatrix[0][j].state == SlotState.Full) {
+//                                                for (int k = min; k <= max; k++) {
+//                                                    if (playerSlotMatrix[1][k].state == SlotState.Empty) {
+//                                                        CommonVector cv = CommonVector.newBuilder()
+//                                                                .addALong(0)
+//                                                                .addALong(j)
+//                                                                .addALong(1)
+//                                                                .addALong(k).build();
+//                                                        instance.session2.GameMoveCardInbattle(cv);
+//                                                        Thread.sleep(2000);
+//                                                        break;
+//                                                    }
+//                                                }
+//
+//                                            }
+//                                        }
+//                                        SummonNormalInBattlePhase(selectCard, 0, min);
+//                                        Thread.sleep(2000);
+//                                        instance.session2.GameConfirmStartBattle();
+//                                        return;
+//
+//                                    }
+//                                }
+//                                //todo: basic k có nhóm 7 => k check nhom 9
+//                                cards = normalGroup(18);
+//                                selectCard = null;
+//                                maxMana = -1;
+//                                for (HandCard card : cards) {
+//                                    if (card.heroInfo.type == DBHero.TYPE_TROOPER_NORMAL && CanSummon(card)) {
+//                                        if (card.tmpMana > maxMana) {
+//                                            maxMana = card.tmpMana;
+//                                            selectCard = card;
+//                                        }
+//                                    }
+//                                }
+//                                int godLane;
+//
+//                                if (0 <= godCard.slot.yPos && godCard.slot.yPos <= 1) {
+//                                    godLane = 0;
+//                                } else {
+//                                    godLane = 2;
+//                                }
+//                                if (selectCard != null) {
+//                                    if (cardInLane[godLane] <= 3) {
+//                                        if (godCard.slot.xPos == 0) {
+//                                            CommonVector cv = CommonVector.newBuilder()
+//                                                    .addALong(0)
+//                                                    .addALong(godCard.slot.yPos)
+//                                                    .addALong(1)
+//                                                    .addALong(godCard.slot.yPos).build();
+//                                            instance.session2.GameMoveCardInbattle(cv);
+//                                            Thread.sleep(2000);
+//                                        }
+//                                        if (playerSlotMatrix[0][godCard.slot.yPos].state == SlotState.Full) {
+//                                            int nearByCol = godLane + (1 - godCard.slot.yPos);
+//                                            int row = -1;
+//                                            for (int i = 0; i < MAX_ROW; i++)
+//                                                if (playerSlotMatrix[0][nearByCol].state == SlotState.Empty) {
+//                                                    row = i;
+//                                                    break;
+//                                                }
+//                                            CommonVector cv = CommonVector.newBuilder()
+//                                                    .addALong(0)
+//                                                    .addALong(godCard.slot.yPos)
+//                                                    .addALong(row)
+//                                                    .addALong(nearByCol).build();
+//                                            instance.session2.GameMoveCardInbattle(cv);
+//                                            Thread.sleep(2000);
+//                                        }
+//                                        SummonNormalInBattlePhase(selectCard, 0, godCard.slot.yPos);
+//
+//
+//                                    } else {
+//                                        int min, max;
+//                                        if (godLane == 0) {
+//                                            min = 2;
+//                                            max = 3;
+//                                        } else {
+//                                            min = 0;
+//                                            max = 1;
+//                                        }
+//                                        int row = -1, col = -1;
+//                                        for (int i = 0; i < MAX_ROW; i++)
+//                                            for (int j = min; j <= max; j++)
+//                                                if (playerSlotMatrix[i][j].state == SlotState.Empty) {
+//                                                    row = i;
+//                                                    col = j;
+//                                                    break;
+//                                                }
+//                                        SummonNormalInBattlePhase(selectCard, 0, godCard.slot.yPos);
+//
+//
+//                                    }
+//                                    Thread.sleep(2000);
+//                                    instance.session2.GameConfirmStartBattle();
+//                                    return;
+//                                }
+//                                selectCard = null;
+//                                maxMana = -1;
+//                                for (HandCard card : Decks[0].GetListCard()) {
+//                                    if (card.heroInfo.type == DBHero.TYPE_TROOPER_NORMAL && CanSummon(card)) {
+//                                        if (card.tmpMana > maxMana) {
+//                                            maxMana = card.tmpMana;
+//                                            selectCard = card;
+//                                        }
+//                                    }
+//                                }
+//                                if (selectCard != null) {
+//                                    int min, max;
+//                                    if (cardInLane[godLane] <= 3) {
+//                                        min = godLane;
+//                                        max = godLane + 1;
+//                                    } else {
+//                                        min = 2 - godLane;
+//                                        max = 2 - godLane + 1;
+//                                    }
+//                                    List<Integer> lstRow = new ArrayList<>();
+//                                    List<Integer> lstCol = new ArrayList<>();
+//                                    for (int i = 0; i < MAX_ROW; i++)
+//                                        for (int j = min; j <= max; j++)
+//                                            if (playerSlotMatrix[i][j].state == SlotState.Empty) {
+//                                                lstRow.add(i);
+//                                                lstCol.add(j);
+//                                                break;
+//                                            }
+//                                    int row = lstRow.get(random.nextInt(lstRow.size()));
+//                                    int col = lstCol.get(random.nextInt(lstCol.size()));
+//                                    SummonNormalInBattlePhase(selectCard, row, col);
+//                                    Thread.sleep(2000);
+//                                    instance.session2.GameConfirmStartBattle();
+//                                    return;
+//                                }
+//                                weight[0] = 0;
+//                                break;
+//
+//
+////                                }
+//
+//
+//                            }
+//                            // đánh phép xuống
+//                            case 1: {
+//                                List<HandCard> handCards = new ArrayList<>();
+//                                for (HandCard handCard : Decks[0].GetListCard()) {
+//                                    if (handCard.heroInfo.type == DBHero.TYPE_TROOPER_MAGIC && CanSummon(handCard)) {
+//                                        handCards.add(handCard);
+//                                    }
+//                                }
+//                                if (handCards.size() == 0) {
+//                                    weight[1] = 0;
+//                                    break;
+//                                }
+//                                outer:
+//                                for (int i = 0; i < prioritySpellArr.size(); i++) {
+//                                    JSONArray arr = (JSONArray) prioritySpellArr.get(i);
+//                                    for (HandCard card : handCards) {
+//                                        long heroId = card.heroID;
+//                                        if (arr.contains(heroId)) {
+//                                            if (SummonSpellInBattlePhase(card)) {
+//                                                Thread.sleep(2000);
+//                                                if (success) {
+//                                                    instance.session2.GameConfirmStartBattle();
+//                                                    return;
+//                                                }
+//                                            }
+//                                        }
+//                                    }
+//
+//                                }
+//
+//
+//                                weight[1] = 0;
+//                                break;
+//                            }
+//                            //dùng skill thần
+//                            case 2: {
+//                                weight[2] = 0;
+//                                break;
+//                            }
+//                            //dùng ulti thần
+//                            default: {
+//                                boolean haveActiveSkill = false;
+//                                for (DBHeroSkill skill : godCard.lstSkill) {
+//                                    if (skill.skill_type == 1 && !skill.isUltiType) {
+//
+//                                        godCard.OnActiveSkill(skill);
+//                                        haveActiveSkill = true;
+//                                        break;
+//                                    }
+//                                }
+//                                if (haveActiveSkill) {
+//                                    boolean ok = DoActiveSkill(godCard);
+//                                    if (ok) {
+//                                        Thread.sleep(2000);
+//                                        if (success) {
+//                                            instance.session2.GameConfirmStartBattle();
+//                                            return;
+//                                        }
+//                                    }
+//                                }
+//                                weight[n - 1] = 0;
+//                                break;
+//                            }
+//                        }
+//                    }
+//                    instance.session2.GameConfirmStartBattle();
+//                }
             }
 
         } catch (Exception e) {
@@ -2696,7 +3751,46 @@ public class Mytheria extends BaseGambScreen {
         }
         instance.session2.GameSummonCardInBatttle(builder.build());
     }
+    public void SummonGodInTable(HandCard handCard, long row, long col) {
 
+        int index = -1;
+        //này là lấy index và maxmana của tướng có nhiều mana nhất trong bộ
+        for (int i = 0; i < playerGodDeck.size(); i++) {
+            DBHero god = playerGodDeck.get(i).hero;
+            if (god.id == handCard.heroID) {
+                index = i;
+                break;
+            }
+        }
+        GodCardUI godCardSelected = playerGodDeck.get(index);;
+        CommonVector.Builder builder = CommonVector.newBuilder()
+                .addALong(godCardSelected.battleId)
+                .addALong(row)
+                .addALong(col);
+        ArrayList<DBHeroSkill> lstHeroSkill = new ArrayList<DBHeroSkill>();
+
+        for (DBHeroSkill skill : godCardSelected.hero.lstHeroSkill) {
+            if (skill.skill_type == DBHeroSkill.TYPE_SUMMON_SKILL) {
+                builder.addALong(skill.id);
+            }
+        }
+        instance.session2.GameSummonCardInBatttle(builder.build());
+    }
+
+    public void SummonBuffGodInBattlePhase(GodCardUI godCardSelected, HandCard card, long row, long col) {
+        //ở đây cần build và gửi lên service cái gì ta?, thôi cứ gửi thêm 1 trường nữa là cái d của thẻ buff vậy
+        CommonVector.Builder builder = CommonVector.newBuilder()
+                .addALong(godCardSelected.battleId)
+                .addALong(row)
+                .addALong(col);
+        for (DBHeroSkill skill : godCardSelected.hero.lstHeroSkill) {
+            if (skill.skill_type == DBHeroSkill.TYPE_SUMMON_SKILL) {
+                builder.addALong(skill.id);
+            }
+        }
+        builder.addALong(card.heroID);
+        instance.session2.GameSummonCardInBatttle(builder.build());
+    }
     public void SummonNormalInBattlePhase(HandCard card, long row, long col) {
 //        LogWriterHandle.WriteLog("SummonCardInBattlePhase==" + card.heroInfo.color);
         if (!CheckHeroSkill(TYPE_WHEN_SUMON, card, row, col)) {
@@ -2710,6 +3804,8 @@ public class Mytheria extends BaseGambScreen {
 
     public boolean SummonSpellInBattlePhase(HandCard card) {
 //        LogWriterHandle.WriteLog("SummonCardInBattlePhase==" + card.heroInfo.color);
+
+        //xem sửa hay ko nè, chắc phải sửa nhưng sau đi, làm luồng chính cái đã ==============
         return CheckHeroSkill(TYPE_WHEN_SUMON, card, -1, -1);
     }
 
@@ -2948,6 +4044,25 @@ public class Mytheria extends BaseGambScreen {
         return false;
     }
 
+    public boolean summonCardInGroupWithMaxMana(int group, int row, int col) {
+
+        List<HandCard> validCards = normalGroup(group);
+        if (validCards.size() <= 0) return false;
+        int maxMana = 0;
+        HandCard cardMaxMana = null;
+        for (HandCard card : validCards) {
+            if(maxMana <= card.tmpMana){
+                maxMana = (int) card.tmpMana;
+                cardMaxMana = card;
+            }
+        }
+        if (cardMaxMana.heroInfo.type == DBHero.TYPE_TROOPER_NORMAL && CanSummon(cardMaxMana)) {
+            SummonNormalInBattlePhase(cardMaxMana, row, col);
+            return true;
+        }
+        return false;
+    }
+
     public boolean canSummonCardInGroup(int group) {
 
         List<HandCard> validCards = normalGroup(group);
@@ -3062,7 +4177,6 @@ public class Mytheria extends BaseGambScreen {
     }
 
     public boolean CheckHeroActiveSkill(
-//            int when,
             Card card) {
         //change mode skill can active
         if (card.skill != null) {
