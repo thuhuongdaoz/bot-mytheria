@@ -1921,6 +1921,8 @@ public class Mytheria extends BaseGambScreen {
                     }
                 }
                 //này là gì? lấy god card hiện tại à?
+                int godRow = 0;
+                int godCol = 0;
                 BoardCard godCard = null;
                 for (int i = 0; i < playerSlotContainer.size(); i++) {
                     CardSlot slot = playerSlotContainer.get(i);
@@ -1928,6 +1930,8 @@ public class Mytheria extends BaseGambScreen {
                         Card card = slot.currentCard;
                         if (card.heroInfo.type == DBHero.TYPE_GOD) {
                             godCard = (BoardCard) card;
+                            godRow = slot.xPos;
+                            godCol = slot.yPos;
                             break;
                         }
                     }
@@ -1941,7 +1945,7 @@ public class Mytheria extends BaseGambScreen {
                                     && handCard.heroInfo.owner_god_id == godCard.heroID
                                     && handCard.tmpMana <= currentMana){
                                 currentMana -= handCard.tmpMana;
-                                SummonBuffGodInBattlePhase(godCard.battleID, handCard.heroID, godCard. ); //để xem có phải gửi vị trí lên ko
+                                SummonBuffGodInBattlePhase(godCard.battleID, handCard.heroID, godRow,godCol); //để xem có phải gửi vị trí lên ko
                             }
                         }
                     }
@@ -2050,7 +2054,7 @@ public class Mytheria extends BaseGambScreen {
                                 && handCard.heroInfo.owner_god_id == godCard.heroID
                                 && handCard.tmpMana <= currentMana){
                             currentMana -= handCard.tmpMana;
-                            SummonBuffGodInBattlePhase(godCard.battleID, handCard.heroID, godCard. ); //để xem có phải gửi vị trí lên ko
+                            SummonBuffGodInBattlePhase(godCard.battleID, handCard.heroID, godRow,godCol ); //để xem có phải gửi vị trí lên ko
                         }
                     }
                 }
@@ -3803,18 +3807,13 @@ public class Mytheria extends BaseGambScreen {
         instance.session2.GameSummonCardInBatttle(builder.build());
     }
 
-    public void SummonBuffGodInBattlePhase(GodCardUI godCardSelected, HandCard card, long row, long col) {
+    public void SummonBuffGodInBattlePhase(Long battleId, Long heroId, int row, int col) {
         //ở đây cần build và gửi lên service cái gì ta?, thôi cứ gửi thêm 1 trường nữa là cái d của thẻ buff vậy
         CommonVector.Builder builder = CommonVector.newBuilder()
-                .addALong(godCardSelected.battleId)
+                .addALong(battleId)
                 .addALong(row)
                 .addALong(col);
-        for (DBHeroSkill skill : godCardSelected.hero.lstHeroSkill) {
-            if (skill.skill_type == DBHeroSkill.TYPE_SUMMON_SKILL) {
-                builder.addALong(skill.id);
-            }
-        }
-        builder.addALong(card.heroID);
+        builder.addALong(heroId);
         instance.session2.GameSummonCardInBatttle(builder.build());
     }
     public void SummonNormalInBattlePhase(HandCard card, long row, long col) {
