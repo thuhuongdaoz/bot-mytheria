@@ -6,10 +6,11 @@ import data.EnumTypes.ManaState;
 public class HandCard extends Card {
 	public boolean isFleeting = false;
 	
-	 public void SetHandCardData(long battleID, long id,long frame, CardOwner owner, long mana)
+	 public void SetHandCardData(long battleID, long id,long frame, CardOwner owner, long mana, long atk, long hp)
 	    {
 	        OnUpdateManaText(mana);
-
+			atkValue = heroInfo.atk + atk;
+			hpValue = heroInfo.hp + hp;
 	        SetCardData(battleID, id, frame, owner);
 	    }
 	    

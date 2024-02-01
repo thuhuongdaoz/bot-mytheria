@@ -16,6 +16,8 @@ public class Card {
 	public DBHeroSkill skill;
 	public ArrayList<DBHeroSkill> lstSkill = new ArrayList<DBHeroSkill>();
 	public DBHero heroInfo;
+	public long atkValue;
+	public long hpValue;
 	public boolean canSelect = false;
 	public CardOwner cardOwner;
 	public boolean isDragging;

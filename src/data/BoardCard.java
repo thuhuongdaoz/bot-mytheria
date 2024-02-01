@@ -23,8 +23,7 @@ public class BoardCard extends Card {
 	 public CardSlot slot;
 	 public boolean isFragile;
 	 public boolean isTired;
-	      public long atkValue;
-	      public long hpValue;
+
 	      public long hpMaxValue;
 	      public long cleaveValue;
 	      public long pierceValue;

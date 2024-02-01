@@ -59,6 +59,7 @@ public class Mytheria extends BaseGambScreen {
     ArrayList<Long> lstGodEnemyBattleID = new ArrayList<Long>();
     ArrayList<Long> lstGodEnemyFrame = new ArrayList<Long>();
 
+    //test
     public HandDeckLayout[] Decks = new HandDeckLayout[2];
     public GodCardHandler godCardHandler = new GodCardHandler();
     public List<GodCardUI> playerGodDeck = new ArrayList<>();
@@ -1747,7 +1748,7 @@ public class Mytheria extends BaseGambScreen {
 //				if (manaList != null)
 //					card.SetHandCardData(battleIDList[i], heroList[i].id, frameList[i], CardOwner.Player, manaList[i]);
 //				else
-                card.SetHandCardData(battleIDList.get(i), heroList.get(i).id, frameList.get(i), CardOwner.Player, -1);
+                card.SetHandCardData(battleIDList.get(i), heroList.get(i).id, frameList.get(i), CardOwner.Player, -1,0,0);
 
 
             } else
@@ -1778,7 +1779,7 @@ public class Mytheria extends BaseGambScreen {
         HandCard card = new HandCard();
 
         if (battleID > 0)
-            card.SetHandCardData(battleID, hero.id, frame, CardOwner.Player, mana);
+            card.SetHandCardData(battleID, hero.id, frame, CardOwner.Player, mana,0,0);
         else
             card.cardOwner = CardOwner.Enemy;
 
@@ -1797,11 +1798,10 @@ public class Mytheria extends BaseGambScreen {
         HandCard card = new HandCard();
 
         if (battleID > 0)
-            card.SetHandCardData(battleID, hero.id, frame, CardOwner.Player, mana);
+            card.SetHandCardData(battleID, hero.id, frame, CardOwner.Player, mana, atk, hp);
         else
             card.cardOwner = CardOwner.Enemy;
-        card.heroInfo.atk += atk;
-        card.heroInfo.hp += hp;
+        //deck
         Decks[index].AddNewCard(card);
 
         card.isFleeting = isFleeting;
@@ -2195,8 +2195,8 @@ public class Mytheria extends BaseGambScreen {
                             HandCard selectCard = null;
                             for (HandCard card : Decks[0].GetListCard()) {
                                 if (card.heroInfo.type == DBHero.TYPE_TROOPER_NORMAL && CanSummon(card)) {
-                                    if (card.heroInfo.atk > maxAtk) {
-                                        maxAtk = card.heroInfo.atk;
+                                    if (card.atkValue > maxAtk) {
+                                        maxAtk = card.atkValue;
                                         selectCard = card;
                                     }
                                 }
@@ -2412,8 +2412,8 @@ public class Mytheria extends BaseGambScreen {
                                     for(int i =0; i< MAX_ROW;j++){
                                         if(enemySlotMatrix[i][j].state == SlotState.Full
                                                 && enemySlotMatrix[i][j].currentCard.heroInfo.type == DBHero.TYPE_TROOPER_NORMAL
-                                                && enemySlotMatrix[i][j].currentCard.heroInfo.hp == 1
-                                                && enemySlotMatrix[i][j].currentCard.heroInfo.atk >= 2) {
+                                                && enemySlotMatrix[i][j].currentCard.hpValue == 1
+                                                && enemySlotMatrix[i][j].currentCard.atkValue >= 2) {
                                             normalHpAtk = true;
                                             break outer;
                                         }
@@ -7132,8 +7132,7 @@ public class Mytheria extends BaseGambScreen {
     ) {
         BoardCard card = new BoardCard();
         card.NewSetBoardCardData(battleID, heroID, frame, owner, targetSlot, atk, hp, mana);
-        card.heroInfo.atk += atk;
-        card.heroInfo.hp += hp;
+
 
         if (targetSlot != null) {
             targetSlot.ChangeSlotState(SlotState.Full, card);
@@ -7300,8 +7299,8 @@ public class Mytheria extends BaseGambScreen {
                              long battleID, long frame, long atk, long hp, long mana) {
         DBHero hero = Database.GetHero(heroID);
         hero.atk += atk;
-        hero.hp+=hp;
-        hero.mana+=mana;
+        hero.hp += hp;
+        hero.mana += mana;
         lstHero.add(hero);
         lstID.add(battleID);
         lstFrame.add(frame);
