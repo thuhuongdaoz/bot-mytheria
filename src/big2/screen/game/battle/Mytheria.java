@@ -1336,10 +1336,14 @@ public class Mytheria extends BaseGambScreen {
                             //Destroy(currentGodCardUI);
 
                             DBHero heroSummon = Database.GetHero(commonVector.getALong(3));
+                            // để ý chỗ này, có thể sẽ đc buff 2 lần khi add card
+                            heroSummon.atk +=commonVector.getALong(5);
+                            heroSummon.hp += commonVector.getALong(6);
+                            heroSummon.mana += commonVector.getALong(7);
                             // is god
                             isPlayer = instance.username.equals(commonVector.getAString(0));
                             if (instance.username.equals(commonVector.getAString(0))) {
-                                if (commonVector.getALong(5) == -1 || commonVector.getALong(6) == -1) {
+                                if (commonVector.getALong(8) == -1 || commonVector.getALong(9) == -1) {
 
                                     HandCard card = GetHandCard(commonVector.getALong(2));
                                     if (card != null) {
@@ -1353,7 +1357,7 @@ public class Mytheria extends BaseGambScreen {
                                     }
                                     success = true;
                                 } else {
-                                    CardSlot slot = GetSlot(SlotType.Player, commonVector.getALong(5), commonVector.getALong(6));
+                                    CardSlot slot = GetSlot(SlotType.Player, commonVector.getALong(8), commonVector.getALong(9));
                                     if (slot != null) {
                                         if (heroSummon.type == DBHero.TYPE_GOD) {
                                             isSummonGodPlayer = true;
@@ -1370,9 +1374,10 @@ public class Mytheria extends BaseGambScreen {
 //                                            delay = 0.1f;
 //                                        }
                                             //sua frame
-                                            BoardCard card = CreateCard(commonVector.getALong(2), commonVector.getALong(3), commonVector.getALong(4), slot, CardOwner.Player);
+                                            BoardCard card = NewCreateCard(commonVector.getALong(2), commonVector.getALong(3), commonVector.getALong(4), slot, CardOwner.Player,
+                                                    commonVector.getALong(5),commonVector.getALong(6),commonVector.getALong(7));
                                             if (card != null) {
-                                                card.isFragile = commonVector.getALong(8) != 0;
+                                                card.isFragile = commonVector.getALong(11) != 0;
                                                 card.Placed();
                                             }
 //                                        onSpawnRandomGod?.Invoke(commonVector.aLong[3]);
@@ -1381,9 +1386,10 @@ public class Mytheria extends BaseGambScreen {
                                             HandCard cardToRemove = GetHandCard(commonVector.getALong(2));
                                             if (cardToRemove != null) {
                                                 //sua frame
-                                                BoardCard card = CreateCard(commonVector.getALong(2), commonVector.getALong(3), commonVector.getALong(4), slot, CardOwner.Player);
+                                                BoardCard card = NewCreateCard(commonVector.getALong(2), commonVector.getALong(3), commonVector.getALong(4), slot, CardOwner.Player,
+                                                        commonVector.getALong(5),commonVector.getALong(6),commonVector.getALong(7));
                                                 if (card != null) {
-                                                    card.isFragile = commonVector.getALong(8) != 0;
+                                                    card.isFragile = commonVector.getALong(11) != 0;
                                                     //CheckHeroSkill(TYPE_WHEN_SUMON, card,slot.xPos,slot.yPos);
 
                                                 }
@@ -1397,7 +1403,7 @@ public class Mytheria extends BaseGambScreen {
                                     }
                                 }
                             } else {
-                                if (commonVector.getALong(5) == -1 || commonVector.getALong(6) == -1) {
+                                if (commonVector.getALong(8) == -1 || commonVector.getALong(9) == -1) {
 //                                    for (int j = 0; j < Decks[1].GetListCard().size(); j++)
 //                                        if (Decks[1].GetListCard().get(j) != null) {
 //
@@ -1413,7 +1419,7 @@ public class Mytheria extends BaseGambScreen {
 
                                     CardSlot slot = null;
                                     for (int j = 0; j < enemySlotContainer.size(); j++)
-                                        if (enemySlotContainer.get(j).xPos == commonVector.getALong(5) && enemySlotContainer.get(j).yPos == commonVector.getALong(6)) {
+                                        if (enemySlotContainer.get(j).xPos == commonVector.getALong(8) && enemySlotContainer.get(j).yPos == commonVector.getALong(9)) {
                                             slot = enemySlotContainer.get(j);
                                             break;
                                         }
@@ -1433,8 +1439,9 @@ public class Mytheria extends BaseGambScreen {
 //                                            delay = 0.1f;
 //                                        }
                                             //sua frame
-                                            BoardCard card = CreateCard(commonVector.getALong(2), commonVector.getALong(3), commonVector.getALong(4), slot, CardOwner.Enemy);
-                                            card.isFragile = commonVector.getALong(8) != 0;
+                                            BoardCard card = NewCreateCard(commonVector.getALong(2), commonVector.getALong(3), commonVector.getALong(4), slot, CardOwner.Enemy,
+                                                    commonVector.getALong(5),commonVector.getALong(6),commonVector.getALong(7));
+                                            card.isFragile = commonVector.getALong(11) != 0;
 
 //                                        onSpawnRandomGodEnemy?.Invoke(commonVector.aLong[3]);
                                         } else {
@@ -1450,8 +1457,9 @@ public class Mytheria extends BaseGambScreen {
 //                                                card.SetHandCardData(commonVector.getALong(2), commonVector.getALong(3), 1, CardOwner.Enemy, -1);
 //                                                Decks[1].RemoveCard(card, 1);
 
-                                            BoardCard boardCard = CreateCard(commonVector.getALong(2), commonVector.getALong(3), commonVector.getALong(4), slot, CardOwner.Enemy);
-                                            boardCard.isFragile = commonVector.getALong(7) != 0;
+                                            BoardCard boardCard = NewCreateCard(commonVector.getALong(2), commonVector.getALong(3), commonVector.getALong(4), slot, CardOwner.Enemy,
+                                                    commonVector.getALong(5),commonVector.getALong(6),commonVector.getALong(7));
+                                            boardCard.isFragile = commonVector.getALong(10) != 0;
 //                                                PoolManager.Pools["Card"].Despawn(card.transform);
 //                                            }
                                         }
@@ -1783,6 +1791,21 @@ public class Mytheria extends BaseGambScreen {
         // Decks[index].RebuildDeckOnAddCard(index, showOpponentCardPoint, card);
         card.isFleeting = isFleeting;
     }
+    void NewAddNewCard(int index, DBHero hero, long battleID, long frame, boolean isFleeting
+            ,long atk, long hp, long mana) {
+
+        HandCard card = new HandCard();
+
+        if (battleID > 0)
+            card.SetHandCardData(battleID, hero.id, frame, CardOwner.Player, mana);
+        else
+            card.cardOwner = CardOwner.Enemy;
+        card.heroInfo.atk += atk;
+        card.heroInfo.hp += hp;
+        Decks[index].AddNewCard(card);
+
+        card.isFleeting = isFleeting;
+    }
 
     private void GameStartBattle(ListAction listAction) {
         System.out.println("GameStartBattle");
@@ -1819,17 +1842,20 @@ public class Mytheria extends BaseGambScreen {
                             String username = commonVector.getAString(j);
                             if (cardSize > 0) {
                                 if (instance.username.equals(username)) {
-                                    long battleID = commonVector.getALong(commonVector.getALongCount() - 4);
-                                    long heroID = commonVector.getALong(commonVector.getALongCount() - 3);
+                                    long battleID = commonVector.getALong(commonVector.getALongCount() - 6);
+                                    long heroID = commonVector.getALong(commonVector.getALongCount() - 5);
                                     System.out.println("drawcard battleId = " + battleID + " heroId = " + heroID);
-                                    long frame = commonVector.getALong(commonVector.getALongCount() - 2);
+                                    long frame = commonVector.getALong(commonVector.getALongCount() - 4);
+                                    long atk = commonVector.getALong(commonVector.getALongCount() - 3);
+                                    long hp = commonVector.getALong(commonVector.getALongCount() - 2);
                                     long cardMana = commonVector.getALong(commonVector.getALongCount() - 1);
                                     DBHero hero = Database.GetHero(heroID);
-                                    AddNewCard(0, hero, battleID, frame, false, cardMana);
+                                    //them
+                                    NewAddNewCard(0, hero, battleID, frame, false, atk, hp, cardMana);
                                 } else {
                                     DBHero hero = new DBHero();
                                     hero.id = -1;
-                                    AddNewCard(1, hero, -1, 1, false, 0);
+                                    NewAddNewCard(1, hero, -1, 1, false, 0, 0, 0);
                                 }
                             }
 //	                            onUpdateShard?.Invoke(GameData.main.profile.username.Equals(username) ? 0 : 1, shard);
@@ -6967,9 +6993,9 @@ public class Mytheria extends BaseGambScreen {
 
                     if (slot != null) {
                         // sua frame
-                        CreateCard(cv.getALong(2), cv.getALong(3), cv.getALong(4),
+                        NewCreateCard(cv.getALong(2), cv.getALong(3), cv.getALong(4),
 //	                        		m_EnemyGodOnBoardCard, slot.transform, holySpawnEffect, 
-                                slot, CardOwner.Enemy
+                                slot, CardOwner.Enemy, cv.getALong(5), cv.getALong(6), cv.getALong(7)
 //                                , 0.1f
                         );
 
@@ -6998,9 +7024,9 @@ public class Mytheria extends BaseGambScreen {
 ////	                                		m_GodCard, slot.transform, null,
 //                                        slot, CardOwner.Player);
 //                            } else {// sua frame
-                            CreateCard(cv.getALong(2), cv.getALong(3), cv.getALong(4),
+                            NewCreateCard(cv.getALong(2), cv.getALong(3), cv.getALong(4),
 //	                                		m_GodCard, slot.transform, null,
-                                    slot, CardOwner.Player);
+                                    slot, CardOwner.Player,cv.getALong(5), cv.getALong(6), cv.getALong(7));
 //                            }
 //	                            Debug.Log("onSpawnRandomGod" + cv.aLong[2] + "/" + cv.aLong[3]);
 //	                            onSpawnRandomGod?.Invoke(cv.aLong[2]);
@@ -7102,6 +7128,25 @@ public class Mytheria extends BaseGambScreen {
         return card;
 //	        callback?.Invoke(card);
     }
+    private BoardCard NewCreateCard(long battleID, long heroID, long frame
+            , CardSlot targetSlot, CardOwner owner, long atk, long hp, long mana
+    ) {
+        BoardCard card = new BoardCard();
+        card.NewSetBoardCardData(battleID, heroID, frame, owner, targetSlot, atk, hp, mana);
+        card.heroInfo.atk += atk;
+        card.heroInfo.hp += hp;
+
+        if (targetSlot != null) {
+            targetSlot.ChangeSlotState(SlotState.Full, card);
+            card.slot = targetSlot;
+            card.SetSummonAnimation();
+            card.UpdatePosition();
+        }
+
+        lstCardInBattle.add(card);
+
+        return card;
+    }
 
 
     private void GameFirstGodSummon(CommonVector commonVector) {
@@ -7123,16 +7168,16 @@ public class Mytheria extends BaseGambScreen {
 
             for (int i = 0; i < playerSlotContainer.size(); i++) {
                 CardSlot slot = playerSlotContainer.get(i);
-                if (slot.xPos == commonVector.getALong(4) && slot.yPos == commonVector.getALong(5)) {
+                if (slot.xPos == commonVector.getALong(7) && slot.yPos == commonVector.getALong(8)) {
 //                    if (commonVector.getALong(2) == 1) {
 //                        CreateCard(commonVector.getALong(1), commonVector.getALong(2), 1,
 ////	        	            		   m_GodCard, slot.transform,null,
 //                                slot, CardOwner.Player, 0.4f);
 //
 //                    } else {
-                    CreateCard(godBattleId, commonVector.getALong(2), commonVector.getALong(3),
+                    NewCreateCard(godBattleId, commonVector.getALong(2), commonVector.getALong(3),
 //	        						m_GodCard, slot.transform, null,
-                            slot, CardOwner.Player
+                            slot, CardOwner.Player, commonVector.getALong(4), commonVector.getALong(5), commonVector.getALong(6)
 //                                , 0.4f
                     );
 //                    }
@@ -7148,6 +7193,7 @@ public class Mytheria extends BaseGambScreen {
 
     private void GameDealCards(ListCommonVector listCommonVector) {
         onProcessData = true;
+        //gì đó?
         // draw card
         // show than cua 2 ben
         // draw card cho 2 ben
@@ -7161,23 +7207,27 @@ public class Mytheria extends BaseGambScreen {
             CommonVector cv1 = listCommonVector.getAVector(1);
 
             if (instance.username.equals(cv0.getAString(0))) {
-                for (int i = 1; i < cv0.getALongCount(); i += 3) {
-                    AddListCard(lstGodPlayer, lstGodPlayerBattleID, lstGodPlayerFrame, cv0.getALong(i),
-                            cv0.getALong(i - 1), cv0.getALong(i + 1));
+                for (int i = 1; i < cv0.getALongCount(); i += 6) {
+                    NewAddListCard(lstGodPlayer, lstGodPlayerBattleID, lstGodPlayerFrame, cv0.getALong(i),
+                            cv0.getALong(i - 1), cv0.getALong(i + 1),
+                            cv0.getALong(i + 2),cv0.getALong(i + 3),cv0.getALong(i + 4));
 
                 }
-                for (int i = 1; i < cv1.getALongCount(); i += 3) {
-                    AddListCard(lstGodEnemy, lstGodEnemyBattleID, lstGodEnemyFrame, cv1.getALong(i),
-                            cv1.getALong(i - 1), cv1.getALong(i + 1));
+                for (int i = 1; i < cv1.getALongCount(); i += 6) {
+                    NewAddListCard(lstGodEnemy, lstGodEnemyBattleID, lstGodEnemyFrame, cv1.getALong(i),
+                            cv1.getALong(i - 1), cv1.getALong(i + 1),
+                            cv0.getALong(i + 2),cv0.getALong(i + 3),cv0.getALong(i + 4));
                 }
             } else {
-                for (int i = 1; i < cv0.getALongCount(); i += 3) {
-                    AddListCard(lstGodEnemy, lstGodEnemyBattleID, lstGodEnemyFrame, cv0.getALong(i),
-                            cv0.getALong(i - 1), cv0.getALong(i + 1));
+                for (int i = 1; i < cv0.getALongCount(); i += 6) {
+                    NewAddListCard(lstGodEnemy, lstGodEnemyBattleID, lstGodEnemyFrame, cv0.getALong(i),
+                            cv0.getALong(i - 1), cv0.getALong(i + 1),
+                            cv0.getALong(i + 2),cv0.getALong(i + 3),cv0.getALong(i + 4));
                 }
-                for (int i = 1; i < cv1.getALongCount(); i += 3) {
-                    AddListCard(lstGodPlayer, lstGodPlayerBattleID, lstGodPlayerFrame, cv1.getALong(i),
-                            cv1.getALong(i - 1), cv1.getALong(i + 1));
+                for (int i = 1; i < cv1.getALongCount(); i += 6) {
+                    NewAddListCard(lstGodPlayer, lstGodPlayerBattleID, lstGodPlayerFrame, cv1.getALong(i),
+                            cv1.getALong(i - 1), cv1.getALong(i + 1),
+                            cv0.getALong(i + 2),cv0.getALong(i + 3),cv0.getALong(i + 4));
                 }
             }
 
@@ -7185,9 +7235,10 @@ public class Mytheria extends BaseGambScreen {
 
 
             CommonVector cv2 = listCommonVector.getAVector(2);
-            for (int i = 1; i < cv2.getALongCount(); i += 3) {
-                AddListCard(lstHeroPlayer, lstHeroBattleID, lstHeroFrame, cv2.getALong(i), cv2.getALong(i - 1),
-                        cv2.getALong(i + 1));
+            for (int i = 1; i < cv2.getALongCount(); i += 6) {
+                NewAddListCard(lstHeroPlayer, lstHeroBattleID, lstHeroFrame, cv2.getALong(i), cv2.getALong(i - 1),
+                        cv2.getALong(i + 1),
+                        cv0.getALong(i + 2),cv0.getALong(i + 3),cv0.getALong(i + 4));
             }
 
             DrawDeckStart(0, lstHeroPlayer, lstHeroBattleID, lstHeroFrame);
@@ -7242,6 +7293,16 @@ public class Mytheria extends BaseGambScreen {
     private void AddListCard(ArrayList<DBHero> lstHero, ArrayList<Long> lstID, ArrayList<Long> lstFrame, long heroID,
                              long battleID, long frame) {
         DBHero hero = Database.GetHero(heroID);
+        lstHero.add(hero);
+        lstID.add(battleID);
+        lstFrame.add(frame);
+    }
+    private void NewAddListCard(ArrayList<DBHero> lstHero, ArrayList<Long> lstID, ArrayList<Long> lstFrame, long heroID,
+                             long battleID, long frame, long atk, long hp, long mana) {
+        DBHero hero = Database.GetHero(heroID);
+        hero.atk += atk;
+        hero.hp+=hp;
+        hero.mana+=mana;
         lstHero.add(hero);
         lstID.add(battleID);
         lstFrame.add(frame);

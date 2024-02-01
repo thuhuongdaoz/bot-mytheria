@@ -365,6 +365,12 @@ public class BoardCard extends Card {
 
 	        this.slot = slot;
 	    }
+	public void NewSetBoardCardData(long battleID, long heroID,long frame, CardOwner owner, CardSlot slot, long atk, long hp, long mana)
+	{
+		SetCardData(battleID, heroID, frame, owner, atk, hp, mana);
+
+		this.slot = slot;
+	}
 
 
 	    @Override
@@ -385,6 +391,25 @@ public class BoardCard extends Card {
 //	        breakerValue = heroInfo.breaker;
 //	        SetTired(0);
 	    }
+
+	public void  SetCardData(long battleID, long heroID, long frame, CardOwner owner, long atk, long hp, long mana)
+	{
+		super.SetCardData(battleID, heroID, frame, owner);
+		atkValue = heroInfo.atk + atk;
+		hpValue = heroInfo.hp + hp;
+		hpMaxValue = heroInfo.hp + hp;
+		tmpMana = heroInfo.mana + mana;
+//	        Debug.Log("ahdgalkfha" + frame);
+//	        Texture cardTexture = CardData.Instance.GetOnBoardTexture(heroInfo.heroNumber);
+//	        if (heroInfo.type == DBHero.TYPE_TROOPER_MAGIC)
+//	            SetSpellData(cardTexture);
+//	        else if (heroInfo.type == DBHero.TYPE_TROOPER_NORMAL)
+//	            SetMinionData(cardTexture);
+//	        else
+//	            SetGodData(cardTexture);
+//	        breakerValue = heroInfo.breaker;
+//	        SetTired(0);
+	}
 
 //	    private void SetSpellData(Texture cardTexture)
 //	    {

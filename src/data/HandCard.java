@@ -9,6 +9,7 @@ public class HandCard extends Card {
 	 public void SetHandCardData(long battleID, long id,long frame, CardOwner owner, long mana)
 	    {
 	        OnUpdateManaText(mana);
+
 	        SetCardData(battleID, id, frame, owner);
 	    }
 	    

@@ -38,6 +38,7 @@ public class IService {
     public static final int GAME_BATTLE_LEAVE = 52;
     public static final int GAME_START = 54;
     public static final int GAME_DEAL_CARDS = 55;
+    //public static final int BEM_DEAL_CARDS = 55;
     public static final int GAME_MULLIGAN = 56;
     public static final int GAME_FIRST_GOD_SUMMON = 57;
     public static final int GAME_MOVE_GOD_SUMMON = 58;
