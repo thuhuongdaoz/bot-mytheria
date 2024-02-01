@@ -358,18 +358,13 @@ public class BoardCard extends Card {
 //	        lstShardAdded.ForEach(x => x.gameObject.SetActive(false));
 	    }
 
-	    public void SetBoardCardData(long battleID, long heroID,long frame, CardOwner owner, CardSlot slot)
+	    public void SetBoardCardData(long battleID, long heroID,long frame, CardOwner owner, CardSlot slot, long atk, long hp, long mana)
 	    {
-	        SetCardData(battleID, heroID, frame, owner);
+	        SetCardData(battleID, heroID, frame, owner, atk, hp, mana);
 
 	        this.slot = slot;
 	    }
-	public void NewSetBoardCardData(long battleID, long heroID,long frame, CardOwner owner, CardSlot slot, long atk, long hp, long mana)
-	{
-		SetCardData(battleID, heroID, frame, owner, atk, hp, mana);
 
-		this.slot = slot;
-	}
 
 
 	    @Override
