@@ -6087,7 +6087,7 @@ public class Mytheria extends BaseGambScreen {
 //                                    }
                                     if (IsMeByServerPos(serverIndexPlayer)) {
                                         DBHero hero = Database.GetHero(newHeroId);
-                                        AddNewCard(0, hero, newBattleId, frame, fleeting != 0,0,0 cardMana);
+                                        AddNewCard(0, hero, newBattleId, frame, fleeting != 0,0,0, cardMana);
                                     }
 //                                    else {
 //                                        DBHero hero = new DBHero();
@@ -6572,7 +6572,7 @@ public class Mytheria extends BaseGambScreen {
 //                                            if (buffCard != null)
 //                                                buffCard.SummonNewCard(card.transform.position, null);
 //                                                });
-                                        AddNewCard(0, hero, newBattleId, frame, fleeting == 1,0,0 cardMana);
+                                        AddNewCard(0, hero, newBattleId, frame, fleeting == 1,0,0, cardMana);
 
                                     }
 //                                        else {
