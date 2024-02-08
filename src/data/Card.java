@@ -1,6 +1,7 @@
 package data;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import data.EnumTypes.CardOwner;
 
@@ -15,6 +16,8 @@ public class Card {
 	// public long effectType;
 	public DBHeroSkill skill;
 	public ArrayList<DBHeroSkill> lstSkill = new ArrayList<DBHeroSkill>();
+
+	public List<Long> unlockSkillId = new ArrayList<>();
 	public DBHero heroInfo;
 	public long atkValue;
 	public long hpValue;

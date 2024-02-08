@@ -17,10 +17,10 @@ public class HandDeckLayout {
 	        lstCard.add(card);
 	    }
 
-	    public void RemoveCard(HandCard card, int index)
+	    public void RemoveCard(HandCard card)
 	    {
 	        lstCard.remove(card);
-	        ReBuildDeck(index);
+//	        ReBuildDeck(index);
 	    }
 
 	  

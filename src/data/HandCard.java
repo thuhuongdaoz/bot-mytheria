@@ -9,8 +9,8 @@ public class HandCard extends Card {
 	 public void SetHandCardData(long battleID, long id,long frame, CardOwner owner, long mana, long atk, long hp)
 	    {
 	        OnUpdateManaText(mana);
-			atkValue = heroInfo.atk + atk;
-			hpValue = heroInfo.hp + hp;
+			atkValue = atk;
+			hpValue = hp;
 	        SetCardData(battleID, id, frame, owner);
 	    }
 	    

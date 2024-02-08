@@ -2,14 +2,14 @@ package data;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
 
 public class DBHero
 {
     public static long TYPE_GOD = 0;
     public static long TYPE_TROOPER_NORMAL = 1;
     public static long TYPE_TROOPER_MAGIC = 2;
-
-    public static long TYPE_BUFF_GOD = 4;
+    public static long TYPE_BUFF_MAGIC = 3;
     public static long COLOR_WHITE = 0;
     public static long COLOR_GREEN = 1;
     public static long COLOR_RED = 2;
@@ -63,6 +63,11 @@ public class DBHero
     public String name, speciesName, skills;
     public boolean isFragile;
     public int maxShardUnlockSkill = 0;
+    //danh cho bai buff
+    //Than so huu skill
+    public long ownerGodID;
+    //skill id tuong ung
+    public List<Long> lstBuffSkillID = new ArrayList<>();
 
     public ArrayList<DBHeroSkill> lstHeroSkill = new ArrayList<DBHeroSkill>();
 

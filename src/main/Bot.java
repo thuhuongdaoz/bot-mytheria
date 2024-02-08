@@ -266,10 +266,18 @@ public static void main(String[] args) throws IOException, ParseException, Inter
 
                 break;
 
-            case IService.GAME_START:
+            case IService.GAME_START:{
+                Object[] args = event.getArgs();
+                CommonVector commonVector = (CommonVector) args[0];
+                for (BattlePlayer player : instance.mLstBattlePlayer)
+                    if (player.position == 0) {
+                        player.towerHealth = commonVector.getALong(1);
+                    } else
+                        player.towerHealth = commonVector.getALong(2);
                 Mytheria screen = new Mytheria(instance, this);
                 instance.session2.removeEventListener(this);
                 instance.session2.addEventListener(screen);
+            }
                 break;
             case IService.GAME_BATTLE_LEAVE:
 //			Context.instance.session2.logout();

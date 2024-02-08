@@ -365,34 +365,13 @@ public class BoardCard extends Card {
 	        this.slot = slot;
 	    }
 
-
-
-	    @Override
-	    public void  SetCardData(long battleID, long heroID, long frame, CardOwner owner)
-	    {
-	        super.SetCardData(battleID, heroID, frame, owner);
-			atkValue = heroInfo.atk;
-			hpValue = heroInfo.hp;
-			hpMaxValue = heroInfo.hp;
-//	        Debug.Log("ahdgalkfha" + frame);
-//	        Texture cardTexture = CardData.Instance.GetOnBoardTexture(heroInfo.heroNumber);
-//	        if (heroInfo.type == DBHero.TYPE_TROOPER_MAGIC)
-//	            SetSpellData(cardTexture);
-//	        else if (heroInfo.type == DBHero.TYPE_TROOPER_NORMAL)
-//	            SetMinionData(cardTexture);
-//	        else
-//	            SetGodData(cardTexture);
-//	        breakerValue = heroInfo.breaker;
-//	        SetTired(0);
-	    }
-
 	public void  SetCardData(long battleID, long heroID, long frame, CardOwner owner, long atk, long hp, long mana)
 	{
 		super.SetCardData(battleID, heroID, frame, owner);
-		atkValue = heroInfo.atk + atk;
-		hpValue = heroInfo.hp + hp;
-		hpMaxValue = heroInfo.hp + hp;
-		tmpMana = heroInfo.mana + mana;
+		atkValue = atk;
+		hpValue = hp;
+		hpMaxValue = hp;
+		tmpMana = mana;
 //	        Debug.Log("ahdgalkfha" + frame);
 //	        Texture cardTexture = CardData.Instance.GetOnBoardTexture(heroInfo.heroNumber);
 //	        if (heroInfo.type == DBHero.TYPE_TROOPER_MAGIC)
@@ -1015,6 +994,18 @@ public class BoardCard extends Card {
 //	            SoundHandler.main.PlaySFX("Debuff", "sounds");
 //	        }
 //	    }
+
+	public void CheckUnlockSkill(long skillID)
+	{
+		for (DBHeroSkill sk : lstSkill)
+		{
+			if (!sk.isUltiType && sk.id == skillID)
+			{
+				unlockSkillId.add(skillID);
+			}
+		}
+	}
+
 //
 //	    public void OnAddShard(long shard, bool isPlayer)
 //	    {

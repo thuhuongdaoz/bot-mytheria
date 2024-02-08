@@ -59,8 +59,6 @@ public class K2Packet {
 				break;
 			}
 			case IService.GAME_START_BATTLE:
-			case IService.GAME_GET_SHARD: 
-			case IService.GAME_ADD_SHARD_HERO:
 			case IService.GAME_MOVE_CARD_IN_BATTLE:
 			case IService.GAME_SUMMON_CARD_IN_BATTLE:
 			case IService.GAME_CONFIRM_STARTBATTLE:

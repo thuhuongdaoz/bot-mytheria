@@ -301,15 +301,6 @@ public class K2P {
         sendPackage(IService.GAME_STARTUP_CONFIRM);
     }
 
-    public void GameGetShard()
-    {
-        sendPackage(IService.GAME_GET_SHARD);
-    }
-
-    public void GameAddShardHero(CommonVector commonVector)
-    {
-        sendPackage(IService.GAME_ADD_SHARD_HERO, commonVector);
-    }
 
     public void GameMoveCardInbattle(CommonVector commonVector)
     {
