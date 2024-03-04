@@ -26,7 +26,7 @@ import static data.Database.normalGroup;
 import static data.Database.prioritySpellArr;
 
 public class Mytheria extends BaseGambScreen {
-
+    public static final int SLEEP_TIME = 2000;
     Bot bot;
 
     public static final int MAX_ROW = 2, MAX_COLUMN = 4;
@@ -63,6 +63,7 @@ public class Mytheria extends BaseGambScreen {
     public HandDeckLayout[] Decks = new HandDeckLayout[2];
     public GodCardHandler godCardHandler = new GodCardHandler();
     public List<GodCardUI> playerGodDeck = new ArrayList<>();
+    public Set<Long> playerOriginGodColor = new HashSet<>();
     public List<GodCardUI> enemyGodDeck = new ArrayList<>();
 
     public ArrayList<LaneController> lstLaneInBattle;
@@ -1675,6 +1676,7 @@ public class Mytheria extends BaseGambScreen {
             GodCardUI card = new GodCardUI();
             card.InitData(godBattleID1.get(i), godHero1.get(i).id, heroInfo1.get(i).frame, EnumTypes.CardOwner.Player); //Database.GetHero(godHero1[indexPlayerBattleID].id).name); ; ;
             playerGodDeck.add(card);
+            playerOriginGodColor.add(card.hero.color);
         }
 //        for (int i = 0; i < godHero2.size(); i++){
 //            GodCardUI card = new GodCardUI();
@@ -1883,7 +1885,8 @@ public class Mytheria extends BaseGambScreen {
                                     && handCard.heroInfo.owner_god_id == godCard.heroID
                                     && handCard.tmpMana <= currentMana){
 //                                currentMana -= handCard.tmpMana;
-                                SummonBuffGodInBattlePhase(godCard.battleID, handCard.heroID, godRow,godCol); //để xem có phải gửi vị trí lên ko
+                                SummonBuffGodInBattlePhase(godCard.battleID, godRow,godCol); //để xem có phải gửi vị trí lên ko
+                                Thread.sleep(SLEEP_TIME);
                             }
                         }
                     }
@@ -1895,22 +1898,30 @@ public class Mytheria extends BaseGambScreen {
                         }
                     }
                     if (handCards.size() != 0) {
-                        for (int i = 0; i < prioritySpellArr.size(); i++) {
-                            JSONArray arr = (JSONArray) prioritySpellArr.get(i);
-                            for (HandCard card : handCards) {
-                                long heroId = card.heroID;
-                                if (arr.contains(heroId)) {
-                                    if (SummonSpellInBattlePhase(card)) {
-                                        Thread.sleep(2000);
-                                        if (success) {
-                                            instance.session2.GameConfirmStartBattle();
-                                            return;
-                                        }
-                                    }
-                                }
+                        for (HandCard card : handCards) {
+                            if (SummonSpellInBattlePhase(card)) {
+                                Thread.sleep(SLEEP_TIME);
+                                instance.session2.GameConfirmStartBattle();
+                                return;
                             }
-
                         }
+//                        for (int i = 0; i < prioritySpellArr.size(); i++) {
+//                            JSONArray arr = (JSONArray) prioritySpellArr.get(i);
+//                            for (HandCard card : handCards) {
+//                                long heroId = card.heroID;
+//                                if (arr.contains(heroId)) {
+//                                    if (SummonSpellInBattlePhase(card)) {
+//                                        Thread.sleep(SLEEP_TIME);
+//                                        if (success) {
+//                                            instance.session2.GameConfirmStartBattle();
+//                                            return;
+//                                        }
+//                                    }
+//                                }
+//                            }
+//
+//                        }
+
                     }
                     //enturn thôi
                     instance.session2.GameConfirmStartBattle();
@@ -1922,24 +1933,26 @@ public class Mytheria extends BaseGambScreen {
 
                 if(godCard != null) {
                     if (playerGodDeck.size() != 0) {
-                        long maxMana = 0;
-                        int index = -1;
-                        //này là lấy index và maxmana của tướng có nhiều mana nhất trong bộ
-                        for (int i = 0; i < playerGodDeck.size(); i++) {
-                            DBHero god = playerGodDeck.get(i).hero;
-                            if (god.mana <= currentMana && god.mana > maxMana) {
-                                maxMana = god.mana;
-                                index = i;
-                            }
-                        }
+//                        long maxMana = 0;
+//                        int index = -1;
+//                        //này là lấy index và maxmana của tướng có nhiều mana nhất trong bộ
+//                        for (int i = 0; i < playerGodDeck.size(); i++) {
+//                            DBHero god = playerGodDeck.get(i).hero;
+//                            if (god.mana <= currentMana && god.mana > maxMana) {
+//                                maxMana = god.mana;
+//                                index = i;
+//                            }
+//                        }
+
                         long row = -1, col = -1;
                         //lấy ra tướng được chọn
-                        GodCardUI godCardSelected = playerGodDeck.get(index);
+                        GodCardUI godCardSelected = playerGodDeck.get(0);
 
                         //đây là gì nhỉ? chọn mấy con hero chỉ hợp hàng sau
-                        if (godCardSelected.hero.id == 347 || godCardSelected.hero.id == 349 || godCardSelected.hero.id == 350 || godCardSelected.hero.id == 351)
-                            row = 0;
-                        else row = 1;
+                        row = 1;
+//                        if (godCardSelected.hero.id == 347 || godCardSelected.hero.id == 349 || godCardSelected.hero.id == 350 || godCardSelected.hero.id == 351)
+//                            row = 0;
+//                        else row = 1;
                         List<Integer> lstIndex = new ArrayList<>();
 
                         //lấy ra danh sách các slot trống ư? với đk là slot đó ở row tương ứng vs vị trí của thần và tình trạng là empty, sau đó lưu y vào
@@ -1971,7 +1984,7 @@ public class Mytheria extends BaseGambScreen {
                         lstXIndex.remove(row);
                         lstYIndex.remove(col);
                         godCard = null;
-                        Thread.sleep(2000);
+                        Thread.sleep(SLEEP_TIME);
                     }
                 }
                 if (godCard != null){
@@ -1992,7 +2005,7 @@ public class Mytheria extends BaseGambScreen {
                                 && handCard.heroInfo.owner_god_id == godCard.heroID
                                 && handCard.tmpMana <= currentMana){
                             currentMana -= handCard.tmpMana;
-                            SummonBuffGodInBattlePhase(godCard.battleID, handCard.heroID, godRow,godCol ); //để xem có phải gửi vị trí lên ko
+                            SummonBuffGodInBattlePhase(godCard.battleID, godRow,godCol ); //để xem có phải gửi vị trí lên ko
                         }
                     }
                 }
@@ -3745,18 +3758,19 @@ public class Mytheria extends BaseGambScreen {
         instance.session2.GameSummonCardInBatttle(builder.build());
     }
 
-    public void SummonBuffGodInBattlePhase(Long battleId, Long heroId, int row, int col) {
+    public void SummonBuffGodInBattlePhase(Long battleId, int row, int col) {
         //ở đây cần build và gửi lên service cái gì ta?, thôi cứ gửi thêm 1 trường nữa là cái d của thẻ buff vậy
         CommonVector.Builder builder = CommonVector.newBuilder()
                 .addALong(battleId)
                 .addALong(row)
                 .addALong(col);
-        builder.addALong(heroId);
         instance.session2.GameSummonCardInBatttle(builder.build());
     }
     public void SummonNormalInBattlePhase(HandCard card, long row, long col) {
 //        LogWriterHandle.WriteLog("SummonCardInBattlePhase==" + card.heroInfo.color);
-        if (!CheckHeroSkill(TYPE_WHEN_SUMON, card, row, col)) {
+        if (!CheckHeroSkill(
+//                TYPE_WHEN_SUMON,
+                card, row, col)) {
             CommonVector cv = CommonVector.newBuilder()
                     .addALong(card.battleID)
                     .addALong(row)
@@ -3767,9 +3781,12 @@ public class Mytheria extends BaseGambScreen {
 
     public boolean SummonSpellInBattlePhase(HandCard card) {
 //        LogWriterHandle.WriteLog("SummonCardInBattlePhase==" + card.heroInfo.color);
+//        LogWriterHandle.WriteLog("SummonCardInBattlePhase==" + card.heroInfo.color);
 
         //xem sửa hay ko nè, chắc phải sửa nhưng sau đi, làm luồng chính cái đã ==============
-        return CheckHeroSkill(TYPE_WHEN_SUMON, card, -1, -1);
+        return CheckHeroSkill(
+//                TYPE_WHEN_SUMON,
+                card, -1, -1);
     }
 
     public boolean CanSummon(HandCard card) {
@@ -3781,18 +3798,20 @@ public class Mytheria extends BaseGambScreen {
 //                return true;
 
 //            boolean isOk = false;
-            long totalShard = 0;
-
-            for (Card c : GetListPlayerCardInBattle()) {
-                if (card.heroInfo.color == c.heroInfo.color) {
-                    if (c.heroInfo.type == DBHero.TYPE_GOD) {
-                        totalShard += c.countShardAddded;
-                    }
-                }
-            }
-
-            if (totalShard >= card.heroInfo.shardRequired)
+            if (playerOriginGodColor.contains(card.heroInfo.color))
                 return true;
+//            long totalShard = 0;
+//
+//            for (Card c : GetListPlayerCardInBattle()) {
+//                if (card.heroInfo.color == c.heroInfo.color) {
+//                    if (c.heroInfo.type == DBHero.TYPE_GOD) {
+//                        totalShard += c.countShardAddded;
+//                    }
+//                }
+//            }
+//
+//            if (totalShard >= card.heroInfo.shardRequired)
+//                return true;
 
 //            if (!isOk)
 //                Toast.Show(LangHandler.Get("54", "Not enough shards consumed on same-color Gods on the board to summon"));
@@ -3803,7 +3822,16 @@ public class Mytheria extends BaseGambScreen {
         return false;
     }
 
-    public boolean CheckHeroSkill(int when, Card card, long row, long col) {
+    /**
+     * check hero skill nhung tam thoi toan AS thoi
+     * @param card
+     * @param row
+     * @param col
+     * @return
+     */
+    public boolean CheckHeroSkill(
+//            int when,
+            Card card, long row, long col) {
         DBHero hero = card.heroInfo;
 
         for (DBHeroSkill skill : hero.lstHeroSkill) {
@@ -3813,10 +3841,10 @@ public class Mytheria extends BaseGambScreen {
             ) {
                 //check condition
 
-                boolean shardOk = CheckShard(card);
-                if (!shardOk) {
-                    return false;
-                }
+//                boolean shardOk = CheckShard(card);
+//                if (!shardOk) {
+//                    return false;
+//                }
 
                 if (CheckSkllCondition(card)) {
                     //find target do now
