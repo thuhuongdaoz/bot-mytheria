@@ -25,6 +25,9 @@ public class Configuration {
 //	//sv test
 //	public static final String HOST_PROTO = "103.9.206.247";
 
+	//	sv new dev
+//	public static final String HOST_PROTO = "45.77.245.14";
+
 	public static final int PORT_PROTO = 8889;
 	//
 	public static final int INTERVAL_ADD_PKG = 500;

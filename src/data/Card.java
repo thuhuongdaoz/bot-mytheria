@@ -11,7 +11,7 @@ public class Card {
 	public long frameC;
 	public long coutUsedSkill = 0;
 	public long countDoActiveSkill = 0;
-	public long countShardAddded = 0;
+//	public long countShardAddded = 0;
 	// public long skillID;
 	// public long effectType;
 	public DBHeroSkill skill;

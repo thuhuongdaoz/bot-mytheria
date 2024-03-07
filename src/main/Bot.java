@@ -105,22 +105,26 @@ public static void main(String[] args) throws IOException, ParseException, Inter
     JSONParser parser = new JSONParser();
     JSONObject jBotConfig = (JSONObject) parser.parse(new FileReader("bot.json"));
     JSONArray jBotArr = (JSONArray) jBotConfig.get("bot");
+
+
+
+
     //sv dev
-//        for (int i = 0; i < jBotArr.size(); i += 25){
+        for (int i = 0; i < jBotArr.size(); i += 25){
+            JSONObject jBot = (JSONObject) jBotArr.get(i);
+            String username = (String) jBot.get("username");
+            String pass = "towardthefuture";
+            String mode = (String) jBot.get("mode");
+            Bot b = new Bot(username, pass, mode);
+        }
+    //sv test + pro
+//    for (int i = 0; i < jBotArr.size(); i++){
 //        JSONObject jBot = (JSONObject) jBotArr.get(i);
 //        String username = (String) jBot.get("username");
 //        String pass = "towardthefuture";
 //        String mode = (String) jBot.get("mode");
 //        Bot b = new Bot(username, pass, mode);
 //    }
-    //sv test + pro
-    for (int i = 0; i < jBotArr.size(); i++){
-        JSONObject jBot = (JSONObject) jBotArr.get(i);
-        String username = (String) jBot.get("username");
-        String pass = "towardthefuture";
-        String mode = (String) jBot.get("mode");
-        Bot b = new Bot(username, pass, mode);
-    }
 
 
 

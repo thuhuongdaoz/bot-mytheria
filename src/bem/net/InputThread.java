@@ -38,7 +38,6 @@ public class InputThread extends Thread {
 			Thread.yield();
 			try {
 				Logger.debug("check for icomming message");
-				System.out.println("hhhhhhhhhhhhhhh");
 				process(socket.receivePacket());
 				Thread.sleep(50);
 			} catch (Exception io) {

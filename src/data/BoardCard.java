@@ -67,12 +67,12 @@ public class BoardCard extends Card {
 //	        initRotation = transform.rotation;
 	    }
 	    
-	    public void OnAddShard(long shard, boolean isPlayer)
-	    {
-	        if (isPlayer)
-	            countShardAddded = shard;
-	     
-	    }
+//	    public void OnAddShard(long shard, boolean isPlayer)
+//	    {
+//	        if (isPlayer)
+//	            countShardAddded = shard;
+//
+//	    }
 	    
 	    
 	    public void SetTired(long isTired)
@@ -114,7 +114,7 @@ public class BoardCard extends Card {
 			}
 	    }
 	    
-	    public void UpdateHeroMatrix(long atk, long hp, long hpMax, long cleave, long pierce, long breaker, long combo, long overrun, long shield, long godSlayer, long shard, long fragile, long precide)
+	    public void UpdateHeroMatrix(long atk, long hp, long hpMax, long cleave, long pierce, long breaker, long combo, long overrun, long shield, long godSlayer, long fragile, long precide)
 	    {
 	        atkValue = atk;
 	        hpValue = hp;
@@ -125,11 +125,11 @@ public class BoardCard extends Card {
 	        comboValue = combo;
 	        overrunValue = overrun;
 	        shieldValue = shield;
-	        countShardAddded = shard;
+//	        countShardAddded = shard;
 	        isFragile = fragile == 1;
 	        godSlayerValue = godSlayer;
-	        if (countShardAddded > 0)
-	        {
+//	        if (countShardAddded > 0)
+//	        {
 //	            for (int i = 0; i < lstShardAdded.Count; i++)
 //	            {
 //	                if (i < countShardAddded)
@@ -140,7 +140,7 @@ public class BoardCard extends Card {
 //	                else
 //	                    break;
 //	            }
-	        }
+//	        }
 	        if (shieldValue > 0)
 	        {
 //	            if (shieldSkeletonEffect == null)

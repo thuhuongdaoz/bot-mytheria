@@ -62,6 +62,8 @@ public class DBHero
     public long speciesId, atk, hp;
     public String name, speciesName, skills;
     public boolean isFragile;
+    public long normalGroupId;
+
     public int maxShardUnlockSkill = 0;
     //danh cho bai buff
     //Than so huu skill

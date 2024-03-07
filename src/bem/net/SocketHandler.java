@@ -162,7 +162,6 @@ public class SocketHandler {
 	}
 
 	protected K2Packet receivePacket() throws IOException,Exception {
-		System.out.println("hhhhhhhhhhhhhh1");
 		try {
 			//magic
 			byte[] magic = new byte[2];
@@ -180,7 +179,6 @@ public class SocketHandler {
 					+ service + "; size = " + length+ "]");
 
 			byte[] body = new byte[length];
-			System.out.println("hhhhhhhhhhhhhh2");
 			if (readBuffer(body) < 0){
 				Logger.debug("-------- Read null body");
 				return null;
@@ -201,7 +199,6 @@ public class SocketHandler {
 	// bytes read if 'EOF' encountered.
 	// -----------------------------------------------------------------
 	private int readBuffer(byte[] buff) throws IOException {
-		System.out.println("hhhhhhhhhhhhhh3");
 		int p = 0, r = 0;
 		while (p < buff.length) {
 			r = ips.read(buff, p, buff.length - p);
