@@ -109,7 +109,7 @@ public static void main(String[] args) throws IOException, ParseException, Inter
 
 
 
-    //sv dev
+
         for (int i = 0; i < jBotArr.size(); i += 25){
             JSONObject jBot = (JSONObject) jBotArr.get(i);
             String username = (String) jBot.get("username");
@@ -117,7 +117,7 @@ public static void main(String[] args) throws IOException, ParseException, Inter
             String mode = (String) jBot.get("mode");
             Bot b = new Bot(username, pass, mode);
         }
-    //sv test + pro
+
 //    for (int i = 0; i < jBotArr.size(); i++){
 //        JSONObject jBot = (JSONObject) jBotArr.get(i);
 //        String username = (String) jBot.get("username");
