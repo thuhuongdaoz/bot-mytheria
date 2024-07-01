@@ -27,6 +27,8 @@ public class Configuration {
 
 	//	sv new dev
 //	public static final String HOST_PROTO = "45.77.245.14";
+	//	sv new test
+//	public static final String HOST_PROTO = "139.180.153.32";
 
 	public static final int PORT_PROTO = 8889;
 	//

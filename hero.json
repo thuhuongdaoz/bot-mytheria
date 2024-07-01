@@ -5,7 +5,7 @@
         "variation": 1,
         "name": "Poseidon",
         "disable": 0,
-        "rarity": 3,
+        "rarity": 0,
         "collectible": 0,
         "type": 0,
         "color": 1,
@@ -33,7 +33,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-06-10 15:28:03",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-03-26 02:51:31"
     },
     {
         "id": 2,
@@ -5215,9 +5215,9 @@
         "fragile": 0,
         "virtual": 0,
         "tut": 0,
-        "normal_group_id": 7,
+        "normal_group_id": 0,
         "created_on": "2022-06-10 15:28:03",
-        "modified_on": "2024-03-04 09:50:51"
+        "modified_on": "2024-03-04 14:26:42"
     },
     {
         "id": 161,
@@ -10769,7 +10769,7 @@
         "variation": 0,
         "name": "Champion of Hades",
         "disable": 0,
-        "rarity": 2,
+        "rarity": 0,
         "collectible": 0,
         "type": 0,
         "color": 4,
@@ -10797,7 +10797,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-10-24 10:06:39",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-03-27 05:03:44"
     },
     {
         "id": 351,
