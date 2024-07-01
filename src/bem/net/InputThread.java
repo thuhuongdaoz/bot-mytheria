@@ -96,6 +96,7 @@ public class InputThread extends Thread {
 			case IService.LOGIN_NORMAL:
 			case IService.SET_USER_BATTLE_DECK:
 			case IService.GAME_START:
+				
 			{
 				
 				CommonVector proto = (CommonVector) pkt.getDataObject();

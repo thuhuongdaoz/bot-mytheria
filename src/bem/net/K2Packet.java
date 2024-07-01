@@ -53,6 +53,7 @@ public class K2Packet {
 			case IService.GAME_STARTUP_END: 
 			case IService.GAME_BATTLE_ENDGAME: 
 			case IService.GAME_BATTLE_JOIN:
+
 				case IService.GAME_RESUME:
 			{
 				ret = ListCommonVector.parseFrom(body);
@@ -66,6 +67,7 @@ public class K2Packet {
 			case IService.GAME_SIMULATE_SKILLS:
 			case IService.GAME_ACTIVE_SKILL:
 			case IService.GAME_BATTLE_ENDROUND:
+
 			{
 				ret = ListAction.parseFrom(body);
 				break;

@@ -29,7 +29,7 @@ public class Mytheria extends BaseGambScreen {
     int TYPE_WHEN_START_TURN = 1;
     public BATTLE_STATE battleState;
 
-    private boolean isSurrender = false, onProcessData = false, IsYourTurn = false, isGameStarted = false;
+    private boolean isSurrender = false, onProcessData = false, IsYourTurn = false, isGameStarted = false, hasBid = false;
     private int playerIndex, turnCount = 0, roundCount = 0;// turnCount = way, roundCount chưa sử dụng
     private long currentMana, tmpCurrentMana, turnMana;
     public boolean isUsedUlti = false;
@@ -624,7 +624,11 @@ public class Mytheria extends BaseGambScreen {
 
                     break;
                 }
-
+                case IService.GAME_BID_RESULT:{
+                    Object[] args = event.getArgs();
+                    ListAction listAction = (ListAction) args[0];
+                    GameBidResult(listAction);
+                }
                 case IService.GAME_MOVE_CARD_IN_BATTLE: {
                     Object[] args = event.getArgs();
                     ListAction listAction = (ListAction) args[0];
@@ -1794,6 +1798,7 @@ public class Mytheria extends BaseGambScreen {
         System.out.println("GameStartBattle");
         // wait 0
         onProcessData = true;
+        hasBid = false;
 
         if (!isGameStarted)
             isGameStarted = true;
@@ -1824,13 +1829,15 @@ public class Mytheria extends BaseGambScreen {
                             String username = commonVector.getAString(j);
                             if (cardSize > 0) {
                                 if (instance.username.equals(username)) {
-                                    long battleID = commonVector.getALong(commonVector.getALongCount() - 6);
-                                    long heroID = commonVector.getALong(commonVector.getALongCount() - 5);
+                                    long battleID = commonVector.getALong(commonVector.getALongCount() - 7);
+                                    long heroID = commonVector.getALong(commonVector.getALongCount() - 6);
                                     System.out.println("drawcard battleId = " + battleID + " heroId = " + heroID);
-                                    long frame = commonVector.getALong(commonVector.getALongCount() - 4);
-                                    long atk = commonVector.getALong(commonVector.getALongCount() - 3);
-                                    long hp = commonVector.getALong(commonVector.getALongCount() - 2);
-                                    long cardMana = commonVector.getALong(commonVector.getALongCount() - 1);
+                                    long frame = commonVector.getALong(commonVector.getALongCount() - 5);
+                                    long atk = commonVector.getALong(commonVector.getALongCount() - 4);
+                                    long hp = commonVector.getALong(commonVector.getALongCount() - 3);
+                                    long cardMana = commonVector.getALong(commonVector.getALongCount() - 2);
+                                    long isBid = commonVector.getALong(commonVector.getALongCount() - 1);
+                                    hasBid = isBid == 1 ? true : false;
                                     DBHero hero = Database.GetHero(heroID);
                                     //them
                                     AddNewCard(0, hero, battleID, frame, false, atk, hp, cardMana);
@@ -1879,9 +1886,9 @@ public class Mytheria extends BaseGambScreen {
         // wait delay
         onProcessData = false;
         //BOT
-        bot();
-
-
+        if(!hasBid) {
+            bot();
+        }
     }
 
     /**
@@ -9452,6 +9459,10 @@ public class Mytheria extends BaseGambScreen {
 
     private boolean IsMeByServerPos(long serverPos) {
         return IsMe(GetUsernameFromServerPos(serverPos));
+    }
+
+    private void GameBidResult(ListAction listAction) {
+
     }
 
     final int POS_6h = 0;

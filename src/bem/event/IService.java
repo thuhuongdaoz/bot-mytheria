@@ -73,6 +73,7 @@ public class IService {
     public static final int GAME_SIMULATE_SKILLS = 77;
     public static final int GAME_SKILL_EFFECT = 78;
     public static final int GAME_DELETE_CARDS = 83;
+    public static final int GAME_BID_RESULT = 90;
 
     public static final int GAME_ACTIVE_SKILL = 80;
     public static final int GAME_STATUS_SKILL = 801;
