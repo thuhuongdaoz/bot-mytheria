@@ -33,7 +33,7 @@ public class Mytheria extends BaseGambScreen {
     private int playerIndex, turnCount = 0, roundCount = 0;// turnCount = way, roundCount chưa sử dụng
     private long currentMana, tmpCurrentMana, turnMana;
     public boolean isUsedUlti = false;
-    ;
+
     ArrayList<BattlePlayer> mLstBattlePlayer = new ArrayList<BattlePlayer>();
 
 
@@ -624,7 +624,7 @@ public class Mytheria extends BaseGambScreen {
 
                     break;
                 }
-                case IService.GAME_BID_RESULT:{
+                case IService.GAME_BID_RESULT: {
                     Object[] args = event.getArgs();
                     ListAction listAction = (ListAction) args[0];
                     GameBidResult(listAction);
@@ -9462,7 +9462,52 @@ public class Mytheria extends BaseGambScreen {
     }
 
     private void GameBidResult(ListAction listAction) {
+        System.out.println("GameBidResult");
+        // wait 0
+        onProcessData = true;
+        String winner = "";
 
+        try {
+
+            for (int i = 0; i < listAction.getAActionCount(); i++) {
+                Action a = listAction.getAAction(i);
+                switch (a.getActionId()) {
+                    case IService.GAME_SUB_BID_RESULT: {
+                        CommonVector commonVector = CommonVector.parseFrom(a.getData());
+//	                        WriteLogBattle("GAME_START_BATTLE: ", string.Join(",", commonVector.aString), string.Join(",", commonVector.aLong));
+                        // way
+                        turnCount = (int) commonVector.getALong(0);
+
+                        winner = commonVector.getAString(0);
+
+                        System.out.println("GameBidResult");
+
+                        if (instance.username.equals(winner)) {
+                            long bidResult = commonVector.getALong(0);
+                        }
+                        break;
+                    }
+
+                    case IService.GAME_SIMULATE_SKILLS_ON_BATTLE: {
+                        ListAction listActionSkill = ListAction.parseFrom(a.getData());
+
+                        for (int j = 0; j < listActionSkill.getAActionCount(); j++) {
+                            SimulateSkillEffect(listActionSkill.getAAction(j));
+                        }
+                        break;
+                    }
+
+                }
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        // wait delay
+        onProcessData = false;
+        //BOT
+        if(!hasBid) {
+            bot();
+        }
     }
 
     final int POS_6h = 0;

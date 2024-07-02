@@ -132,6 +132,7 @@ public class InputThread extends Thread {
 			case IService.GAME_SIMULATE_SKILLS:
 			case IService.GAME_ACTIVE_SKILL:
 			case IService.GAME_BATTLE_ENDROUND:
+			case IService.GAME_BID_RESULT:
 			{
 				ListAction proto = (ListAction) pkt.getDataObject();
 				fireEvent(new KEvent(pkt.service, new Object[] { proto }));
