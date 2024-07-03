@@ -92,6 +92,12 @@ public class DBHeroSkill
     public static final int EFFECT_X_AND_Y = 27;
     public static final int EFFECT_X_TO_Y_TARGET = 28;
 
+    public static final int SWAP_MANA_ATK = 29;
+    public static final int DUPLICATE = 30;
+    public static final int KILL = 31;
+    public static final int REPLACE = 32;
+    public static final int DEAL_DAME_ON_HAND = 33;
+
 
     public int id, hero_id, timing, eventSkill, max_turn, sark_god, min_shard, max_shard, skill_type, target , effect_type, enable;
     public String name_skill, note;

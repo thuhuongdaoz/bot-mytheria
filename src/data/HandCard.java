@@ -152,7 +152,13 @@ public class HandCard extends Card {
 //	        {
 //	            UnHighlighCard();
 //	        }
-	    }    
+	    }
+
+	public void OnSwapManaAtk(long mana, long atk)
+	{
+		this.tmpMana = atk;
+		this.atkValue = mana;
+	}
 
 
 		  

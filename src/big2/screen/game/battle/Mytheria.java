@@ -1888,6 +1888,8 @@ public class Mytheria extends BaseGambScreen {
         //BOT
         if(!hasBid) {
             bot();
+        } else {
+//            startBid();
         }
     }
 
@@ -7888,16 +7890,17 @@ public class Mytheria extends BaseGambScreen {
                         switch ((int) effectId) {
                             case (int) DBHeroSkill.EFFECT_BUFF_HP: {
                                 //buff hp for list hero
-                                //[skillId, type_eff, battleId,[valueHpBuff1, buffBatleId1, heroHp1, HeroHpmax1]]
+                                //[skillId,type_eff, battleId,isFromBid,[valueHpBuff1,buffBatleId1,heroHp1,HeroHpmax1]]
                                 //GAME_SKILL_EFFECT 78: 40,2,72,5,72,4,5
                                 //GAME_SKILL_EFFECT 78: 5,2,6,1,2,2,4,5
                                 int BLOCK = 4;
-                                int num = (cv.getALongCount() - 3) / BLOCK;
+                                int START = 4;
+                                int num = (cv.getALongCount() - START) / BLOCK;
                                 for (int i = 0; i < num; i++) {
-                                    long valueHpBuff = cv.getALong(3 + i * BLOCK);
-                                    long buffBatleId = cv.getALong(3 + i * BLOCK + 1);
-                                    long heroHp = cv.getALong(3 + i * BLOCK + 2);
-                                    long heroHpmax = cv.getALong(3 + i * BLOCK + 3);
+                                    long valueHpBuff = cv.getALong(START + i * BLOCK);
+                                    long buffBatleId = cv.getALong(START + i * BLOCK + 1);
+                                    long heroHp = cv.getALong(START + i * BLOCK + 2);
+                                    long heroHpmax = cv.getALong(START + i * BLOCK + 3);
                                     //Do buff HP ....
 //                                    ProjectileDataInfo info = ProjectileData.Instance.projectileInfo.FirstOrDefault(x = > x.skillID == skillId && x.effectID == effectId)
                                     ;
@@ -7963,19 +7966,20 @@ public class Mytheria extends BaseGambScreen {
                             }
                             case (int) DBHeroSkill.EFFECT_TMP_INCREASE_ATK_AND_HP: {
                                 //increase TMP ATK and HP
-                                //[skillId,type_eff,battleId,[valueAtkBuff1,valueHpBuff1,buffBatleId1,heroAtk1,heroHp1,HeroHpmax1]]
+                                //[skillId,type_eff,battleId,isFromBid,[valueAtkBuff1,valueHpBuff1,buffBatleId1,heroAtk1,heroHp1,HeroHpmax1]]
                                 //38,0,32,32,1,0,3,3,3
                                 int BLOCK = 6;
-                                int num = (cv.getALongCount() - 3) / BLOCK;
+                                int START = 4;
+                                int num = (cv.getALongCount() - START) / BLOCK;
 //								ProjectileDataInfo info = ProjectileData.Instance.projectileInfo.FirstOrDefault(x => x.skillID == skillId && x.effectID == effectId);
                                 for (int i = 0; i < num; i++) {
 
-                                    long valueAtkBuff = cv.getALong(3 + i * BLOCK);
-                                    long valueHpBuff = cv.getALong(3 + i * BLOCK + 1);
-                                    long buffBatleId = cv.getALong(3 + i * BLOCK + 2);
-                                    long heroAtk = cv.getALong(3 + i * BLOCK + 3);
-                                    long heroHp = cv.getALong(3 + i * BLOCK + 4);
-                                    long HeroHpmax = cv.getALong(3 + i * BLOCK + 5);
+                                    long valueAtkBuff = cv.getALong(START + i * BLOCK);
+                                    long valueHpBuff = cv.getALong(START + i * BLOCK + 1);
+                                    long buffBatleId = cv.getALong(START + i * BLOCK + 2);
+                                    long heroAtk = cv.getALong(START + i * BLOCK + 3);
+                                    long heroHp = cv.getALong(START + i * BLOCK + 4);
+                                    long HeroHpmax = cv.getALong(START + i * BLOCK + 5);
                                     //Do increse TMP ATK buff HP ....
                                     BoardCard card = lstCardInBattle.stream().filter(x -> x.battleID == buffBatleId).findAny().orElse(null);
 //                                    LogWriterHandle.WriteLog("EFFECT_TMP_INCREASE_ATK_AND_HP = " + buffBatleId + " | " + valueAtkBuff + " | " + valueHpBuff + "|" + (card == null ? "NULL" : "NOT NULL"));
@@ -7998,18 +8002,19 @@ public class Mytheria extends BaseGambScreen {
                             }
                             case (int) DBHeroSkill.EFFECT_INCREASE_ATK_AND_HP: {
                                 //increase ATK and HP
-                                //[skillId,type_eff,battleId,[valueAtkBuff1,valueHpBuff1,buffBatleId1,heroAtk1,heroHp1,HeroHpmax1]]
+                                //[skillId,type_eff,battleId,isFromBid,[valueAtkBuff1,valueHpBuff1,buffBatleId1,heroAtk1,heroHp1,HeroHpmax1....]]
                                 int BLOCK = 6;
-                                int num = (cv.getALongCount() - 3) / BLOCK;
+                                int START = 4;
+                                int num = (cv.getALongCount() - START) / BLOCK;
 //                                ProjectileDataInfo info = ProjectileData.Instance.projectileInfo.FirstOrDefault(x = > x.skillID == skillId && x.effectID == effectId)
                                 ;
                                 for (int i = 0; i < num; i++) {
-                                    long valueAtkBuff = cv.getALong(3 + i * BLOCK);
-                                    long valueHpBuff = cv.getALong(3 + i * BLOCK + 1);
-                                    long buffBatleId = cv.getALong(3 + i * BLOCK + 2);
-                                    long heroAtk = cv.getALong(3 + i * BLOCK + 3);
-                                    long heroHp = cv.getALong(3 + i * BLOCK + 4);
-                                    long HeroHpmax = cv.getALong(3 + i * BLOCK + 5);
+                                    long valueAtkBuff = cv.getALong(START + i * BLOCK);
+                                    long valueHpBuff = cv.getALong(START + i * BLOCK + 1);
+                                    long buffBatleId = cv.getALong(START + i * BLOCK + 2);
+                                    long heroAtk = cv.getALong(START + i * BLOCK + 3);
+                                    long heroHp = cv.getALong(START + i * BLOCK + 4);
+                                    long HeroHpmax = cv.getALong(START + i * BLOCK + 5);
                                     //Do increse ATK buff HP ....
                                     BoardCard card = lstCardInBattle.stream().filter(x -> x.battleID == buffBatleId).findAny().orElse(null);
                                     // do glory
@@ -8047,6 +8052,7 @@ public class Mytheria extends BaseGambScreen {
                                 break;
                             }
                             case (int) DBHeroSkill.EFFECT_MANA_CREATE_SHARD: {
+                                // Q:?? còn dùng nữa hay không? thấy khác so với doc
                                 //mana create shard
                                 //[skillId,type_eff, battleId,indexplayer,manaDegre, shardIncre, cur_mana, cur_shard]
                                 //106,3,18,0,0,1,0,1 | 0
@@ -8127,20 +8133,30 @@ public class Mytheria extends BaseGambScreen {
                                 break;
                             }
                             case (int) DBHeroSkill.EFFECT_MOVE_HERO: {
-                                //[skillId,type_eff, battleId,indexplayer,[BatleId1,row1,colum1]]
-                                long serverIndexPlayer = cv.getALong(3);
-                                CardSlot targetSlot1 = GetSlot(IsMeByServerPos(serverIndexPlayer) ? SlotType.Player : SlotType.Enemy, cv.getALong(5), cv.getALong(6));
-                                CardSlot targetSlot2 = GetSlot(IsMeByServerPos(serverIndexPlayer) ? SlotType.Player : SlotType.Enemy, cv.getALong(8), cv.getALong(9));
-                                BoardCard card1 = GetBoardCard(cv.getALong(4));
-                                BoardCard card2 = GetBoardCard(cv.getALong(7));
+                                //[skillId,type_eff, battleId,indexplayer,[BatleId1,row1,colum1]] // old
+                                //[skillId,type_eff, battleId,isFromBid,indexplayer,[BatleId1,row1,colum1]] // new
+                                // old
+//                                long serverIndexPlayer = cv.getALong(3);
+//                                CardSlot targetSlot1 = GetSlot(IsMeByServerPos(serverIndexPlayer) ? SlotType.Player : SlotType.Enemy, cv.getALong(5), cv.getALong(6));
+//                                CardSlot targetSlot2 = GetSlot(IsMeByServerPos(serverIndexPlayer) ? SlotType.Player : SlotType.Enemy, cv.getALong(8), cv.getALong(9));
+//                                BoardCard card1 = GetBoardCard(cv.getALong(4));
+//                                BoardCard card2 = GetBoardCard(cv.getALong(7));
+
+                                // new
+                                long serverIndexPlayer = cv.getALong(4);
+                                CardSlot targetSlot1 = GetSlot(IsMeByServerPos(serverIndexPlayer) ? SlotType.Player : SlotType.Enemy, cv.getALong(6), cv.getALong(7));
+                                CardSlot targetSlot2 = GetSlot(IsMeByServerPos(serverIndexPlayer) ? SlotType.Player : SlotType.Enemy, cv.getALong(9), cv.getALong(10));
+                                BoardCard card1 = GetBoardCard(cv.getALong(5));
+                                BoardCard card2 = GetBoardCard(cv.getALong(8));
                                 card1.MoveToSlot(targetSlot1);
                                 card2.MoveToSlot(targetSlot2);
                                 break;
                             }
                             case (int) DBHeroSkill.EFFECT_DRAW_CARD: {
 //                                [skillId,type_eff, battleId,indexplayer,[BatleId1,HeroId1,frame1,ATK1,HP1,HPMAX1,fragile1,pleeting1,cleave1.Pierce1, Breaker1, Combo1, Overrun1, Shield1,GodSlayer1,mana1]]
-                                long serverIndexPlayer = cv.getALong(3);
-                                int BLOCK = 16, START = 4;
+//                                [skillId,type_eff, battleId,isFromBid,indexplayer,[BatleId1,HeroId1,frame1,ATK1,HP1,HPMAX1,fragile1,pleeting1,cleave1.Pierce1, Breaker1, Combo1, Overrun1, Shield1,GodSlayer1,mana1]]
+                                long serverIndexPlayer = cv.getALong(4);
+                                int BLOCK = 16, START = 5;
                                 int num = (cv.getALongCount() - START) / BLOCK;
                                 //GAME_SKILL_EFFECT 78: 12,5,47,44,3,1,1,1,0,0,1,0,0,0,0,0
 //                                ProjectileDataInfo info = ProjectileData.Instance.projectileInfo.FirstOrDefault(x = > x.skillID == skillId && x.effectID == effectId);
@@ -8172,7 +8188,7 @@ public class Mytheria extends BaseGambScreen {
                             }
                             case (int) DBHeroSkill.EFFECT_DEAL_DAME: {
                                 //deal dame fountain
-                                //[skillId,type_eff,battleId,[battleId1,dame1,hp1,Hp1Max]]
+                                //[skillId,type_eff,battleId,isFromBid,[battleId1,dame1,hp1,Hp1Max]]
                                 //-----------GAME_SKILL = 0,6,42,///-11,1,14
                                 //GAME_SKILL_EFFECT 78: 43,6,36,41,1,4,5,41,1,3,5,41,1,2,5
                                 //12,6,47,40,1,5,6
@@ -8180,16 +8196,17 @@ public class Mytheria extends BaseGambScreen {
                                 //GAME_SKILL_EFFECT 78: 83,6,41,3,1,3,6,14,1,1,2,16,1,0,1 | 0
                                 long attackBattleId = cv.getALong(2);
                                 int BLOCK = 4;
-                                int num = (cv.getALongCount() - 3) / BLOCK;
+                                int START = 4;
+                                int num = (cv.getALongCount() - START) / BLOCK;
                                 float waitTime = 0;
                                 boolean isAtkCardDead = false;
 //								yield return new WaitForSeconds(0.5f);
 
                                 BoardCard attackCard = lstCardInBattle.stream().filter(x -> x.battleID == attackBattleId).findAny().orElse(null);
                                 for (int i = 0; i < num; i++) {
-                                    long battleiD = cv.getALong(3 + i * BLOCK);
-                                    long deal = cv.getALong(3 + i * BLOCK + 1);
-                                    long newhp = cv.getALong(3 + i * BLOCK + 2);
+                                    long battleiD = cv.getALong(START + i * BLOCK);
+                                    long deal = cv.getALong(START + i * BLOCK + 1);
+                                    long newhp = cv.getALong(START + i * BLOCK + 2);
                                     if (attackCard != null) {
                                         if (battleiD < 0) {
                                             List<TowerController> lstTower = lstTowerInBattle.stream().filter(t -> {
@@ -8422,20 +8439,21 @@ public class Mytheria extends BaseGambScreen {
 //                                break;
 //                            }
                             case (int) DBHeroSkill.EFFECT_READY: {
-                                //[skillId,type_eff, battleId,[batleId1, isTired]
+                                //[skillId,type_eff, battleId,isFromBid,[batleId1, isTired]
                                 //ready hero
                                 //GAME_SKILL_EFFECT 78: 59,9,19,19,1 | 0
                                 //68,9,57,3,1 | 0
                                 long attackBattleId = cv.getALong(2);
                                 int BLOCK = 2;
-                                int num = (cv.getALongCount() - 3) / BLOCK;
+                                int START = 4;
+                                int num = (cv.getALongCount() - START) / BLOCK;
 //                                yield return new WaitForSeconds(0.5f);
                                 BoardCard attackCard = lstCardInBattle.stream().filter(x -> x.battleID == attackBattleId).findAny().orElse(null);
 
 
                                 for (int i = 0; i < num; i++) {
-                                    long battleIdReceive = cv.getALong(3 + i * BLOCK);
-                                    long isTired = cv.getALong(3 + i * BLOCK + 1);
+                                    long battleIdReceive = cv.getALong(START + i * BLOCK);
+                                    long isTired = cv.getALong(START + i * BLOCK + 1);
                                     // change state of hero
                                     BoardCard card = lstCardInBattle.stream().filter(x -> x.battleID == battleIdReceive).findAny().orElse(null);
                                     if (card != null) {
@@ -8467,12 +8485,12 @@ public class Mytheria extends BaseGambScreen {
                             }
                             case (int) DBHeroSkill.EFFECT_SUMMON_VIRTUAL_HERO: {
 
-                                //[skillId,type_eff, battleId,indexPlayer,[hủy, BattleId1,heroId1,frame1,Atk1,Hp1,fragile1,pleeting1,row1,colum1]]
+                                //[skillId,type_eff, battleId,isFromBid,indexPlayer,[hủy, BattleId1,heroId1,frame1,Atk1,Hp1,mana1,fragile1,pleeting1,row1,colum1]]
                                 //GAME_SKILL_EFFECT 78: 17,11,38,75,45,1,5,0,0,0,1
                                 //fragile: tướng ở trên bàn chỉ tồn tại trong 1 turn hoặc 1 round
                                 //precide: quân bài ở trên tay chỉ tồn tại dc 1 turn
 
-                                long serverIndexPlayer = cv.getALong(3);
+                                long serverIndexPlayer = cv.getALong(4);
 
 //								if (skillId == 17 || skillId == 234)
 //								{
@@ -8485,7 +8503,7 @@ public class Mytheria extends BaseGambScreen {
 //									ultimateVideo.gameObject.SetActive(false);
 //								}
 
-                                int BLOCK = 11, START = 4;
+                                int BLOCK = 11, START = 5;
                                 int num = (cv.getALongCount() - START) / BLOCK;
 //								ProjectileDataInfo info = ProjectileData.Instance.projectileInfo.FirstOrDefault(x => x.skillID == skillId && x.effectID == effectId);
 //								if (buffCard != null && info != null)
@@ -8599,9 +8617,9 @@ public class Mytheria extends BaseGambScreen {
                                 break;
                             }
                             case (int) DBHeroSkill.EFFECT_SUMMON_CARD_IN_HAND: {
-                                //[skillId,type_eff, battleId,indexplayer,[BatleId1,HeroId1,frame1,ATK1,HP1,HPMAX1,fragile1,pleeting1,cleave1.Pierce1, Breaker1, Combo1, Overrun1, Shield1,godSlayer1, cardMana, hủy(0 ; ko, 1 : bị hủy vì có nhiều hơn 10 lá bài trên tay)]]
-                                long serverIndexPlayer = cv.getALong(3);
-                                int BLOCK = 17, START = 4;
+                                //[skillId,type_eff, battleId,isFromBid,indexplayer,[BatleId1,HeroId1,frame1,ATK1,HP1,HPMAX1,fragile1,pleeting1,cleave1.Pierce1, Breaker1, Combo1, Overrun1, Shield1,godSlayer1, cardMana, hủy(0 ; ko, 1 : bị hủy vì có nhiều hơn 10 lá bài trên tay)]]
+                                long serverIndexPlayer = cv.getALong(4);
+                                int BLOCK = 17, START = 5;
                                 int num = (cv.getALongCount() - START) / BLOCK;
 
 //                                ProjectileDataInfo info = ProjectileData.Instance.projectileInfo.FirstOrDefault(x = > x.skillID == skillId && x.effectID == effectId)
@@ -8664,11 +8682,12 @@ public class Mytheria extends BaseGambScreen {
                                 break;
                             }
                             case (int) DBHeroSkill.EFFECT_USER_MANA_MAX: {
-                                long serverIndexPlayer = cv.getALong(3);
+                                // [skillId,type_eff, battleId,isFromBid,indexplayer,manaDegre, cur_mana_max]
+                                long serverIndexPlayer = cv.getALong(4);
                                 //GAME_SKILL_EFFECT 78: 57,13,46,1,1,7 | 0
                                 //@Chau them mana cho user
-                                long addedMana = cv.getALong(4);
-                                long currentMana = cv.getALong(5);
+                                long addedMana = cv.getALong(5);
+                                long currentMana = cv.getALong(6);
 //                                yield return new WaitForSeconds(1);
 //                                onUpdateMana ?.Invoke((int) GetClientPosFromServerPos(serverIndexPlayer), currentMana, ManaState.StartTurn, 0);
                                 if ((int) GetClientPosFromServerPos(serverIndexPlayer) == 0)
@@ -8707,8 +8726,8 @@ public class Mytheria extends BaseGambScreen {
 //                                break;
 //                            }
                             case (int) DBHeroSkill.EFFECT_INCREASE_HERO_MANA: {
-                                //skillId,type_eff, battleId,[battleId1,mana1]
-                                int BLOCK = 2, START = 3;
+                                //skillId,type_eff, battleId,isFromBid,[battleId1,mana1]
+                                int BLOCK = 2, START = 4;
                                 int num = (cv.getALongCount() - START) / BLOCK;
 
                                 for (int i = 0; i < num; i++) {
@@ -8721,8 +8740,8 @@ public class Mytheria extends BaseGambScreen {
                                 break;
                             }
                             case (int) DBHeroSkill.EFFECT_TMP_INCREASE_HERO_MANA: {
-                                //skillId,type_eff, battleId,[battleId1,mana1]
-                                int BLOCK = 2, START = 3;
+                                // skillId,type_eff, battleId,isFromBid,[battleId1,mana1]
+                                int BLOCK = 2, START = 4;
                                 int num = (cv.getALongCount() - START) / BLOCK;
 
                                 for (int i = 0; i < num; i++) {
@@ -8739,8 +8758,10 @@ public class Mytheria extends BaseGambScreen {
 //                                break;
 //                            }
                             case (int) DBHeroSkill.EFFECT_PENATY: {
+                                // skillId,type_eff, battleId,isFromBid,trụ, dame, curHP
+                                // Q:?? Skill này sao parse lạ thế? vì ko có block nào
 //                                WriteLogBattle("EFFECT_PENATY: ", "", string.Join(",", cv.aLong));
-                                int BLOCK = 3, START = 3;
+                                int BLOCK = 3, START = 4;
                                 int num = (cv.getALongCount() - START) / BLOCK;
 //                                float waitTime = 0;
 //                                yield return new WaitForSeconds(0.5f);
@@ -8770,6 +8791,103 @@ public class Mytheria extends BaseGambScreen {
                                         // battle>0 -> card
 //                                        WriteLogBattle("EFFECT_PENATY: ", "", string.Join(",", cv.aLong));
                                     }
+                                }
+                                break;
+                            }
+
+                            case (int) DBHeroSkill.SWAP_MANA_ATK: {
+                                // skillId,type_eff, battleId,isFromBid,indexplayer,[battleId,heroId, atk, mana]
+                                int BLOCK = 4, START = 5;
+                                int num = (cv.getALongCount() - START) / BLOCK;
+
+                                for (int i = 0; i < num; i++) {
+                                    long battleID = cv.getALong(START + i * BLOCK);
+                                    long heroID = cv.getALong(START + i * BLOCK + 1);
+                                    long atk = cv.getALong(START + i * BLOCK + 2);
+                                    long mana = cv.getALong(START + i * BLOCK + 3);
+                                    HandCard card = Decks[0].GetListCard().stream().filter(x -> x.battleID == battleID).findAny().orElse(null);
+                                    if (card != null)
+                                        card.OnSwapManaAtk(mana, atk);
+                                }
+                                break;
+                            }
+
+                            case (int) DBHeroSkill.DUPLICATE: {
+                                //[skillId,type_eff, battleId,isFromBid,indexplayer,[BatleId1,HeroId1,frame1,ATK1,HP1,HPMAX1,fragile1,pleeting1,cleave1.Pierce1, Breaker1, Combo1, Overrun1, Shield1,GodSlayer1,mana1, hủy(0 ; ko, 1 : bị hủy vì có nhiều hơn 10 lá bài trên tay)]]
+                                long serverIndexPlayer = cv.getALong(4);
+                                int BLOCK = 17, START = 5;
+                                int num = (cv.getALongCount() - START) / BLOCK;
+
+//                                for (int i = 0; i < num; i++) {
+//                                    long battleID = cv.getALong(START + i * BLOCK);
+//                                    long heroID = cv.getALong(START + i * BLOCK + 1);
+//                                    long frame = cv.getALong(START + i * BLOCK + 2);
+//                                    long atk = cv.getALong(START + i * BLOCK + 3);
+//                                    long hp = cv.getALong(START + i * BLOCK + 4);
+//                                    long hpMax = cv.getALong(START + i * BLOCK + 5);
+//                                    long fragile = cv.getALong(START + i * BLOCK + 6);
+//                                    long pleeting = cv.getALong(START + i * BLOCK + 7);
+//                                    long cleave = cv.getALong(START + i * BLOCK + 8);
+//                                    long pierce = cv.getALong(START + i * BLOCK + 9);
+//                                    long breaker = cv.getALong(START + i * BLOCK + 10);
+//                                    long combo = cv.getALong(START + i * BLOCK + 11);
+//                                    long overrun = cv.getALong(START + i * BLOCK + 12);
+//                                    long shield = cv.getALong(START + i * BLOCK + 13);
+//                                    long godSlayer = cv.getALong(START + i * BLOCK + 14);
+//                                    long mana = cv.getALong(START + i * BLOCK + 15);
+//                                    long isDestroy = cv.getALong(START + i * BLOCK + 16);
+//
+//                                    HandCard card = Decks[0].GetListCard().stream().filter(x -> x.battleID == battleID).findAny().orElse(null);
+//                                    if (card != null)
+//                                        card.OnUpdateManaText(additionMana);
+//                                }
+
+                                for (int i = 0; i < num; i++) {
+                                    long newBattleId = cv.getALong(START + i * BLOCK);
+                                    long newHeroId = cv.getALong(START + i * BLOCK + 1);
+                                    long frame = cv.getALong(START + i * BLOCK + 2);
+                                    long fragile = cv.getALong(START + i * BLOCK + 6);
+                                    long fleeting = cv.getALong(START + i * BLOCK + 7);
+                                    long cardMana = cv.getALong(START + i * BLOCK + 15);
+                                    //add heroid --> check fragile va precide
+                                    //Do draw card ....
+//                                    if (info != null && buffCard != null) {
+//                                        buffCard.OnCastSkill(skillId, effectId, null, () = > {});
+//                                    }
+                                    if (IsMeByServerPos(serverIndexPlayer)) {
+                                        DBHero hero = Database.GetHero(newHeroId);
+                                        AddNewCard(0, hero, newBattleId, frame, fleeting != 0, 0, 0, cardMana);
+                                    }
+                                }
+                                break;
+                            }
+
+                            case (int) DBHeroSkill.REPLACE: {
+                                //[skillId,type_eff, battleId,isFromBid,indexplayer,[BatleId1,HeroId1,frame1,ATK1,HP1,HPMAX1,fragile1,pleeting1,cleave1.Pierce1, Breaker1, Combo1, Overrun1, Shield1,GodSlayer1,mana1]]
+                                int BLOCK = 16, START = 5;
+                                int num = (cv.getALongCount() - START) / BLOCK;
+
+                                for (int i = 0; i < num; i++) {
+                                    long battleID = cv.getALong(START + i * BLOCK);
+                                    long additionMana = cv.getALong(START + i * BLOCK + 1);
+                                    HandCard card = Decks[0].GetListCard().stream().filter(x -> x.battleID == battleID).findAny().orElse(null);
+                                    if (card != null)
+                                        card.OnUpdateManaText(additionMana);
+                                }
+                                break;
+                            }
+
+                            case (int) DBHeroSkill.DEAL_DAME_ON_HAND: {
+                                //skillId,type_eff, battleId,isFromBid,indexplayer,[battleId,heroId, atk]
+                                int BLOCK = 2, START = 3;
+                                int num = (cv.getALongCount() - START) / BLOCK;
+
+                                for (int i = 0; i < num; i++) {
+                                    long battleID = cv.getALong(START + i * BLOCK);
+                                    long additionMana = cv.getALong(START + i * BLOCK + 1);
+                                    HandCard card = Decks[0].GetListCard().stream().filter(x -> x.battleID == battleID).findAny().orElse(null);
+                                    if (card != null)
+                                        card.OnUpdateManaText(additionMana);
                                 }
                                 break;
                             }
@@ -9483,6 +9601,7 @@ public class Mytheria extends BaseGambScreen {
                         System.out.println("GameBidResult");
 
                         if (instance.username.equals(winner)) {
+                            // hỏi lại Hiền bidResult có làm gì nữa không?
                             long bidResult = commonVector.getALong(0);
                         }
                         break;
