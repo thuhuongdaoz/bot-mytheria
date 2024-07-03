@@ -160,6 +160,13 @@ public class HandCard extends Card {
 		this.atkValue = mana;
 	}
 
+	public void OnDealDameOnHand(long atk)
+	{
+		this.atkValue = atk;
+	}
+
+
+
 
 		  
 }

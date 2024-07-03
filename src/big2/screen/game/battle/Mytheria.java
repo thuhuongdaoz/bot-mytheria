@@ -8849,11 +8849,7 @@ public class Mytheria extends BaseGambScreen {
                                     long fragile = cv.getALong(START + i * BLOCK + 6);
                                     long fleeting = cv.getALong(START + i * BLOCK + 7);
                                     long cardMana = cv.getALong(START + i * BLOCK + 15);
-                                    //add heroid --> check fragile va precide
-                                    //Do draw card ....
-//                                    if (info != null && buffCard != null) {
-//                                        buffCard.OnCastSkill(skillId, effectId, null, () = > {});
-//                                    }
+
                                     if (IsMeByServerPos(serverIndexPlayer)) {
                                         DBHero hero = Database.GetHero(newHeroId);
                                         AddNewCard(0, hero, newBattleId, frame, fleeting != 0, 0, 0, cardMana);
@@ -8864,15 +8860,38 @@ public class Mytheria extends BaseGambScreen {
 
                             case (int) DBHeroSkill.REPLACE: {
                                 //[skillId,type_eff, battleId,isFromBid,indexplayer,[BatleId1,HeroId1,frame1,ATK1,HP1,HPMAX1,fragile1,pleeting1,cleave1.Pierce1, Breaker1, Combo1, Overrun1, Shield1,GodSlayer1,mana1]]
+                                long serverIndexPlayer = cv.getALong(4);
                                 int BLOCK = 16, START = 5;
                                 int num = (cv.getALongCount() - START) / BLOCK;
 
                                 for (int i = 0; i < num; i++) {
                                     long battleID = cv.getALong(START + i * BLOCK);
-                                    long additionMana = cv.getALong(START + i * BLOCK + 1);
-                                    HandCard card = Decks[0].GetListCard().stream().filter(x -> x.battleID == battleID).findAny().orElse(null);
-                                    if (card != null)
-                                        card.OnUpdateManaText(additionMana);
+                                    long heroID = cv.getALong(START + i * BLOCK + 1);
+                                    long frame = cv.getALong(START + i * BLOCK + 2);
+                                    long atk = cv.getALong(START + i * BLOCK + 3);
+                                    long hp = cv.getALong(START + i * BLOCK + 4);
+                                    long hpMax = cv.getALong(START + i * BLOCK + 5);
+                                    long fragile = cv.getALong(START + i * BLOCK + 6);
+                                    long pleeting = cv.getALong(START + i * BLOCK + 7);
+                                    long cleave = cv.getALong(START + i * BLOCK + 8);
+                                    long pierce = cv.getALong(START + i * BLOCK + 9);
+                                    long breaker = cv.getALong(START + i * BLOCK + 10);
+                                    long combo = cv.getALong(START + i * BLOCK + 11);
+                                    long overrun = cv.getALong(START + i * BLOCK + 12);
+                                    long shield = cv.getALong(START + i * BLOCK + 13);
+                                    long godSlayer = cv.getALong(START + i * BLOCK + 14);
+                                    long mana = cv.getALong(START + i * BLOCK + 15);
+
+                                    BoardCard card = lstCardInBattle.stream().filter(x -> x.battleID == battleID).findAny().orElse(null);
+                                    if (card != null) {
+                                        card.SetFrame(frame);
+                                        card.UpdateHeroMatrix(atk, hp, hpMax, cleave, pierce, breaker, combo, overrun, shield, godSlayer, fragile, 0);
+                                    }
+//                                    CreateCard(newBattleId, heroId, frame
+//
+//                                            , atk, hp, mana, slot, owner
+//
+//                                    ).UpdateHeroMatrix(atk, hp, hp, 0, 0, 0, 0, 0, 0, 0, fragile, 0);
                                 }
                                 break;
                             }
@@ -8884,10 +8903,13 @@ public class Mytheria extends BaseGambScreen {
 
                                 for (int i = 0; i < num; i++) {
                                     long battleID = cv.getALong(START + i * BLOCK);
-                                    long additionMana = cv.getALong(START + i * BLOCK + 1);
+                                    long heroID = cv.getALong(START + i * BLOCK + 1);
+                                    long atk = cv.getALong(START + i * BLOCK + 2);
                                     HandCard card = Decks[0].GetListCard().stream().filter(x -> x.battleID == battleID).findAny().orElse(null);
-                                    if (card != null)
-                                        card.OnUpdateManaText(additionMana);
+                                    if (card != null){
+                                        card.OnDealDameOnHand(atk);
+                                    }
+
                                 }
                                 break;
                             }

@@ -79,6 +79,11 @@ public class BoardCard extends Card {
 	    {
 	        this.isTired = isTired == 1 ? true : false;
 	    }
+
+		public void SetFrame(long frame)
+		{
+			this.frameC = frame;
+		}
 	    
 	    public void OnDamaged(long damage, long health)
 	    {
