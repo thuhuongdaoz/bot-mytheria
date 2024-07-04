@@ -317,6 +317,11 @@ public class K2P {
         sendPackage(IService.GAME_CONFIRM_STARTBATTLE);
     }
 
+    public void GameConfirmBid()
+    {
+        sendPackage(IService.GAME_CONFIRM_BID);
+    }
+
     public void GameChooseWayRequest(CommonVector commonVector)
     {
         sendPackage(IService.GAME_CHOOSE_WAY_REQUEST, commonVector);

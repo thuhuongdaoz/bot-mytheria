@@ -9609,7 +9609,7 @@ public class Mytheria extends BaseGambScreen {
 
         try {
 
-            for (int i = 0; i < listAction.getAActionCount(); i++) {
+            for (int i = 0; i < listAction.getAActionCount(); i++) { 
                 Action a = listAction.getAAction(i);
                 switch (a.getActionId()) {
                     case IService.GAME_SUB_BID_RESULT: {
@@ -9617,11 +9617,7 @@ public class Mytheria extends BaseGambScreen {
 //	                        WriteLogBattle("GAME_START_BATTLE: ", string.Join(",", commonVector.aString), string.Join(",", commonVector.aLong));
                         // way
                         turnCount = (int) commonVector.getALong(0);
-
                         winner = commonVector.getAString(0);
-
-                        System.out.println("GameBidResult");
-
                         if (instance.username.equals(winner)) {
                             // hỏi lại Hiền bidResult có làm gì nữa không?
                             long bidResult = commonVector.getALong(0);
@@ -9645,10 +9641,10 @@ public class Mytheria extends BaseGambScreen {
         }
         // wait delay
         onProcessData = false;
-        //BOT
-        if(!hasBid) {
-            bot();
-        }
+
+        instance.session2.GameConfirmBid();
+
+
     }
 
     final int POS_6h = 0;
