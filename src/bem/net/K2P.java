@@ -317,6 +317,11 @@ public class K2P {
         sendPackage(IService.GAME_CONFIRM_STARTBATTLE);
     }
 
+    public void GameStartBid()
+    {
+        sendPackage(IService.GAME_START_BID);
+    }
+
     public void GameConfirmBid()
     {
         sendPackage(IService.GAME_CONFIRM_BID);

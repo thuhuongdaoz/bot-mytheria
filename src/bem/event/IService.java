@@ -85,6 +85,7 @@ public class IService {
     public static final int OPEN_CHEST = 118;
     public static final int GAME_RESUME = 221;
 
+    public static final int GAME_START_BID = 613;
     public static final int GAME_BID_RESULT = 615;
     public static final int GAME_SUB_BID_RESULT = 6151;
     public static final int GAME_CONFIRM_BID = 616;

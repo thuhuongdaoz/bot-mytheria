@@ -624,6 +624,7 @@ public class Mytheria extends BaseGambScreen {
 
                     break;
                 }
+
                 case IService.GAME_BID_RESULT: {
                     Object[] args = event.getArgs();
                     ListAction listAction = (ListAction) args[0];
@@ -1889,6 +1890,7 @@ public class Mytheria extends BaseGambScreen {
         if(!hasBid) {
             bot();
         } else {
+            instance.session2.GameStartBid();
 //            startBid();
         }
     }
@@ -9643,8 +9645,6 @@ public class Mytheria extends BaseGambScreen {
         onProcessData = false;
 
         instance.session2.GameConfirmBid();
-
-
     }
 
     final int POS_6h = 0;
