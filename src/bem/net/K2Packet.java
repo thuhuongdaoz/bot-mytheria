@@ -44,7 +44,8 @@ public class K2Packet {
 			case IService.GAME_DELETE_CARDS:
 			case IService.GAME_BATTLE_LEAVE: 
 			case IService.GAME_CHOOSE_WAY_REQUEST: 
-			case IService.GAME_SIMULATE_CONFIRM: 
+			case IService.GAME_SIMULATE_CONFIRM:
+			case IService.GAME_BID_MOVE_TO_PREPARE:
 
 				ret = CommonVector.parseFrom(body);
 				break;

@@ -89,5 +89,6 @@ public class IService {
     public static final int GAME_BID_RESULT = 615;
     public static final int GAME_SUB_BID_RESULT = 6151;
     public static final int GAME_CONFIRM_BID = 616;
+    public static final int GAME_BID_MOVE_TO_PREPARE = 617;
 
 }

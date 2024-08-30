@@ -96,6 +96,7 @@ public class InputThread extends Thread {
 			case IService.LOGIN_NORMAL:
 			case IService.SET_USER_BATTLE_DECK:
 			case IService.GAME_START:
+			case IService.GAME_BID_MOVE_TO_PREPARE:
 				
 			{
 				
@@ -117,7 +118,7 @@ public class InputThread extends Thread {
 			case IService.GAME_RESUME:
 			case IService.GAME_DEAL_CARDS:
 			case IService.GAME_STARTUP_END: 
-			case IService.GAME_BATTLE_ENDGAME: 
+			case IService.GAME_BATTLE_ENDGAME:
 			{
 				ListCommonVector proto = (ListCommonVector) pkt.getDataObject();
 				fireEvent(new KEvent(pkt.service, new Object[] { proto }));

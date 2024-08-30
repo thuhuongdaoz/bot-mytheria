@@ -630,6 +630,11 @@ public class Mytheria extends BaseGambScreen {
                     ListAction listAction = (ListAction) args[0];
                     GameBidResult(listAction);
                 }
+                case IService.GAME_BID_MOVE_TO_PREPARE: {
+                    Object[] args = event.getArgs();
+                    CommonVector commonVector = (CommonVector) args[0];
+                    GameBidMoveToPrepare(commonVector);
+                }
                 case IService.GAME_MOVE_CARD_IN_BATTLE: {
                     Object[] args = event.getArgs();
                     ListAction listAction = (ListAction) args[0];
@@ -9645,6 +9650,10 @@ public class Mytheria extends BaseGambScreen {
         onProcessData = false;
 
         instance.session2.GameConfirmBid();
+    }
+    private void GameBidMoveToPrepare(CommonVector commonVector) {
+        System.out.println("GameBidMoveToPrepare");
+        bot();
     }
 
     final int POS_6h = 0;
