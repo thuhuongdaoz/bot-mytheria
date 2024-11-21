@@ -64,7 +64,7 @@ public class DBHero
     public boolean isFragile;
     public long normalGroupId;
 
-    public int maxShardUnlockSkill = 0;
+//    public int maxShardUnlockSkill = 0;
     //danh cho bai buff
     //Than so huu skill
     public long ownerGodID;

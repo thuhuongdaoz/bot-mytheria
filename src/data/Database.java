@@ -136,8 +136,8 @@ public class Database
             skill.eventSkill = ((Long) o.get ("event")).intValue();
             skill.max_turn = ((Long) o.get ("max_turn")).intValue();
 //            skill.sark_god = ((Long) o.get ("sark_god")).intValue();
-            skill.min_shard = ((Long) o.get ("min_shard")).intValue();
-            skill.max_shard = ((Long) o.get ("max_shard")).intValue();
+//            skill.min_shard = ((Long) o.get ("min_shard")).intValue();
+//            skill.max_shard = ((Long) o.get ("max_shard")).intValue();
             skill.skill_type = ((Long) o.get ("skill_type")).intValue();
             skill.enable = ((Long) o.get ("enable")).intValue();
             skill.isUltiType = (Long) o.get ("util_type") == 1;
@@ -211,7 +211,7 @@ public class Database
             for (int j = 0; j < lstHero.size(); j ++)
                 if (lstHero.get(j) .id == skill.hero_id && skill.enable==1){
                     lstHero.get(j).lstHeroSkill.add(skill);
-                    lstHero.get(j).maxShardUnlockSkill = Math.max(lstHero.get(j).maxShardUnlockSkill, skill.min_shard);
+//                    lstHero.get(j).maxShardUnlockSkill = Math.max(lstHero.get(j).maxShardUnlockSkill, skill.min_shard);
                 }
 
         }

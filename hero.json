@@ -5,7 +5,7 @@
         "variation": 1,
         "name": "Poseidon",
         "disable": 0,
-        "rarity": 0,
+        "rarity": 3,
         "collectible": 0,
         "type": 0,
         "color": 1,
@@ -33,7 +33,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-06-10 15:28:03",
-        "modified_on": "2024-03-26 02:51:31"
+        "modified_on": "2024-09-05 08:01:13"
     },
     {
         "id": 2,
@@ -848,7 +848,7 @@
         "patheon": 1,
         "shard_required": 0,
         "cleave": 0,
-        "breaker": 0,
+        "breaker": 3,
         "overrun": 0,
         "combo": 0,
         "pierce": 0,
@@ -856,12 +856,12 @@
         "backdoor": 0,
         "defender": 0,
         "invariant": 0,
-        "fragile": 0,
+        "fragile": 1,
         "virtual": 0,
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-06-10 15:28:03",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:25:16"
     },
     {
         "id": 26,
@@ -2164,7 +2164,7 @@
         "hero_number": 69,
         "variation": 4,
         "name": "Thuy Tinh*",
-        "disable": 1,
+        "disable": 0,
         "rarity": 4,
         "collectible": 0,
         "type": 0,
@@ -2193,7 +2193,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-06-10 15:28:03",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:07"
     },
     {
         "id": 70,
@@ -3080,7 +3080,7 @@
         "patheon": 1,
         "shard_required": 0,
         "cleave": 0,
-        "breaker": 0,
+        "breaker": 2,
         "overrun": 0,
         "combo": 0,
         "pierce": 0,
@@ -3093,7 +3093,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-06-10 15:28:03",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:08"
     },
     {
         "id": 96,
@@ -3935,7 +3935,7 @@
         "color": 4,
         "death_cost": 0,
         "mana": 2,
-        "atk": 10,
+        "atk": 0,
         "hp": 2,
         "owner_god_id": 0,
         "buff_skills": "[]",
@@ -3957,7 +3957,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-06-10 15:28:03",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-07-16 09:19:59"
     },
     {
         "id": 120,
@@ -4720,15 +4720,15 @@
         "hero_number": 142,
         "variation": 2,
         "name": "Son Tinh",
-        "disable": 1,
+        "disable": 0,
         "rarity": 4,
         "collectible": 0,
         "type": 0,
         "color": 1,
         "death_cost": 5,
         "mana": 0,
-        "atk": 0,
-        "hp": 6,
+        "atk": 1,
+        "hp": 5,
         "owner_god_id": 0,
         "buff_skills": "[]",
         "species_id": 0,
@@ -4749,7 +4749,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-06-10 15:28:03",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:08"
     },
     {
         "id": 145,
@@ -6593,7 +6593,7 @@
         "variation": 0,
         "name": "Faefolk Hermit",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 3,
@@ -6621,7 +6621,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-13 17:34:16",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:09"
     },
     {
         "id": 219,
@@ -6629,7 +6629,7 @@
         "variation": 0,
         "name": "White Dragon",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 3,
@@ -6657,7 +6657,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-13 17:37:29",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:10"
     },
     {
         "id": 220,
@@ -6665,7 +6665,7 @@
         "variation": 0,
         "name": "Zeus Admirer",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 3,
@@ -6693,7 +6693,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-13 17:40:38",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:10"
     },
     {
         "id": 221,
@@ -6701,7 +6701,7 @@
         "variation": 0,
         "name": "Phoenix of Protection",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 3,
@@ -6729,7 +6729,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-13 17:41:24",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:11"
     },
     {
         "id": 222,
@@ -6737,7 +6737,7 @@
         "variation": 0,
         "name": "Faefolk Archer",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 3,
@@ -6765,7 +6765,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-13 17:41:49",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:12"
     },
     {
         "id": 223,
@@ -6773,7 +6773,7 @@
         "variation": 0,
         "name": "Stormcaller",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 3,
@@ -6801,7 +6801,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-13 17:42:41",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:12"
     },
     {
         "id": 224,
@@ -6809,7 +6809,7 @@
         "variation": 0,
         "name": "Faefolk Spellslinger",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 3,
@@ -6837,7 +6837,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-13 17:42:58",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:13"
     },
     {
         "id": 226,
@@ -6845,7 +6845,7 @@
         "variation": 0,
         "name": "Cranefolk Aura Master",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 3,
@@ -6873,7 +6873,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-13 17:44:13",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:14"
     },
     {
         "id": 227,
@@ -6881,7 +6881,7 @@
         "variation": 0,
         "name": "Taoist Geomancer",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 3,
@@ -6909,7 +6909,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-13 17:44:45",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:14"
     },
     {
         "id": 228,
@@ -6917,7 +6917,7 @@
         "variation": 0,
         "name": "Majestic Kirin",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 3,
@@ -6945,7 +6945,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-13 17:45:22",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:15"
     },
     {
         "id": 229,
@@ -6953,7 +6953,7 @@
         "variation": 0,
         "name": "Taoist Fortuneteller",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 3,
@@ -6981,7 +6981,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-13 17:46:02",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:16"
     },
     {
         "id": 230,
@@ -6989,7 +6989,7 @@
         "variation": 0,
         "name": "Yellow Mytiny",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 3,
@@ -7017,7 +7017,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-13 17:46:24",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:16"
     },
     {
         "id": 231,
@@ -7025,7 +7025,7 @@
         "variation": 0,
         "name": "Zeus's Fanatic",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 3,
@@ -7053,7 +7053,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-13 17:47:03",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:17"
     },
     {
         "id": 232,
@@ -7061,7 +7061,7 @@
         "variation": 0,
         "name": "Cranefolk Shaman",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 3,
@@ -7089,7 +7089,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-13 17:50:51",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:18"
     },
     {
         "id": 233,
@@ -7097,7 +7097,7 @@
         "variation": 0,
         "name": "Cranefolk Enchanter",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 3,
@@ -7125,7 +7125,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-13 17:51:20",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:18"
     },
     {
         "id": 235,
@@ -7133,7 +7133,7 @@
         "variation": 0,
         "name": "Demetor's Supporter",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 1,
@@ -7161,7 +7161,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-13 17:52:08",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:19"
     },
     {
         "id": 236,
@@ -7169,7 +7169,7 @@
         "variation": 0,
         "name": "Bunny Gang",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 1,
@@ -7197,7 +7197,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-14 08:56:16",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:20"
     },
     {
         "id": 237,
@@ -7241,7 +7241,7 @@
         "variation": 0,
         "name": "Buffalo Soldier",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 1,
@@ -7269,7 +7269,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-14 09:05:04",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:20"
     },
     {
         "id": 239,
@@ -7277,7 +7277,7 @@
         "variation": 0,
         "name": "Enrage Cyclops",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 1,
@@ -7305,7 +7305,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-14 09:06:09",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:21"
     },
     {
         "id": 240,
@@ -7349,7 +7349,7 @@
         "variation": 0,
         "name": "Chariot Rider",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 1,
@@ -7377,7 +7377,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-14 09:07:45",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:22"
     },
     {
         "id": 242,
@@ -7385,7 +7385,7 @@
         "variation": 0,
         "name": "Bear Clan Chieftain",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 1,
@@ -7413,7 +7413,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-14 09:08:48",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:22"
     },
     {
         "id": 243,
@@ -7421,7 +7421,7 @@
         "variation": 0,
         "name": "Wolf Clan Chieftain",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 1,
@@ -7449,7 +7449,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-14 09:10:11",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:23"
     },
     {
         "id": 244,
@@ -7457,7 +7457,7 @@
         "variation": 0,
         "name": "Dragonkin Hothead",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 2,
@@ -7485,7 +7485,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-14 09:13:32",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:24"
     },
     {
         "id": 245,
@@ -7493,7 +7493,7 @@
         "variation": 0,
         "name": "Spartan Newcomer",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 2,
@@ -7521,7 +7521,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-14 09:18:24",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:24"
     },
     {
         "id": 246,
@@ -7529,7 +7529,7 @@
         "variation": 0,
         "name": "Dragonkin Artificer",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 2,
@@ -7557,7 +7557,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-14 09:18:59",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:25"
     },
     {
         "id": 247,
@@ -7565,7 +7565,7 @@
         "variation": 0,
         "name": "Dragonkin Herald",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 2,
@@ -7593,7 +7593,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-14 09:19:27",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:26"
     },
     {
         "id": 248,
@@ -7601,7 +7601,7 @@
         "variation": 0,
         "name": "Athena's Advisor",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 2,
@@ -7629,7 +7629,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-14 09:20:04",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:26"
     },
     {
         "id": 249,
@@ -7637,7 +7637,7 @@
         "variation": 0,
         "name": "Killer Fish",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 4,
@@ -7665,7 +7665,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-14 09:20:44",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:27"
     },
     {
         "id": 250,
@@ -7673,7 +7673,7 @@
         "variation": 0,
         "name": "Aquafolk Weakling",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 4,
@@ -7701,7 +7701,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-14 09:22:20",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:28"
     },
     {
         "id": 251,
@@ -7709,7 +7709,7 @@
         "variation": 0,
         "name": "Deathrite Shaman",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 4,
@@ -7737,7 +7737,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-14 09:23:00",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:28"
     },
     {
         "id": 252,
@@ -7745,7 +7745,7 @@
         "variation": 0,
         "name": "Dragon Clan Vanguard",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 4,
@@ -7773,7 +7773,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-14 09:24:08",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:29"
     },
     {
         "id": 253,
@@ -7781,7 +7781,7 @@
         "variation": 0,
         "name": "Toad Soldier",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 4,
@@ -7809,7 +7809,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-14 09:24:51",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:30"
     },
     {
         "id": 254,
@@ -7817,7 +7817,7 @@
         "variation": 0,
         "name": "Rageblood Shaman",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 4,
@@ -7845,7 +7845,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-14 09:25:23",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:30"
     },
     {
         "id": 255,
@@ -7853,7 +7853,7 @@
         "variation": 0,
         "name": "Shady Brewer",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 4,
@@ -7881,7 +7881,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-14 09:26:00",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:31"
     },
     {
         "id": 256,
@@ -7889,7 +7889,7 @@
         "variation": 0,
         "name": "Bloodthristy Mytiny",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 4,
@@ -7917,7 +7917,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-14 09:26:40",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:32"
     },
     {
         "id": 257,
@@ -7925,7 +7925,7 @@
         "variation": 0,
         "name": "Aphodite's Best Creation",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 4,
@@ -7953,7 +7953,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-14 09:27:22",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:32"
     },
     {
         "id": 258,
@@ -7961,7 +7961,7 @@
         "variation": 0,
         "name": "Monkey Trickster",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 4,
@@ -7989,7 +7989,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-14 09:27:55",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:33"
     },
     {
         "id": 259,
@@ -7997,7 +7997,7 @@
         "variation": 0,
         "name": "Wannabe Monkey",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 4,
@@ -8025,7 +8025,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-14 09:28:16",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:34"
     },
     {
         "id": 260,
@@ -8033,7 +8033,7 @@
         "variation": 0,
         "name": "Playful Monkey",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 4,
@@ -8061,7 +8061,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-14 09:28:37",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:35"
     },
     {
         "id": 261,
@@ -8069,7 +8069,7 @@
         "variation": 0,
         "name": "Monkey Elder",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 4,
@@ -8097,7 +8097,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-14 09:29:19",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:35"
     },
     {
         "id": 262,
@@ -8105,7 +8105,7 @@
         "variation": 0,
         "name": "Night Owl",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 4,
@@ -8133,7 +8133,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-14 09:29:56",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:36"
     },
     {
         "id": 263,
@@ -8141,7 +8141,7 @@
         "variation": 0,
         "name": "Tortoise",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 4,
@@ -8169,7 +8169,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-14 09:31:08",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:37"
     },
     {
         "id": 264,
@@ -8177,7 +8177,7 @@
         "variation": 0,
         "name": "Shady Landlord",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 4,
@@ -8205,7 +8205,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-14 09:32:02",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:37"
     },
     {
         "id": 265,
@@ -8213,7 +8213,7 @@
         "variation": 0,
         "name": "Bandit Hothead",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 0,
@@ -8241,7 +8241,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-15 10:37:39",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:38"
     },
     {
         "id": 266,
@@ -8249,7 +8249,7 @@
         "variation": 0,
         "name": "Bandit Shieldbearer",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 0,
@@ -8277,7 +8277,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-15 10:37:58",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:39"
     },
     {
         "id": 267,
@@ -8285,7 +8285,7 @@
         "variation": 0,
         "name": "Dragonkin Archer",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 0,
@@ -8313,7 +8313,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-15 10:38:18",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:39"
     },
     {
         "id": 269,
@@ -8321,7 +8321,7 @@
         "variation": 0,
         "name": "Bandit Marksman",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 0,
@@ -8349,7 +8349,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-15 10:39:05",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:40"
     },
     {
         "id": 270,
@@ -8357,7 +8357,7 @@
         "variation": 0,
         "name": "Gorgon",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 0,
@@ -8385,7 +8385,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-15 10:39:30",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:41"
     },
     {
         "id": 271,
@@ -8393,7 +8393,7 @@
         "variation": 0,
         "name": "Strong as Rhino",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 2,
         "color": 1,
@@ -8421,7 +8421,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-15 10:44:36",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:41"
     },
     {
         "id": 272,
@@ -8465,7 +8465,7 @@
         "variation": 0,
         "name": "Focus Healing",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 2,
         "color": 1,
@@ -8493,7 +8493,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-15 10:45:19",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:42"
     },
     {
         "id": 274,
@@ -8501,7 +8501,7 @@
         "variation": 0,
         "name": "Bless of Seagod",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 2,
         "color": 1,
@@ -8529,7 +8529,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-15 10:45:40",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:43"
     },
     {
         "id": 275,
@@ -8537,7 +8537,7 @@
         "variation": 0,
         "name": "Last Resort",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 2,
         "color": 2,
@@ -8565,7 +8565,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-15 10:46:15",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:43"
     },
     {
         "id": 276,
@@ -8573,7 +8573,7 @@
         "variation": 0,
         "name": "Paralyzing Gaze",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 2,
         "color": 3,
@@ -8601,7 +8601,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-15 10:46:36",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:44"
     },
     {
         "id": 277,
@@ -8609,7 +8609,7 @@
         "variation": 0,
         "name": "Wrath of Zeus",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 2,
         "color": 3,
@@ -8637,7 +8637,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-15 10:46:55",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:45"
     },
     {
         "id": 278,
@@ -8645,7 +8645,7 @@
         "variation": 0,
         "name": "Radiant Strike",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 2,
         "color": 3,
@@ -8673,7 +8673,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-15 10:47:23",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:46"
     },
     {
         "id": 279,
@@ -8681,7 +8681,7 @@
         "variation": 0,
         "name": "Gift from Zeus",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 2,
         "color": 3,
@@ -8709,7 +8709,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-15 10:47:43",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:47"
     },
     {
         "id": 280,
@@ -8717,7 +8717,7 @@
         "variation": 0,
         "name": "Raging Sky",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 2,
         "color": 3,
@@ -8745,7 +8745,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-15 10:48:23",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:47"
     },
     {
         "id": 281,
@@ -8753,7 +8753,7 @@
         "variation": 0,
         "name": "See through the Future",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 2,
         "color": 3,
@@ -8781,7 +8781,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-15 10:48:45",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:48"
     },
     {
         "id": 282,
@@ -8789,7 +8789,7 @@
         "variation": 0,
         "name": "Blood for Blood",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 2,
         "color": 4,
@@ -8817,7 +8817,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-15 10:49:01",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:49"
     },
     {
         "id": 283,
@@ -8825,7 +8825,7 @@
         "variation": 0,
         "name": "Enrage",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 2,
         "color": 4,
@@ -8853,7 +8853,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-15 10:49:21",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:49"
     },
     {
         "id": 284,
@@ -8861,7 +8861,7 @@
         "variation": 0,
         "name": "Hades's Command",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 2,
         "color": 4,
@@ -8889,7 +8889,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-15 10:49:52",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:50"
     },
     {
         "id": 285,
@@ -8897,7 +8897,7 @@
         "variation": 0,
         "name": "Toss",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 2,
         "color": 4,
@@ -8925,7 +8925,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-15 10:50:07",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:51"
     },
     {
         "id": 286,
@@ -8933,7 +8933,7 @@
         "variation": 0,
         "name": "Hammerhead Shark",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 2,
@@ -8961,7 +8961,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-07-21 10:23:10",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:51"
     },
     {
         "id": 287,
@@ -8969,7 +8969,7 @@
         "variation": 0,
         "name": "Saint Giong",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 0,
         "color": 2,
@@ -8997,7 +8997,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-08-24 08:23:34",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:52"
     },
     {
         "id": 288,
@@ -9005,7 +9005,7 @@
         "variation": 0,
         "name": "Dragonkin's Iron Helm",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 2,
@@ -9033,7 +9033,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-08-24 08:29:51",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:53"
     },
     {
         "id": 289,
@@ -9041,7 +9041,7 @@
         "variation": 0,
         "name": "Dragonkin's Iron Armor",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 2,
@@ -9069,7 +9069,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-08-24 08:30:38",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:53"
     },
     {
         "id": 290,
@@ -9077,7 +9077,7 @@
         "variation": 0,
         "name": "Dragonkin's Iron Whip",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 2,
@@ -9105,7 +9105,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-08-24 08:31:02",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:54"
     },
     {
         "id": 291,
@@ -9113,7 +9113,7 @@
         "variation": 0,
         "name": "Dragonkin's Iron Horse",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 2,
@@ -9141,7 +9141,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-08-24 08:31:28",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:55"
     },
     {
         "id": 292,
@@ -9149,7 +9149,7 @@
         "variation": 0,
         "name": "Rice",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 2,
         "color": 2,
@@ -9177,7 +9177,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-08-24 08:33:09",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:55"
     },
     {
         "id": 293,
@@ -9185,7 +9185,7 @@
         "variation": 0,
         "name": "Isis's Guardian",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 3,
@@ -9213,7 +9213,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-09-07 17:02:20",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:56"
     },
     {
         "id": 294,
@@ -9221,7 +9221,7 @@
         "variation": 0,
         "name": "Isis's Emissary",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 3,
@@ -9249,7 +9249,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-09-07 17:04:58",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:57"
     },
     {
         "id": 295,
@@ -9257,7 +9257,7 @@
         "variation": 0,
         "name": "Agent of Isis",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 3,
@@ -9285,7 +9285,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-09-07 17:06:27",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:57"
     },
     {
         "id": 296,
@@ -9293,7 +9293,7 @@
         "variation": 0,
         "name": "Isis's Sharpshooter",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 3,
@@ -9321,7 +9321,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-09-07 17:12:26",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:58"
     },
     {
         "id": 297,
@@ -9329,7 +9329,7 @@
         "variation": 0,
         "name": "Isis's Oracle",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 3,
@@ -9357,7 +9357,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-09-07 17:13:08",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:59"
     },
     {
         "id": 298,
@@ -9365,7 +9365,7 @@
         "variation": 0,
         "name": "Isis's Blessing",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 2,
         "color": 3,
@@ -9393,7 +9393,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-09-07 17:13:58",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:28:59"
     },
     {
         "id": 299,
@@ -9401,7 +9401,7 @@
         "variation": 0,
         "name": "Gift for Isis",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 2,
         "color": 3,
@@ -9429,7 +9429,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-09-07 17:14:30",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:29:00"
     },
     {
         "id": 300,
@@ -9437,7 +9437,7 @@
         "variation": 0,
         "name": "Aphrodite's Admirer",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 4,
@@ -9465,7 +9465,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-09-07 17:14:59",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:29:01"
     },
     {
         "id": 301,
@@ -9473,7 +9473,7 @@
         "variation": 0,
         "name": "Bloodlust Assassin",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 4,
@@ -9501,7 +9501,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-09-07 17:15:54",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:29:01"
     },
     {
         "id": 302,
@@ -9509,7 +9509,7 @@
         "variation": 0,
         "name": "Ancient Protector",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 4,
@@ -9537,7 +9537,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-09-07 17:18:58",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:29:02"
     },
     {
         "id": 303,
@@ -9545,7 +9545,7 @@
         "variation": 0,
         "name": "Aphrodite's Biggest Fan",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 4,
@@ -9573,7 +9573,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-09-07 17:19:44",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:29:03"
     },
     {
         "id": 304,
@@ -9581,7 +9581,7 @@
         "variation": 0,
         "name": "Isis's Executioner",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 4,
@@ -9609,7 +9609,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-09-07 17:20:38",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:29:03"
     },
     {
         "id": 305,
@@ -9617,7 +9617,7 @@
         "variation": 0,
         "name": "Aphrodite's Thread",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 2,
         "color": 4,
@@ -9645,7 +9645,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-09-07 17:22:14",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:29:04"
     },
     {
         "id": 306,
@@ -9653,7 +9653,7 @@
         "variation": 0,
         "name": "Gift of the Admirers",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 2,
         "color": 4,
@@ -9681,7 +9681,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-09-07 17:22:41",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:29:05"
     },
     {
         "id": 307,
@@ -9689,7 +9689,7 @@
         "variation": 0,
         "name": "Last Breath",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 2,
         "color": 4,
@@ -9717,7 +9717,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-09-07 17:23:17",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:29:05"
     },
     {
         "id": 308,
@@ -9725,7 +9725,7 @@
         "variation": 0,
         "name": "Ares's Ravager",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 2,
@@ -9753,7 +9753,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-09-07 17:25:21",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:29:06"
     },
     {
         "id": 309,
@@ -9761,7 +9761,7 @@
         "variation": 0,
         "name": "Skillful Shinobi",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 2,
@@ -9789,7 +9789,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-09-07 17:25:50",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:29:07"
     },
     {
         "id": 310,
@@ -9797,7 +9797,7 @@
         "variation": 0,
         "name": "Swiftblade Ronin",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 2,
@@ -9825,7 +9825,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-09-07 17:26:16",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:29:07"
     },
     {
         "id": 311,
@@ -9833,7 +9833,7 @@
         "variation": 0,
         "name": "Trebutchet",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 2,
@@ -9861,7 +9861,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-09-07 17:26:48",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:29:08"
     },
     {
         "id": 312,
@@ -9869,7 +9869,7 @@
         "variation": 0,
         "name": "Leonidas, the Unstoppable",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 2,
@@ -9897,7 +9897,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-09-07 17:27:58",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:29:09"
     },
     {
         "id": 313,
@@ -9905,7 +9905,7 @@
         "variation": 0,
         "name": "Bandit Assassin",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 2,
@@ -9933,7 +9933,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-09-07 17:28:17",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:29:09"
     },
     {
         "id": 314,
@@ -9941,7 +9941,7 @@
         "variation": 0,
         "name": "Ares's Dedicator",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 2,
@@ -9969,7 +9969,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-09-07 17:28:59",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:29:10"
     },
     {
         "id": 315,
@@ -9977,7 +9977,7 @@
         "variation": 0,
         "name": "Death from Behind",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 2,
         "color": 2,
@@ -10005,7 +10005,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-09-07 17:29:44",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:29:11"
     },
     {
         "id": 316,
@@ -10013,7 +10013,7 @@
         "variation": 0,
         "name": "First Forest Anito",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 1,
@@ -10041,7 +10041,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-09-07 17:32:57",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:29:12"
     },
     {
         "id": 317,
@@ -10049,7 +10049,7 @@
         "variation": 0,
         "name": "Ancient Moutain Anito",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 1,
@@ -10077,7 +10077,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-09-07 17:33:16",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:29:12"
     },
     {
         "id": 318,
@@ -10085,7 +10085,7 @@
         "variation": 0,
         "name": "Minito",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 1,
@@ -10113,7 +10113,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-09-07 17:33:30",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:29:13"
     },
     {
         "id": 319,
@@ -10121,7 +10121,7 @@
         "variation": 0,
         "name": "Scorching Anito",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 1,
         "color": 1,
@@ -10149,7 +10149,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-09-07 17:34:47",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:29:14"
     },
     {
         "id": 320,
@@ -10157,7 +10157,7 @@
         "variation": 0,
         "name": "Purify",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 2,
         "color": 1,
@@ -10185,7 +10185,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-09-07 17:35:06",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:29:14"
     },
     {
         "id": 321,
@@ -10193,7 +10193,7 @@
         "variation": 0,
         "name": "Soul Absorb",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 2,
         "color": 4,
@@ -10221,7 +10221,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-09-08 10:37:13",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:29:15"
     },
     {
         "id": 322,
@@ -10229,7 +10229,7 @@
         "variation": 0,
         "name": "Aphrodite",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 4,
         "collectible": 0,
         "type": 0,
         "color": 1,
@@ -10257,7 +10257,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-09-08 14:33:49",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:29:16"
     },
     {
         "id": 323,
@@ -10265,7 +10265,7 @@
         "variation": 0,
         "name": "Demeter",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 3,
         "collectible": 0,
         "type": 0,
         "color": 1,
@@ -10293,7 +10293,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-09-08 15:24:04",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:29:16"
     },
     {
         "id": 324,
@@ -10301,7 +10301,7 @@
         "variation": 0,
         "name": "Bathala",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 3,
         "collectible": 0,
         "type": 0,
         "color": 1,
@@ -10329,7 +10329,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-09-08 15:25:15",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:29:17"
     },
     {
         "id": 325,
@@ -10337,7 +10337,7 @@
         "variation": 0,
         "name": "Heimdall",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 3,
         "collectible": 0,
         "type": 0,
         "color": 1,
@@ -10365,7 +10365,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-09-08 15:25:34",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:29:18"
     },
     {
         "id": 326,
@@ -10373,7 +10373,7 @@
         "variation": 0,
         "name": "Isis",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 3,
         "collectible": 0,
         "type": 0,
         "color": 3,
@@ -10401,7 +10401,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-09-08 15:26:37",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:29:18"
     },
     {
         "id": 327,
@@ -10409,7 +10409,7 @@
         "variation": 0,
         "name": "Chang'e",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 3,
         "collectible": 0,
         "type": 0,
         "color": 3,
@@ -10437,7 +10437,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-09-08 15:26:52",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:29:19"
     },
     {
         "id": 328,
@@ -10445,7 +10445,7 @@
         "variation": 0,
         "name": "Susanoo II",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 4,
         "collectible": 0,
         "type": 0,
         "color": 2,
@@ -10473,7 +10473,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-09-08 15:29:44",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:29:20"
     },
     {
         "id": 330,
@@ -10481,7 +10481,7 @@
         "variation": 0,
         "name": "Lac Long Quan",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 4,
         "collectible": 0,
         "type": 0,
         "color": 2,
@@ -10509,7 +10509,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-09-10 09:42:33",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:29:20"
     },
     {
         "id": 331,
@@ -10517,7 +10517,7 @@
         "variation": 0,
         "name": "Rejuvenate",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 1,
         "collectible": 0,
         "type": 2,
         "color": 1,
@@ -10545,7 +10545,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-09-10 09:46:44",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:29:21"
     },
     {
         "id": 333,
@@ -10553,7 +10553,7 @@
         "variation": 0,
         "name": "Ceberus II",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 4,
         "collectible": 0,
         "type": 1,
         "color": 4,
@@ -10581,7 +10581,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-09-29 14:08:25",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:29:22"
     },
     {
         "id": 334,
@@ -10589,7 +10589,7 @@
         "variation": 4,
         "name": "Thuy Tinh IV",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 4,
         "collectible": 0,
         "type": 0,
         "color": 4,
@@ -10617,7 +10617,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-09-29 14:09:17",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:29:22"
     },
     {
         "id": 339,
@@ -10625,7 +10625,7 @@
         "variation": 0,
         "name": "Great Saint Giong",
         "disable": 1,
-        "rarity": 0,
+        "rarity": 4,
         "collectible": 0,
         "type": 0,
         "color": 2,
@@ -10653,7 +10653,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-09-29 14:31:44",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:29:23"
     },
     {
         "id": 347,
@@ -10676,7 +10676,7 @@
         "patheon": 1,
         "shard_required": 0,
         "cleave": 0,
-        "breaker": 0,
+        "breaker": 2,
         "overrun": 0,
         "combo": 0,
         "pierce": 0,
@@ -10689,7 +10689,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-10-24 10:05:16",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:29:24"
     },
     {
         "id": 348,
@@ -10769,7 +10769,7 @@
         "variation": 0,
         "name": "Champion of Hades",
         "disable": 0,
-        "rarity": 0,
+        "rarity": 2,
         "collectible": 0,
         "type": 0,
         "color": 4,
@@ -10788,7 +10788,7 @@
         "overrun": 0,
         "combo": 0,
         "pierce": 0,
-        "god_slayer": 0,
+        "god_slayer": 1,
         "backdoor": 0,
         "defender": 0,
         "invariant": 0,
@@ -10797,7 +10797,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-10-24 10:06:39",
-        "modified_on": "2024-03-27 05:03:44"
+        "modified_on": "2024-08-30 11:29:24"
     },
     {
         "id": 351,
@@ -10823,7 +10823,7 @@
         "breaker": 0,
         "overrun": 0,
         "combo": 0,
-        "pierce": 0,
+        "pierce": 1,
         "god_slayer": 0,
         "backdoor": 0,
         "defender": 0,
@@ -10833,7 +10833,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-10-24 10:07:03",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:29:25"
     },
     {
         "id": 352,
@@ -10869,7 +10869,7 @@
         "tut": 0,
         "normal_group_id": 0,
         "created_on": "2022-10-24 10:07:28",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-08-30 11:29:26"
     },
     {
         "id": 353,
@@ -11883,7 +11883,7 @@
         "id": 10006,
         "hero_number": 10006,
         "variation": 0,
-        "name": "Athena's General",
+        "name": "Huge Champion",
         "disable": 0,
         "rarity": 1,
         "collectible": 0,
@@ -11913,7 +11913,7 @@
         "tut": 1,
         "normal_group_id": 0,
         "created_on": "2022-12-02 15:15:52",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-07-08 10:50:14"
     },
     {
         "id": 10007,
@@ -11991,7 +11991,7 @@
         "id": 10010,
         "hero_number": 10010,
         "variation": 0,
-        "name": "Athena's Champion",
+        "name": "Big General",
         "disable": 0,
         "rarity": 2,
         "collectible": 0,
@@ -12021,6 +12021,6 @@
         "tut": 1,
         "normal_group_id": 0,
         "created_on": "2023-12-21 03:06:09",
-        "modified_on": "2024-03-04 09:41:18"
+        "modified_on": "2024-07-08 10:51:06"
     }
 ]
